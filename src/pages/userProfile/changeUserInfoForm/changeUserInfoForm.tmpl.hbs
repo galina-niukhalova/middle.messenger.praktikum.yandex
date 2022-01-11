@@ -1,0 +1,24 @@
+<form class="{{className}}" id={{ id }}>
+  <ul class='profile-form__rows'>
+    {{#each inputs }}
+    <li class='profile-form__row'>
+      <label class='profile-form__label'>{{ label }}</label>
+      <input 
+        name={{name}} 
+        class='profile-form__input' 
+
+        {{#if type}} type={{type}}
+        {{else}} type="text" {{/if}}
+
+        {{#if value}} value={{ value }} 
+        {{else}} value='' {{/if}}
+
+        {{#if readonly}} readonly {{/if}}
+      ></input>
+    </li>
+    {{/each}}
+  </ul>
+  <div class='profile-form__submit-button-wrap profile-form__submit-button-wrap_hidden'>
+    {{ button id=submitBtn.id title=submitBtn.title className='profile-form__submit-btn' type='submit' }}
+  </div>
+</form>
