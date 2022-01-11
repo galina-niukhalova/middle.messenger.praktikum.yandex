@@ -2,7 +2,7 @@
 
 This is a messenger app written for Yandex practicum [middle FE course](https://practicum.yandex.ru/profile/middle-frontend/).
 
-You can find a published version [here]()
+You can find a published version [here](https://galina-messenger.netlify.app)
 
 ## Design
 Project design can be found in [Figma](https://www.figma.com/file/EuBlJHo8hEbs4qs7NQc64c/Chat-Galina)
@@ -15,20 +15,24 @@ Project design can be found in [Figma](https://www.figma.com/file/EuBlJHo8hEbs4q
 - [Netlify](https://app.netlify.com/) for publishing
 
 ## Installation
+#### 1. Install dependencies
+```
+npm install
+```
 
-#### Build static files
+#### 2. Build static files
 To build static files, using Parcel, use the following command
 ```
 npm run build
 ```
 This will create a new folder `dist` with all static files.
 
-#### Run a web server
+#### 3. Run a web server
 To run a web server locally use the following command: 
 ```
 npm run start
 ```
-This will run a web server on the 3000 port locally.
-Type in your browser http://localhost:3000 and you will see a login page
+This command will run a web server locally on port 3000.
 
-## 
+To check it out, open http://localhost:3000 in your browser.
+You should see a login page for non authorized users.
