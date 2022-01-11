@@ -1,7 +1,7 @@
 import linkTemplate from './link.tmpl.hbs';
 import Handlebars from 'handlebars/dist/handlebars.runtime';
 import './link.style.scss';
-import classnames from 'utils/classNames';
+import classnames from 'utils/classnames';
 
 Handlebars.registerHelper('link', function (options) {
   const { hash } = options || {};

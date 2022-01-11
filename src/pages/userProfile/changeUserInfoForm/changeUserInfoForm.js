@@ -1,7 +1,7 @@
 import changeUserInfoFormTemplate from './changeUserInfoForm.tmpl.hbs';
 import './changeUserInfoForm.style.scss';
 import Handlebars from 'handlebars/dist/handlebars.runtime';
-import classnames from 'utils/classNames';
+import classnames from 'utils/classnames';
 
 Handlebars.registerHelper('profileForm', function (options) {
   const { hash } = options || {};

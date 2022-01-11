@@ -1,7 +1,8 @@
 # Messenger app
 
 This is a messenger app written for Yandex practicum [middle FE course](https://practicum.yandex.ru/profile/middle-frontend/).
-You can find a publish version [here]()
+
+You can find a published version [here]()
 
 ## Design
 Project design can be found in [Figma](https://www.figma.com/file/EuBlJHo8hEbs4qs7NQc64c/Chat-Galina)

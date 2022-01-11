@@ -1,7 +1,7 @@
 import buttonTemplate from './button.hbs';
 import Handlebars from 'handlebars/dist/handlebars.runtime';
 import './button.scss';
-import classnames from 'utils/classNames';
+import classnames from 'utils/classnames';
 
 const BUTTON_VARIANTS = {
   CLASSIC: 'classic',
