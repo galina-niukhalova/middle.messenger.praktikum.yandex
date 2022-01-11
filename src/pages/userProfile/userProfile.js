@@ -9,6 +9,7 @@ import {
   userInfoFormData,
   passwordChangeFormData,
 } from './const';
+import { addContentToMainSection } from 'utils/dom';
 
 function listenAvatarUpload() {
   document.getElementsByClassName(SELECTORS.AVATAR.FILE_UPLOAD)[0]
@@ -126,7 +127,7 @@ function getInputsFrom(formDataObject, readonly) {
 }
 
 function renderUserProfilePage() {
-  document.body.innerHTML = userProfileTemplate({
+  const content = userProfileTemplate({
     avatar: {
       imageUrl: '',
       placeholder: avatarPlaceholder,
@@ -147,6 +148,8 @@ function renderUserProfilePage() {
     },
     userName: 'Test user',
   });
+
+  addContentToMainSection(content);
 
   listenAvatarUpload();
   listenChangeUserInfoBtnClick();

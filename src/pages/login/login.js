@@ -7,13 +7,14 @@ import {
   NO_ACCOUNT_LINK,
   SUBMIT_BTN
 } from './const';
+import { addContentToMainSection } from 'utils/dom';
 
 function handleFormSubmit() {
   window.location.href = '/chats';
 }
 
 function renderLoginPage() {
-  document.body.innerHTML = loginTemplate(
+  const content = loginTemplate(
     {
       data: {
         formID: FORM.id,
@@ -27,6 +28,8 @@ function renderLoginPage() {
         formLink: NO_ACCOUNT_LINK,
       }
     });
+
+  addContentToMainSection(content);
 
   const loginForm = new Form(
     FORM.id,

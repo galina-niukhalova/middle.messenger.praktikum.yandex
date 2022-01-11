@@ -2,14 +2,24 @@
 
 This is a messenger app written for Yandex practicum [middle FE course](https://practicum.yandex.ru/profile/middle-frontend/).
 
-You can find a published version [here](https://galina-messenger.netlify.app)
+Live version is published [here](https://galina-messenger.netlify.app).
+
+## Functionality
+A user can visit the following pages:
+- [Login page](https://galina-messenger.netlify.app/)
+- [Signup page](https://galina-messenger.netlify.app/signup)
+- [User profile](https://galina-messenger.netlify.app/profile)
+- [5xx](https://galina-messenger.netlify.app/error)
+- [404](https://galina-messenger.netlify.app/random)
+- [chats](https://galina-messenger.netlify.app/chats) `mock page`
+- [chat](https://galina-messenger.netlify.app/chat) `mock page`
 
 ## Design
-Project design can be found in [Figma](https://www.figma.com/file/EuBlJHo8hEbs4qs7NQc64c/Chat-Galina)
+Project design can be found in [Figma](https://www.figma.com/file/EuBlJHo8hEbs4qs7NQc64c/Chat-Galina).
 
 ## Technology 
 - [Parcel](https://parceljs.org/), as a build tool
-- [Scss](https://sass-lang.com/) as a stylesheet language
+- [Scss](https://sass-lang.com/), as a stylesheet language
 - [Handlebars](https://handlebarsjs.com/), as a templating language
 - [Express](https://expressjs.com/) for NodeJS, as a web server for serving static files.
 - [Netlify](https://app.netlify.com/) for publishing

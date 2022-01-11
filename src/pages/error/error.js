@@ -1,8 +1,11 @@
 import errorTemplate from './error.tmpl.hbs';
 import './error.style.scss';
+import { addContentToMainSection } from 'utils/dom';
 
 function renderError() {
-  document.body.innerHTML = errorTemplate();
+  const content = errorTemplate();
+
+  addContentToMainSection(content);
 }
 
 export default renderError;

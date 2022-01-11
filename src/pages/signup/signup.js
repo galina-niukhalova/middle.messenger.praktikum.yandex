@@ -7,6 +7,7 @@ import {
   SUBMIT_BTN,
   LOGIN_LINK
 } from './const';
+import { addContentToMainSection } from 'utils/dom';
 
 function handleFormSubmit() {
   window.location.href = '/chats';
@@ -14,7 +15,7 @@ function handleFormSubmit() {
 
 /** RENDER */
 function renderSignupPage() {
-  document.body.innerHTML = signupTemplate(
+  const content = signupTemplate(
     {
       data: {
         formID: FORM.id,
@@ -29,6 +30,8 @@ function renderSignupPage() {
       }
     }
   );
+
+  addContentToMainSection(content);
 
   const signupForm = new Form(FORM.id, FORM.name, INPUTS);
   signupForm.listenFormSubmission(handleFormSubmit);
