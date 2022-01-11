@@ -7,7 +7,7 @@ Handlebars.registerHelper('link', function (options) {
   const { hash } = options || {};
   if (!hash) return;
 
-  const { url, title, className, danger, size = "medium" } = hash;
+  const { url, title, className, danger, size = 'medium' } = hash;
   const linkHTML = linkTemplate({
     url: Handlebars.escapeExpression(url),
     title: Handlebars.escapeExpression(title),

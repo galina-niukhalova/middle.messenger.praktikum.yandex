@@ -1,8 +1,8 @@
 import inputTemplate from './input.hbs';
-import Handlebars from "handlebars/dist/handlebars.runtime";
+import Handlebars from 'handlebars/dist/handlebars.runtime';
 import './input.scss';
 
-Handlebars.registerHelper("input", function (options) {
+Handlebars.registerHelper('input', function (options) {
   const { hash } = options || {};
   if (!hash) return;
 
@@ -10,7 +10,7 @@ Handlebars.registerHelper("input", function (options) {
 
   const html = inputTemplate({
     className: Handlebars.escapeExpression(className),
-    containerClassName: isFormInput && "form__input-container",
+    containerClassName: isFormInput && 'form__input-container',
     type: Handlebars.escapeExpression(type),
     name: Handlebars.escapeExpression(name),
     label: Handlebars.escapeExpression(label),

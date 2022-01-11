@@ -1,7 +1,7 @@
 <div class='page-wrap profile'>
   <div class='avatar'>
     <label for='avatar__file-upload' class='avatar__label'></label>
-    <input type='file' alt='Выберите аватарку' id='avatar__file-upload' class='avatar__file-upload' accept='image/*' name="avatar">
+    <input type='file' alt='Выберите аватарку' id='avatar__file-upload' class='avatar__file-upload' accept='image/*' name='avatar'>
     <div class='avatar__image-wrap'>
       {{#if avatar.imageUrl }}
         <img class='avatar__image' src={{avatar.imageUrl}} />
@@ -18,13 +18,13 @@
 
   <ul class='profile__actions-buttons'>
     <li class='profile__actions-button-row'>
-      {{ button id='change-user-info-button' variant="link" title='Изменить данные' }}
+      {{ button id='change-user-info-button' variant='link' title='Изменить данные' }}
     </li>
     <li class='profile__actions-button-row'>
-      {{ button id='change-password-button' variant="link" title='Изменить пароль' }}
+      {{ button id='change-password-button' variant='link' title='Изменить пароль' }}
     </li>
     <li class='profile__actions-button-row'>
-      {{ link title='Выйти' url='/login' danger=true size="medium" }}
+      {{ link title='Выйти' url='/login' danger=true size='medium' }}
     </li>
   </ul>
 </div>

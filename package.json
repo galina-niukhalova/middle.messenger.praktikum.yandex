@@ -2,11 +2,11 @@
   "name": "yandex_frontend",
   "version": "1.0.0",
   "description": "",
-  "source": "index.html",
+  "source": "static/index.html",
   "scripts": {
-    "dev": "parcel -p 3000",
+    "dev": "parcel -p 4000",
     "build": "parcel build",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
     "lint": "eslint --fix --ext .js, ."
   },
   "author": "",
