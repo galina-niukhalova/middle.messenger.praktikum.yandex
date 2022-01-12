@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "parcel -p 4000",
     "build": "parcel build",
-    "start": "node server.js",
+    "start": "npm run build && node server.js",
     "lint": "eslint --fix --ext .js, ."
   },
   "author": "",
