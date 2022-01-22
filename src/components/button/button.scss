@@ -1,0 +1,23 @@
+@import '~style/colors.scss';
+
+.button {
+  padding: 16px 8px;
+  border-radius: 8px;
+  border: none;
+  background-color: $color-blue;
+  color: $color-white;
+  font-size: 13px;
+  line-height: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.button_link {
+  border: none;
+  color: $color-blue;
+  font-size: 13px;
+  line-height: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: white;
+}

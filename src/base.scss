@@ -1,0 +1,16 @@
+@import '~style/colors.scss';
+
+body {
+  padding: 0;
+  margin: 0;
+  color: $color-black;
+  font-family: Inter;
+  box-sizing: border-box;
+  font-style: normal;
+}
+
+body * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

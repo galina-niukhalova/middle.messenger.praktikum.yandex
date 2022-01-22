@@ -1,0 +1,30 @@
+<div class='page-wrap profile'>
+  <div class='avatar'>
+    <label for='avatar__file-upload' class='avatar__label'></label>
+    <input type='file' alt='Выберите аватарку' id='avatar__file-upload' class='avatar__file-upload' accept='image/*' name='avatar'>
+    <div class='avatar__image-wrap'>
+      {{#if avatar.imageUrl }}
+        <img class='avatar__image' src={{avatar.imageUrl}} />
+      {{else}}
+        <img class='avatar__image avatar__image-placeholder' src={{avatar.placeholder}} />
+      {{/if}}
+    </div>
+  </div>
+
+  <h3 class='profile__user-name'>{{userName}}</h3>
+  
+  {{ profileForm data=userInfoForm readonly=true }}
+  {{ profileForm data=passwordChangeForm disabled=true }}
+
+  <ul class='profile__actions-buttons'>
+    <li class='profile__actions-button-row'>
+      {{ button id='change-user-info-button' variant='link' title='Изменить данные' }}
+    </li>
+    <li class='profile__actions-button-row'>
+      {{ button id='change-password-button' variant='link' title='Изменить пароль' }}
+    </li>
+    <li class='profile__actions-button-row'>
+      {{ link title='Выйти' url='/login' danger=true size='medium' }}
+    </li>
+  </ul>
+</div>
