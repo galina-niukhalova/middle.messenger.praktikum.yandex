@@ -1,4 +1,5 @@
 import { isPasswordValid } from './utils';
+import { IFormInput } from 'components/form/types';
 
 const FORM = {
   name: 'signup-form',
@@ -10,7 +11,7 @@ const SUBMIT_BTN = {
   title: 'Зарегистрироваться'
 };
 
-const INPUTS = {
+const INPUTS: ({ [key: string]: IFormInput }) = {
   email: {
     id: 'signup-form_email-input',
     type: 'email',

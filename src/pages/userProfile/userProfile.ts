@@ -17,13 +17,15 @@ function listenAvatarUpload() {
       const reader = new FileReader();
 
       reader.onload = function (e) {
-        const avatarImage = document.getElementsByClassName(SELECTORS.AVATAR.IMAGE)[0];
-        avatarImage.src = e.target.result;
+        const avatarImage = document.getElementsByClassName(SELECTORS.AVATAR.IMAGE)[0] as HTMLImageElement;
+        avatarImage.src = e.target.result as string;
         avatarImage.classList.remove(SELECTORS.AVATAR.IMAGE_PLACEHOLDER);
         disableAvatarEdit();
       };
 
-      reader.readAsDataURL(input.files[0]);
+      if (input instanceof HTMLInputElement) {
+        reader.readAsDataURL(input.files[0]);
+      }
     });
 }
 

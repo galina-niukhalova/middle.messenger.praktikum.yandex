@@ -1,3 +1,5 @@
+import { IFormInput } from 'components/form/types';
+
 const FORM = {
   name: 'login-form',
   id: 'login',
@@ -8,7 +10,7 @@ const SUBMIT_BTN = {
   title: 'Войти'
 };
 
-const INPUTS = {
+const INPUTS: ({ [key: string]: IFormInput }) = {
   login: {
     id: 'login-form_login-input',
     type: 'text',

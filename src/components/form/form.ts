@@ -5,6 +5,7 @@ import './form.scss';
 import { CLASS_NAMES } from './const';
 import formTemplate from './form.hbs';
 import Handlebars from 'handlebars/dist/handlebars.runtime';
+import { IFormInput } from './types';
 
 Handlebars.registerHelper('form', function (options) {
   const { hash } = options || {};
@@ -18,10 +19,19 @@ Handlebars.registerHelper('form', function (options) {
 
   return new Handlebars.SafeString(formHTML);
 });
+
+
 class Form {
+  id: string;
+  name: string;
+  inputs: { [key: string]: IFormInput };
   formWasSubmitted = false;
 
-  constructor(id, name, inputs) {
+  constructor(
+    id: string,
+    name: string,
+    inputs: ({ [key: string]: IFormInput })
+  ) {
     this.id = id;
     this.name = name;
     this.inputs = inputs;
@@ -42,13 +52,15 @@ class Form {
 
   listenInputsChange() {
     document.getElementById(this.id).addEventListener('input', ({ target }) => {
-      this.formWasSubmitted && this.validateInput(target.name);
+      if (target instanceof HTMLInputElement) {
+        this.formWasSubmitted && this.validateInput(target.name);
+      }
     });
   }
 
   /** HELPERS */
   showErrorMessageFor(field, show = true) {
-    const inputElement = document.getElementsByName(field)[0];
+    const inputElement = document.getElementsByName(field)[0] as HTMLInputElement;
     const errorMessageElement = getErrorMessageElement(this.name, field);
     if (!errorMessageElement) return;
 
@@ -78,7 +90,7 @@ class Form {
   }
 
   isInputValid(inputName) {
-    const inputElement = document.getElementsByName(inputName)[0];
+    const inputElement = document.getElementsByName(inputName)[0] as HTMLInputElement;
 
     if (!inputElement.value) return false;
 
