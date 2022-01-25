@@ -1,4 +1,4 @@
-function baseRange(start: number, end: number, step: number, isRight: boolean) {
+function baseRange(start: number, end: number, step: number, isRight?: boolean) {
   let result = [];
 
   if (step === 0) {

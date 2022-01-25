@@ -41,7 +41,7 @@ class Form {
 
   /** EVENTS */
   listenFormSubmission(onFormSubmit: () => void) {
-    document.getElementById(this.id).addEventListener('submit', (event) => {
+    document.getElementById(this.id)?.addEventListener('submit', (event) => {
       event.preventDefault();
       this.formWasSubmitted = true;
 
@@ -49,11 +49,11 @@ class Form {
         console.log('Form was successfully submitted');
         onFormSubmit();
       }
-    });
+    })
   }
 
   listenInputsChange() {
-    document.getElementById(this.id).addEventListener('input', ({ target }) => {
+    document.getElementById(this.id)?.addEventListener('input', ({ target }) => {
       if (target instanceof HTMLInputElement) {
         this.formWasSubmitted && this.validateInput(target.name);
       }
@@ -68,9 +68,9 @@ class Form {
 
     if (show) {
       errorMessageElement.classList.remove(CLASS_NAMES.hiddenErrorMessage);
-      errorMessageElement.innerHTML = !inputElement.value
-        ? this.inputs[field].errors.emptyField
-        : this.inputs[field].errors.general;
+      errorMessageElement.innerHTML = inputElement.value
+        ? this.inputs[field].errors?.emptyField ?? ""
+        : this.inputs[field].errors?.general ?? ""
       inputElement.classList.add(CLASS_NAMES.invalidInput);
     } else {
       errorMessageElement.classList.add(CLASS_NAMES.hiddenErrorMessage);
@@ -96,8 +96,8 @@ class Form {
 
     if (!inputElement.value) return false;
 
-    if (this.inputs[inputName].errors.customValidator) {
-      return this.inputs[inputName].errors.customValidator();
+    if (this.inputs[inputName]?.errors?.customValidator) {
+      return this.inputs[inputName]!.errors!.customValidator!();
     }
 
     return inputElement.validity.valid;
@@ -108,7 +108,7 @@ class Form {
       ? this.showErrorMessageFor(field, true)
       : this.showErrorMessageFor(field, false);
 
-    const dependentFields = this.inputs[field].errors.dependentFields;
+    const dependentFields = this.inputs[field]?.errors?.dependentFields;
     if (dependentFields) {
       dependentFields.forEach(dependentField => {
         !this.isInputValid(dependentField)

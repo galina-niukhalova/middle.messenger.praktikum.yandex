@@ -4,7 +4,7 @@
     "target": "es2016",
     "declaration": false,
     "module": "commonjs",
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "sourceMap": true,
     "baseUrl": "src",
     "noImplicitAny": true,

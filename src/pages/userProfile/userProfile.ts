@@ -17,45 +17,41 @@ function listenAvatarUpload() {
 
       reader.onload = function (e) {
         const avatarImage = document.getElementsByClassName(SELECTORS.AVATAR.IMAGE)[0] as HTMLImageElement;
-        avatarImage.src = e.target.result as string;
+        avatarImage.src = e.target?.result as string;
         avatarImage.classList.remove(SELECTORS.AVATAR.IMAGE_PLACEHOLDER);
         disableAvatarEdit();
       };
 
-      if (input instanceof HTMLInputElement) {
+      if (input instanceof HTMLInputElement && input.files?.length) {
         reader.readAsDataURL(input.files[0]);
       }
     });
 }
 
 function listenSubmitUserInfo() {
-  document.getElementById(SELECTORS.PROFILE_FORM.USER_INFO_FORM.DEFAULT)
-    .addEventListener('submit', (e) => {
-      e.preventDefault();
-      switchViewTo(Views.READ_ONLY);
-    });
+  document.getElementById(SELECTORS.PROFILE_FORM.USER_INFO_FORM.DEFAULT)?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    switchViewTo(Views.READ_ONLY);
+  });
 }
 
 function listenSubmitPassword() {
-  document.getElementById(SELECTORS.PROFILE_FORM.PASSWORD_CHANGE_FORM.DEFAULT)
-    .addEventListener('submit', (e) => {
-      e.preventDefault();
-      switchViewTo(Views.READ_ONLY);
-    });
+  document.getElementById(SELECTORS.PROFILE_FORM.PASSWORD_CHANGE_FORM.DEFAULT)?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    switchViewTo(Views.READ_ONLY);
+  });
 }
 
 function listenChangeUserInfoBtnClick() {
-  document.getElementById(SELECTORS.ACTIONS_BUTTONS.CHANGE_USER_INFO)
-    .addEventListener('click', () => {
-      switchViewTo(Views.EDIT_USER_INFO);
-    });
+  document.getElementById(SELECTORS.ACTIONS_BUTTONS.CHANGE_USER_INFO)?.addEventListener('click', () => {
+    switchViewTo(Views.EDIT_USER_INFO);
+  });
 }
 
 function listenChangePasswordBtnClick() {
-  document.getElementById(SELECTORS.ACTIONS_BUTTONS.CHANGE_PASSWORD)
-    .addEventListener('click', () => {
-      switchViewTo(Views.EDIT_USER_PASSWORD);
-    });
+  document.getElementById(SELECTORS.ACTIONS_BUTTONS.CHANGE_PASSWORD)?.addEventListener('click', () => {
+    switchViewTo(Views.EDIT_USER_PASSWORD);
+  });
 }
 
 function disableInputs(form: ProfileForms, disabled = true) {
@@ -71,8 +67,8 @@ function displaySubmitButton(form: ProfileForms, shown = true) {
   const submitBtn = document.querySelector(SELECTORS.PROFILE_FORM[form].SUBMIT_BTN);
 
   shown
-    ? submitBtn.classList.remove(SELECTORS.PROFILE_FORM.SUBMIT_BTN_HIDDEN)
-    : submitBtn.classList.add(SELECTORS.PROFILE_FORM.SUBMIT_BTN_HIDDEN);
+    ? submitBtn?.classList.remove(SELECTORS.PROFILE_FORM.SUBMIT_BTN_HIDDEN)
+    : submitBtn?.classList.add(SELECTORS.PROFILE_FORM.SUBMIT_BTN_HIDDEN);
 }
 
 function displayActionsButtons(shown = true) {
@@ -95,8 +91,8 @@ function showFormInputs(form: ProfileForms, shown = true) {
   const formElement = document.getElementById(SELECTORS.PROFILE_FORM[form].DEFAULT);
 
   shown
-    ? formElement.classList.remove(SELECTORS.PROFILE_FORM.DISABLED)
-    : formElement.classList.add(SELECTORS.PROFILE_FORM.DISABLED);
+    ? formElement?.classList.remove(SELECTORS.PROFILE_FORM.DISABLED)
+    : formElement?.classList.add(SELECTORS.PROFILE_FORM.DISABLED);
 }
 
 function switchViewTo(viewName: Views) {
