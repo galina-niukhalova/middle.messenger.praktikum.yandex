@@ -1,3 +1,5 @@
+import { ProfileForms } from '../types';
+
 const SELECTORS = {
   AVATAR: {
     LABEL: 'avatar__label',
@@ -10,12 +12,12 @@ const SELECTORS = {
     DEFAULT: 'profile-form',
     DISABLED: 'profile-form_disabled',
     SUBMIT_BTN_HIDDEN: 'profile-form__submit-button-wrap_hidden',
-    USER_INFO_FORM: {
+    [ProfileForms.USER_INFO_FORM]: {
       DEFAULT: 'profile__user-info-form',
       INPUT: '#profile__user-info-form .profile-form__input',
       SUBMIT_BTN: '#profile__user-info-form .profile-form__submit-button-wrap',
     },
-    PASSWORD_CHANGE_FORM: {
+    [ProfileForms.PASSWORD_CHANGE_FORM]: {
       DEFAULT: 'profile__password-change-form',
       INPUT: '#profile__password-change-form .profile-form__input',
       SUBMIT_BTN: '#profile__password-change-form .profile-form__submit-button-wrap',

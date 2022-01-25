@@ -12,6 +12,9 @@ interface IFormInput {
     dependentFields?: [string],
   }
 }
+export interface IFormInputData extends IFormInput {
+  name: string
+}
 
 export default IFormInput;
 

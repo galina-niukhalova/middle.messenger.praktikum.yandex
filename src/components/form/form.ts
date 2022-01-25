@@ -6,8 +6,10 @@ import { CLASS_NAMES } from './const';
 import formTemplate from './form.hbs';
 import Handlebars from 'handlebars/dist/handlebars.runtime';
 import { IFormInput } from './types';
+import { IHbsRegisterHelperOptions } from 'types';
+import { IFormProps } from './types';
 
-Handlebars.registerHelper('form', function (options) {
+Handlebars.registerHelper('form', function (options: IHbsRegisterHelperOptions<IFormProps>) {
   const { hash } = options || {};
   if (!hash) return;
 
@@ -24,13 +26,13 @@ Handlebars.registerHelper('form', function (options) {
 class Form {
   id: string;
   name: string;
-  inputs: { [key: string]: IFormInput };
+  inputs: Record<string, IFormInput>;
   formWasSubmitted = false;
 
   constructor(
     id: string,
     name: string,
-    inputs: ({ [key: string]: IFormInput })
+    inputs: Record<string, IFormInput>,
   ) {
     this.id = id;
     this.name = name;
@@ -38,7 +40,7 @@ class Form {
   }
 
   /** EVENTS */
-  listenFormSubmission(onFormSubmit) {
+  listenFormSubmission(onFormSubmit: () => void) {
     document.getElementById(this.id).addEventListener('submit', (event) => {
       event.preventDefault();
       this.formWasSubmitted = true;
@@ -59,7 +61,7 @@ class Form {
   }
 
   /** HELPERS */
-  showErrorMessageFor(field, show = true) {
+  showErrorMessageFor(field: string, show = true) {
     const inputElement = document.getElementsByName(field)[0] as HTMLInputElement;
     const errorMessageElement = getErrorMessageElement(this.name, field);
     if (!errorMessageElement) return;
@@ -89,7 +91,7 @@ class Form {
     return !validationFail;
   }
 
-  isInputValid(inputName) {
+  isInputValid(inputName: string) {
     const inputElement = document.getElementsByName(inputName)[0] as HTMLInputElement;
 
     if (!inputElement.value) return false;
@@ -101,7 +103,7 @@ class Form {
     return inputElement.validity.valid;
   }
 
-  validateInput(field) {
+  validateInput(field: string) {
     !this.isInputValid(field)
       ? this.showErrorMessageFor(field, true)
       : this.showErrorMessageFor(field, false);

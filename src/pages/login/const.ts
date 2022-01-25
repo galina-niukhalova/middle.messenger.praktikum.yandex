@@ -1,4 +1,4 @@
-import { IFormInput } from 'components/form/types';
+import { IFormInput, ISubmitBtn, IFormLink } from 'components/form/types';
 
 const FORM = {
   name: 'login-form',
@@ -6,11 +6,11 @@ const FORM = {
   title: 'Вход'
 };
 
-const SUBMIT_BTN = {
+const SUBMIT_BTN: ISubmitBtn = {
   title: 'Войти'
 };
 
-const INPUTS: ({ [key: string]: IFormInput }) = {
+const INPUTS: Record<string, IFormInput> = {
   login: {
     id: 'login-form_login-input',
     type: 'text',
@@ -32,7 +32,7 @@ const INPUTS: ({ [key: string]: IFormInput }) = {
   }
 };
 
-const NO_ACCOUNT_LINK = {
+const NO_ACCOUNT_LINK: IFormLink = {
   url: '/signup',
   title: 'Нет аккаунта?'
 };

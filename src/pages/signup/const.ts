@@ -11,7 +11,7 @@ const SUBMIT_BTN = {
   title: 'Зарегистрироваться'
 };
 
-const INPUTS: ({ [key: string]: IFormInput }) = {
+const INPUTS: Record<string, IFormInput> = {
   email: {
     id: 'signup-form_email-input',
     type: 'email',

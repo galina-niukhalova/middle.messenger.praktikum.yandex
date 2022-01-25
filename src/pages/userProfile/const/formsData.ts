@@ -1,4 +1,6 @@
-const userInfoFormData = {
+import { IFormData } from '../types';
+
+const userInfoFormData: IFormData = {
   email: {
     label: 'Почта',
     value: 'example_email'
@@ -20,7 +22,7 @@ const userInfoFormData = {
   }
 };
 
-const passwordChangeFormData = {
+const passwordChangeFormData: IFormData = {
   oldPassword: {
     label: 'Старый пароль',
     type: 'password',
@@ -35,13 +37,7 @@ const passwordChangeFormData = {
   }
 };
 
-const FORMS = {
-  USER_INFO_FORM: 'USER_INFO_FORM',
-  PASSWORD_CHANGE_FORM: 'PASSWORD_CHANGE_FORM'
-};
-
 export {
-  FORMS,
   passwordChangeFormData,
   userInfoFormData
 };

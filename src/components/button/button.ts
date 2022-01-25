@@ -2,13 +2,17 @@ import buttonTemplate from './button.hbs';
 import Handlebars from 'handlebars/dist/handlebars.runtime';
 import './button.scss';
 import classnames from 'utils/classnames';
+import { IHbsRegisterHelperOptions } from 'types';
+import { IButtonProps } from './types';
 
 const BUTTON_VARIANTS = {
   CLASSIC: 'classic',
   LINK: 'link'
 };
 
-Handlebars.registerHelper('button', function (options) {
+Handlebars.registerHelper('button', function (
+  options: IHbsRegisterHelperOptions<IButtonProps>
+) {
   const { hash } = options || {};
   if (!hash) return;
 

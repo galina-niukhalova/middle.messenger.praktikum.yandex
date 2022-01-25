@@ -7,11 +7,12 @@
     "strictNullChecks": false,
     "sourceMap": true,
     "baseUrl": "src",
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "paths": {
       "pages": ["pages"],
+      "types": ["types"]
     }
  }
 } 

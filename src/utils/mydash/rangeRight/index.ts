@@ -1,6 +1,6 @@
 import range from 'utils/mydash/range';
 
-function rangeRight(start, end, step) {
+function rangeRight(start: number, end: number, step: number) {
   return range(start, end, step, true);
 }
 

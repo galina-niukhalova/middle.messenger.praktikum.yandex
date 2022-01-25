@@ -4,12 +4,11 @@ import avatarPlaceholder from 'static/images/image-outline.svg';
 import './changeUserInfoForm';
 import {
   SELECTORS,
-  VIEWS,
-  FORMS,
   userInfoFormData,
   passwordChangeFormData,
 } from './const';
 import { addContentToMainSection } from 'utils/dom';
+import { ProfileForms, Views, IFormData } from './types';
 
 function listenAvatarUpload() {
   document.getElementsByClassName(SELECTORS.AVATAR.FILE_UPLOAD)[0]
@@ -33,7 +32,7 @@ function listenSubmitUserInfo() {
   document.getElementById(SELECTORS.PROFILE_FORM.USER_INFO_FORM.DEFAULT)
     .addEventListener('submit', (e) => {
       e.preventDefault();
-      switchViewTo(VIEWS.READ_ONLY);
+      switchViewTo(Views.READ_ONLY);
     });
 }
 
@@ -41,33 +40,34 @@ function listenSubmitPassword() {
   document.getElementById(SELECTORS.PROFILE_FORM.PASSWORD_CHANGE_FORM.DEFAULT)
     .addEventListener('submit', (e) => {
       e.preventDefault();
-      switchViewTo(VIEWS.READ_ONLY);
+      switchViewTo(Views.READ_ONLY);
     });
 }
 
 function listenChangeUserInfoBtnClick() {
   document.getElementById(SELECTORS.ACTIONS_BUTTONS.CHANGE_USER_INFO)
     .addEventListener('click', () => {
-      switchViewTo(VIEWS.EDIT_USER_INFO);
+      switchViewTo(Views.EDIT_USER_INFO);
     });
 }
 
 function listenChangePasswordBtnClick() {
   document.getElementById(SELECTORS.ACTIONS_BUTTONS.CHANGE_PASSWORD)
     .addEventListener('click', () => {
-      switchViewTo(VIEWS.EDIT_USER_PASSWORD);
+      switchViewTo(Views.EDIT_USER_PASSWORD);
     });
 }
 
-function disableInputs(form, disabled = true) {
+function disableInputs(form: ProfileForms, disabled = true) {
   if (form) {
-    Array.from(document.querySelectorAll(SELECTORS.PROFILE_FORM[form].INPUT))?.forEach(inputElement => {
-      inputElement.readOnly = disabled;
-    });
+    Array.from(document.querySelectorAll(SELECTORS.PROFILE_FORM[form].INPUT))?.forEach(
+      (inputElement: HTMLInputElement) => {
+        inputElement.readOnly = disabled;
+      });
   }
 }
 
-function displaySubmitButton(form, shown = true) {
+function displaySubmitButton(form: ProfileForms, shown = true) {
   const submitBtn = document.querySelector(SELECTORS.PROFILE_FORM[form].SUBMIT_BTN);
 
   shown
@@ -91,7 +91,7 @@ function disableAvatarEdit(disabled = true) {
     : avatarLabel.classList.remove(SELECTORS.AVATAR.LABEL_HIDDEN);
 }
 
-function showFormInputs(form, shown = true) {
+function showFormInputs(form: ProfileForms, shown = true) {
   const formElement = document.getElementById(SELECTORS.PROFILE_FORM[form].DEFAULT);
 
   shown
@@ -99,31 +99,31 @@ function showFormInputs(form, shown = true) {
     : formElement.classList.add(SELECTORS.PROFILE_FORM.DISABLED);
 }
 
-function switchViewTo(viewName) {
+function switchViewTo(viewName: Views) {
   switch (viewName) {
-    case VIEWS.READ_ONLY:
-      showFormInputs(FORMS.PASSWORD_CHANGE_FORM, false);
-      showFormInputs(FORMS.USER_INFO_FORM);
-      disableInputs(FORMS.USER_INFO_FORM);
+    case Views.READ_ONLY:
+      showFormInputs(ProfileForms.PASSWORD_CHANGE_FORM, false);
+      showFormInputs(ProfileForms.USER_INFO_FORM);
+      disableInputs(ProfileForms.USER_INFO_FORM);
       displayActionsButtons();
-      displaySubmitButton(FORMS.USER_INFO_FORM, false);
+      displaySubmitButton(ProfileForms.USER_INFO_FORM, false);
       break;
-    case VIEWS.EDIT_USER_INFO:
+    case Views.EDIT_USER_INFO:
       disableAvatarEdit(false);
-      disableInputs(FORMS.USER_INFO_FORM, false);
+      disableInputs(ProfileForms.USER_INFO_FORM, false);
       displayActionsButtons(false);
-      displaySubmitButton(FORMS.USER_INFO_FORM);
+      displaySubmitButton(ProfileForms.USER_INFO_FORM);
       break;
-    case VIEWS.EDIT_USER_PASSWORD:
-      showFormInputs(FORMS.PASSWORD_CHANGE_FORM);
-      showFormInputs(FORMS.USER_INFO_FORM, false);
+    case Views.EDIT_USER_PASSWORD:
+      showFormInputs(ProfileForms.PASSWORD_CHANGE_FORM);
+      showFormInputs(ProfileForms.USER_INFO_FORM, false);
       displayActionsButtons(false);
-      displaySubmitButton(FORMS.PASSWORD_CHANGE_FORM);
+      displaySubmitButton(ProfileForms.PASSWORD_CHANGE_FORM);
       break;
   }
 }
 
-function getInputsFrom(formDataObject, readonly) {
+function getInputsFrom(formDataObject: IFormData, readonly: boolean) {
   return Object.keys(formDataObject)
     .map(key => ({ ...formDataObject[key], name: key, readonly }));
 }

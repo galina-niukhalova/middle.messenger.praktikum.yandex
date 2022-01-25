@@ -1,8 +1,10 @@
 import inputTemplate from './input.hbs';
 import Handlebars from 'handlebars/dist/handlebars.runtime';
 import './input.scss';
+import { IHbsRegisterHelperOptions } from 'types';
+import { IInputProps } from './types';
 
-Handlebars.registerHelper('input', function (options) {
+Handlebars.registerHelper('input', function (options: IHbsRegisterHelperOptions<IInputProps>) {
   const { hash } = options || {};
   if (!hash) return;
 

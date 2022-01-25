@@ -1,14 +1,14 @@
-function classnames(...names) {
+function classnames(...names: (string | Record<string, boolean>)[]) {
   const className = [];
   for (let name of names) {
     if (typeof name === 'string') {
       className.push(name);
-    } else {
+    } else if (typeof name === 'object') {
       Object.keys(name).forEach(key => {
-        if (name[key]) {
+        if ((name as Record<string, boolean>)[key]) {
           className.push(key);
         }
-      });
+      })
     }
   }
 

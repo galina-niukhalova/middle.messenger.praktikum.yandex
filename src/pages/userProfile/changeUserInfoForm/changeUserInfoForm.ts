@@ -2,8 +2,10 @@ import changeUserInfoFormTemplate from './changeUserInfoForm.tmpl.hbs';
 import './changeUserInfoForm.style.scss';
 import Handlebars from 'handlebars/dist/handlebars.runtime';
 import classnames from 'utils/classnames';
+import { IHbsRegisterHelperOptions } from 'types';
+import { IChangeUserProfileProps } from './types';
 
-Handlebars.registerHelper('profileForm', function (options) {
+Handlebars.registerHelper('profileForm', function (options: IHbsRegisterHelperOptions<IChangeUserProfileProps>) {
   const { hash } = options || {};
   if (!hash) return;
 

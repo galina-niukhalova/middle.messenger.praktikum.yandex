@@ -1,4 +1,4 @@
-function last(list) {
+function last(list: unknown[]) {
   if (!Array.isArray(list)) return undefined;
   if (!list.length) return undefined;
 

@@ -1,3 +1,2 @@
-export { userInfoFormData, passwordChangeFormData, FORMS } from './formsData';
-export { default as VIEWS } from './renderViews';
+export { userInfoFormData, passwordChangeFormData } from './formsData';
 export { default as SELECTORS } from './selectors';

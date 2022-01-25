@@ -2,8 +2,10 @@ import linkTemplate from './link.tmpl.hbs';
 import Handlebars from 'handlebars/dist/handlebars.runtime';
 import './link.style.scss';
 import classnames from 'utils/classnames';
+import { IHbsRegisterHelperOptions } from 'types';
+import { ILinkProps } from './types';
 
-Handlebars.registerHelper('link', function (options) {
+Handlebars.registerHelper('link', function (options: IHbsRegisterHelperOptions<ILinkProps>) {
   const { hash } = options || {};
   if (!hash) return;
 

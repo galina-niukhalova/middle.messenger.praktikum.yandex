@@ -1,4 +1,4 @@
-function baseRange(start, end, step, isRight) {
+function baseRange(start: number, end: number, step: number, isRight: boolean) {
   let result = [];
 
   if (step === 0) {
@@ -18,7 +18,7 @@ function baseRange(start, end, step, isRight) {
   return result;
 }
 
-function range(start, end, step, isRight) {
+function range(start: number, end?: number, step?: number, isRight?: boolean) {
   if (end === undefined) {
     end = start;
     start = 0;
