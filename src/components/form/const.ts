@@ -3,6 +3,4 @@ const CLASS_NAMES = {
   invalidInput: 'input_invalid',
 };
 
-export {
-  CLASS_NAMES,
-};
+export default CLASS_NAMES;

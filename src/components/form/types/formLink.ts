@@ -3,4 +3,4 @@ interface IFromLink {
   title: string
 }
 
-export default IFromLink
+export default IFromLink;

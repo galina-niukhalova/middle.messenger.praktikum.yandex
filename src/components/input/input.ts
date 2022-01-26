@@ -1,14 +1,16 @@
-import inputTemplate from './input.hbs';
 import Handlebars from 'handlebars/dist/handlebars.runtime';
 import './input.scss';
 import { IHbsRegisterHelperOptions } from 'types';
 import { IInputProps } from './types';
+import inputTemplate from './input.hbs';
 
-Handlebars.registerHelper('input', function (options: IHbsRegisterHelperOptions<IInputProps>) {
+Handlebars.registerHelper('input', (options: IHbsRegisterHelperOptions<IInputProps>): string => {
   const { hash } = options || {};
-  if (!hash) return;
+  if (!hash) return '';
 
-  const { className, type, name, label, errorId, isFormInput } = hash;
+  const {
+    className, type, name, label, errorId, isFormInput,
+  } = hash;
 
   const html = inputTemplate({
     className: Handlebars.escapeExpression(className),

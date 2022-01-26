@@ -5,6 +5,4 @@ function isPasswordValid() {
   return password.value === repeatPassword.value;
 }
 
-export {
-  isPasswordValid
-};
+export default isPasswordValid;

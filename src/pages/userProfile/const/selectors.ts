@@ -27,8 +27,8 @@ const SELECTORS = {
     DEFAULT: 'profile__actions-buttons',
     HIDDEN: 'profile__actions-buttons_hidden',
     CHANGE_USER_INFO: 'change-user-info-button',
-    CHANGE_PASSWORD: 'change-password-button'
-  }
+    CHANGE_PASSWORD: 'change-password-button',
+  },
 };
 
 export default SELECTORS;

@@ -1,1 +1,6 @@
-export { default as IHbsRegisterHelperOptions } from './hbsRegisterHelper';
+import IHbsRegisterHelperOptions from './hbsRegisterHelper';
+
+export {
+  IHbsRegisterHelperOptions,
+};
+export default IHbsRegisterHelperOptions;

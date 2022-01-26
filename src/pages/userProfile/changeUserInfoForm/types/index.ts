@@ -1,1 +1,3 @@
-export { default as IChangeUserProfileProps } from './changeUserProfileProps';
+import IChangeUserProfileProps from './changeUserProfileProps';
+
+export default IChangeUserProfileProps;

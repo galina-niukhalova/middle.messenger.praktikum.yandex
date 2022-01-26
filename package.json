@@ -7,7 +7,7 @@
     "dev": "parcel -p 4000",
     "build": "parcel build",
     "start": "npm run build && node server.js",
-    "lint": "eslint --fix --ext .js, ."
+    "lint": "eslint . --fix --ext .js,.ts"
   },
   "author": "",
   "license": "ISC",
@@ -23,7 +23,11 @@
     "@anikin/parcel-transformer-handlebars-precompile": "^1.0.1",
     "@parcel/config-default": "^2.1.1",
     "@parcel/transformer-sass": "^2.1.1",
-    "eslint": "^8.5.0",
+    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "@typescript-eslint/parser": "^5.10.1",
+    "eslint": "^8.7.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-import-resolver-typescript": "^2.5.0",
     "parcel": "^2.0.1",
     "sass": "^1.45.1",
     "ts-node": "^10.4.0",

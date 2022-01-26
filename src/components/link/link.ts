@@ -1,27 +1,27 @@
-import linkTemplate from './link.tmpl.hbs';
 import Handlebars from 'handlebars/dist/handlebars.runtime';
 import './link.style.scss';
 import classnames from 'utils/classnames';
 import { IHbsRegisterHelperOptions } from 'types';
 import { ILinkProps } from './types';
+import linkTemplate from './link.tmpl.hbs';
 
-Handlebars.registerHelper('link', function (options: IHbsRegisterHelperOptions<ILinkProps>) {
+Handlebars.registerHelper('link', (options: IHbsRegisterHelperOptions<ILinkProps>): string => {
   const { hash } = options || {};
-  if (!hash) return;
+  if (!hash) return '';
 
-  const { url, title, className, danger, size = 'medium' } = hash;
+  const {
+    url, title, className, danger, size = 'medium',
+  } = hash;
   const linkHTML = linkTemplate({
     url: Handlebars.escapeExpression(url),
     title: Handlebars.escapeExpression(title),
     className: Handlebars.escapeExpression(
       classnames('link', `link_${size}`, {
         [className]: !!className,
-        'link_danger': !!danger,
-      })
-    )
+        link_danger: !!danger,
+      }),
+    ),
   });
 
   return new Handlebars.SafeString(linkHTML);
 });
-
-

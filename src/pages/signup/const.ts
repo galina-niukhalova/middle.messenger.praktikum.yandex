@@ -1,14 +1,14 @@
-import { isPasswordValid } from './utils';
 import { IFormInput } from 'components/form/types';
+import isPasswordValid from './utils';
 
 const FORM = {
   name: 'signup-form',
   id: 'signup',
-  title: 'Регистрация'
+  title: 'Регистрация',
 };
 
 const SUBMIT_BTN = {
-  title: 'Зарегистрироваться'
+  title: 'Зарегистрироваться',
 };
 
 const INPUTS: Record<string, IFormInput> = {
@@ -19,8 +19,8 @@ const INPUTS: Record<string, IFormInput> = {
     errors: {
       fieldId: 'signup-form_email-error',
       general: 'Неверная почта',
-      emptyField: 'Укажите пожалуйста почту'
-    }
+      emptyField: 'Укажите пожалуйста почту',
+    },
   },
   login: {
     id: 'signup-form_login-input',
@@ -29,7 +29,7 @@ const INPUTS: Record<string, IFormInput> = {
     errors: {
       fieldId: 'signup-form_login-error',
       emptyField: 'Укажите пожалуйста логин',
-    }
+    },
   },
   'first-name': {
     id: 'signup-form_first-name-input',
@@ -38,7 +38,7 @@ const INPUTS: Record<string, IFormInput> = {
     errors: {
       fieldId: 'signup-form_first-name-error',
       emptyField: 'Укажите пожалуйста имя',
-    }
+    },
   },
   'second-name': {
     id: 'signup-form_second-name-input',
@@ -46,8 +46,8 @@ const INPUTS: Record<string, IFormInput> = {
     label: 'Фамилия',
     errors: {
       fieldId: 'signup-form_second-name-error',
-      emptyField: 'Укажите пожалуйста фамилию'
-    }
+      emptyField: 'Укажите пожалуйста фамилию',
+    },
   },
   phone: {
     id: 'signup-form_phone-input',
@@ -56,7 +56,7 @@ const INPUTS: Record<string, IFormInput> = {
     errors: {
       fieldId: 'signup-form_phone-error',
       emptyField: 'Укажите пожалуйста телефон',
-    }
+    },
   },
   password: {
     id: 'signup-form_password-input',
@@ -68,7 +68,7 @@ const INPUTS: Record<string, IFormInput> = {
       general: 'Пароли не совпадают',
       dependentFields: ['repeat-password'],
       customValidator: isPasswordValid.bind(this, FORM.name),
-    }
+    },
   },
   'repeat-password': {
     id: 'signup-form_repeat-password-input',
@@ -80,18 +80,18 @@ const INPUTS: Record<string, IFormInput> = {
       emptyField: 'Поле обязательное для заполнения',
       dependentFields: ['password'],
       customValidator: isPasswordValid.bind(this, FORM.name),
-    }
-  }
+    },
+  },
 };
 
 const LOGIN_LINK = {
   url: '/login',
-  title: 'Войти'
+  title: 'Войти',
 };
 
 export {
   FORM,
   INPUTS,
   SUBMIT_BTN,
-  LOGIN_LINK
+  LOGIN_LINK,
 };

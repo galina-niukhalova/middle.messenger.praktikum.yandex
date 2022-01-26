@@ -8,5 +8,5 @@ function addContentToMainSection(content: string) {
 
 export {
   getErrorMessageElement,
-  addContentToMainSection
+  addContentToMainSection,
 };

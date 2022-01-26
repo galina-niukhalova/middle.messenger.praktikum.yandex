@@ -1,4 +1,4 @@
-export enum ButtonVariants {
+enum ButtonVariants {
   CLASSIC,
   LINK
 }

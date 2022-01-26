@@ -2,4 +2,4 @@ interface ISubmitBtn {
   title: string
 }
 
-export default ISubmitBtn
+export default ISubmitBtn;

@@ -1,5 +1,5 @@
 function baseRange(start: number, end: number, step: number, isRight?: boolean) {
-  let result = [];
+  const result = [];
 
   if (step === 0) {
     return Array(end - 1).fill(start);
@@ -19,13 +19,19 @@ function baseRange(start: number, end: number, step: number, isRight?: boolean) 
 }
 
 function range(start: number, end?: number, step?: number, isRight?: boolean) {
-  if (end === undefined) {
-    end = start;
-    start = 0;
+  let newEnd = end;
+  let newStart = start;
+  let newStep = step;
+
+  if (newEnd === undefined) {
+    newEnd = start;
+    newStart = 0;
   }
 
-  step = step === undefined ? (end > start ? 1 : -1) : step;
-  return baseRange(start, end, step, isRight);
+  if (newStep === undefined) {
+    newStep = newEnd > newStart ? 1 : -1;
+  }
+  return baseRange(newStart, newEnd, newStep, isRight);
 }
 
 export default range;

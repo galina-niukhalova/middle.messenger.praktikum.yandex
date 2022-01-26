@@ -10,4 +10,3 @@ interface IInputProps {
 }
 
 export default IInputProps;
-

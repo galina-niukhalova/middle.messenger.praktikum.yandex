@@ -1,13 +1,14 @@
+import Form from 'components/form';
+import { addContentToMainSection } from 'utils/dom';
 import signupTemplate from './signup.tmpl.hbs';
 import './signup.style.scss';
-import Form from 'components/form';
+
 import {
   FORM,
   INPUTS,
   SUBMIT_BTN,
-  LOGIN_LINK
+  LOGIN_LINK,
 } from './const';
-import { addContentToMainSection } from 'utils/dom';
 
 function handleFormSubmit() {
   window.location.href = '/chats';
@@ -22,13 +23,11 @@ function renderSignupPage() {
         title: FORM.title,
         formClassName: 'signup-form',
         inputs:
-          Object.keys(INPUTS).map(key =>
-            ({ name: key, ...INPUTS[key] })
-          ),
+          Object.keys(INPUTS).map((key) => ({ name: key, ...INPUTS[key] })),
         submitBtn: SUBMIT_BTN,
         formLink: LOGIN_LINK,
-      }
-    }
+      },
+    },
   );
 
   addContentToMainSection(content);

@@ -1,6 +1,6 @@
-import chatTemplate from './chat.tmpl.hbs';
 import './chat.style.scss';
 import { addContentToMainSection } from 'utils/dom';
+import chatTemplate from './chat.tmpl.hbs';
 
 function renderChat() {
   const content = chatTemplate();

@@ -17,4 +17,3 @@ export interface IFormInputData extends IFormInput {
 }
 
 export default IFormInput;
-
