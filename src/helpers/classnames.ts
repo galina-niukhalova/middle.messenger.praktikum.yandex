@@ -4,7 +4,7 @@ function classnames(...names: (string | Record<string, boolean>)[]) {
     if (typeof name === 'string') {
       className.push(name);
     } else if (typeof name === 'object') {
-      Object.keys(name).forEach((key) => {
+      Object.keys(name!).forEach((key) => {
         if ((name as Record<string, boolean>)[key]) {
           className.push(key);
         }

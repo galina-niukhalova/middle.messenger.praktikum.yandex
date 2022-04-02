@@ -2,7 +2,9 @@ type InputType = 'text' | 'password' | 'tel' | 'email';
 
 interface IFormInput {
   id: string,
-  type: InputType,
+  name?: string,
+  type?: InputType,
+  value?: string,
   label: string,
   errors?: {
     fieldId: string,

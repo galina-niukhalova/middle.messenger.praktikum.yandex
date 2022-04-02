@@ -1,42 +1,30 @@
-import Form from 'components/form';
-import { addContentToMainSection } from 'utils/dom';
-import loginTemplate from './login.tmpl.hbs';
 import './login.style.scss';
+import Form from 'components/form';
+import Block from 'utils/Block';
+import tmpl from './login.tmpl.hbs';
 import {
   FORM,
   INPUTS,
   NO_ACCOUNT_LINK,
   SUBMIT_BTN,
 } from './const';
+class Login extends Block {
+  initChildren() {
+    this.children.form = new Form({
+      id: FORM.id,
+      name: FORM.name,
+      title: FORM.title,
+      className: 'login-form',
+      inputs: Object.keys(INPUTS).map((key) => ({ name: key, ...INPUTS[key] })),
+      submitBtn: SUBMIT_BTN,
+      link: NO_ACCOUNT_LINK,
+      onFormSubmit: () => { console.log('submit'); },
+    });
+  }
 
-function handleFormSubmit() {
-  window.location.href = '/chats';
+  render() {
+    return this.compile(tmpl, {});
+  }
 }
 
-function renderLoginPage() {
-  const content = loginTemplate(
-    {
-      data: {
-        formID: FORM.id,
-        title: FORM.title,
-        formClassName: 'login-form',
-        inputs:
-          Object.keys(INPUTS).map((key) => ({ name: key, ...INPUTS[key] })),
-        submitBtn: SUBMIT_BTN,
-        formLink: NO_ACCOUNT_LINK,
-      },
-    },
-  );
-
-  addContentToMainSection(content);
-
-  const loginForm = new Form(
-    FORM.id,
-    FORM.name,
-    INPUTS,
-  );
-  loginForm.listenFormSubmission(handleFormSubmit);
-  loginForm.listenInputsChange();
-}
-
-export default renderLoginPage;
+export default Login;

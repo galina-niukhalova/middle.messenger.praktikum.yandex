@@ -3,14 +3,15 @@ import ISubmitBtn from './submitBtn';
 import IFormLink from './formLink';
 
 interface IFormProps {
-  data: {
-    formID: string,
-    title: string,
-    formClassName: string,
-    inputs: IFormInputData,
-    submitBtn: ISubmitBtn,
-    formLink: IFormLink,
-  }
+  id: string,
+  name: string,
+  title?: string,
+  className: string,
+  inputs: IFormInputData[],
+  submitBtn: ISubmitBtn,
+  link?: IFormLink,
+  readonly?: boolean,
+  onFormSubmit: () => void;
 }
 
 export default IFormProps;

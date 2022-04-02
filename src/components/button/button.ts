@@ -1,39 +1,33 @@
-import Handlebars from 'handlebars/dist/handlebars.runtime';
 import './button.scss';
-import classnames from 'utils/classnames';
-import { IHbsRegisterHelperOptions } from 'types';
-import { IButtonProps } from './types';
-import buttonTemplate from './button.hbs';
+import classnames from 'helpers/classnames';
+import Block from 'utils/Block';
+import tmpl from './button.hbs';
+import { IButtonProps, ButtonVariants } from './types';
 
-const BUTTON_VARIANTS = {
-  CLASSIC: 'classic',
-  LINK: 'link',
-};
+class Button extends Block {
+  constructor(props: IButtonProps) {
+    const variant = props.variant ?? ButtonVariants.CLASSIC;
+    const classNames = [];
+    if (props.className) classNames.push(props.className);
 
-Handlebars.registerHelper('button', (
-  options: IHbsRegisterHelperOptions<IButtonProps>,
-): string => {
-  const { hash } = options || {};
-  if (!hash) return '';
+    const defaultProps = {
+      type: 'button',
+      variant,
+    };
 
-  const {
-    type,
-    className,
-    title,
-    id,
-    variant = BUTTON_VARIANTS.CLASSIC,
-  } = hash;
+    super({
+      ...defaultProps,
+      ...props,
+      className: classnames(...classNames, {
+        button_link: variant === ButtonVariants.LINK,
+        button: variant === ButtonVariants.CLASSIC,
+      }),
+    });
+  }
 
-  const html = buttonTemplate({
-    type: Handlebars.escapeExpression(type || 'button'),
-    title: Handlebars.escapeExpression(title),
-    className: classnames({
-      [className]: !!className,
-      button_link: variant === BUTTON_VARIANTS.LINK,
-      button: variant === BUTTON_VARIANTS.CLASSIC,
-    }),
-    id: Handlebars.escapeExpression(id),
-  });
+  render() {
+    return this.compile(tmpl, { ...this.props });
+  }
+}
 
-  return new Handlebars.SafeString(html);
-});
+export default Button;

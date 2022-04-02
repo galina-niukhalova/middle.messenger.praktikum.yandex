@@ -1,8 +1,7 @@
+import Block from 'utils/Block';
 import Form from 'components/form';
-import { addContentToMainSection } from 'utils/dom';
 import signupTemplate from './signup.tmpl.hbs';
 import './signup.style.scss';
-
 import {
   FORM,
   INPUTS,
@@ -10,31 +9,28 @@ import {
   LOGIN_LINK,
 } from './const';
 
-function handleFormSubmit() {
-  window.location.href = '/chats';
+class Signup extends Block {
+  initChildren() {
+    this.children.form = new Form({
+      id: FORM.id,
+      name: FORM.name,
+      title: FORM.title,
+      className: 'signup-form',
+      inputs: Object.keys(INPUTS).map((key) => ({ name: key, ...INPUTS[key] })),
+      submitBtn: SUBMIT_BTN,
+      link: LOGIN_LINK,
+      onFormSubmit: this.handleFormSubmit,
+    });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  handleFormSubmit() {
+    window.location.href = '/chats';
+  }
+
+  render() {
+    return this.compile(signupTemplate, {});
+  }
 }
 
-/** RENDER */
-function renderSignupPage() {
-  const content = signupTemplate(
-    {
-      data: {
-        formID: FORM.id,
-        title: FORM.title,
-        formClassName: 'signup-form',
-        inputs:
-          Object.keys(INPUTS).map((key) => ({ name: key, ...INPUTS[key] })),
-        submitBtn: SUBMIT_BTN,
-        formLink: LOGIN_LINK,
-      },
-    },
-  );
-
-  addContentToMainSection(content);
-
-  const signupForm = new Form(FORM.id, FORM.name, INPUTS);
-  signupForm.listenFormSubmission(handleFormSubmit);
-  signupForm.listenInputsChange();
-}
-
-export default renderSignupPage;
+export default Signup;

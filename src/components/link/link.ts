@@ -1,27 +1,32 @@
-import Handlebars from 'handlebars/dist/handlebars.runtime';
 import './link.style.scss';
-import classnames from 'utils/classnames';
-import { IHbsRegisterHelperOptions } from 'types';
-import { ILinkProps } from './types';
+import classnames from 'helpers/classnames';
+import Block from 'utils/Block';
+import ILinkProps from './types';
 import linkTemplate from './link.tmpl.hbs';
 
-Handlebars.registerHelper('link', (options: IHbsRegisterHelperOptions<ILinkProps>): string => {
-  const { hash } = options || {};
-  if (!hash) return '';
+class Link extends Block {
+  constructor(props: ILinkProps) {
+    const size = props.size ?? 'medium';
+    const classNames = [];
+    if (props.className) classNames.push(props.className);
 
-  const {
-    url, title, className, danger, size = 'medium',
-  } = hash;
-  const linkHTML = linkTemplate({
-    url: Handlebars.escapeExpression(url),
-    title: Handlebars.escapeExpression(title),
-    className: Handlebars.escapeExpression(
-      classnames('link', `link_${size}`, {
-        [className]: !!className,
-        link_danger: !!danger,
+    const defaultProps = {
+      size,
+      danger: false,
+      className: classnames(...classNames, 'link', `link_${size}`, {
+        link_danger: !!props.danger,
       }),
-    ),
-  });
+    };
 
-  return new Handlebars.SafeString(linkHTML);
-});
+    super({
+      ...defaultProps,
+      ...props,
+    });
+  }
+
+  render() {
+    return this.compile(linkTemplate, { ...this.props });
+  }
+}
+
+export default Link;

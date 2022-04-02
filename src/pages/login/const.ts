@@ -7,7 +7,7 @@ const FORM = {
 };
 
 const SUBMIT_BTN: ISubmitBtn = {
-  title: 'Войти',
+  label: 'Войти',
 };
 
 const INPUTS: Record<string, IFormInput> = {

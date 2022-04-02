@@ -1,11 +1,11 @@
 import './chatsList.style.scss';
-import { addContentToMainSection } from 'utils/dom';
+import Block from 'utils/Block';
 import chatsListTemplate from './chatsList.tmpl.hbs';
 
-function renderChatsList() {
-  const content = chatsListTemplate();
-
-  addContentToMainSection(content);
+class Chats extends Block {
+  render() {
+    return this.compile(chatsListTemplate, {});
+  }
 }
 
-export default renderChatsList;
+export default Chats;

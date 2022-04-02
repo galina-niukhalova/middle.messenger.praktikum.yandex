@@ -1,11 +1,19 @@
-import { addContentToMainSection } from 'utils/dom';
-import notFoundTemplate from './notFound.hbs';
 import './notFound.style.scss';
+import Block from 'utils/Block';
+import Link from 'components/link';
+import notFoundTemplate from './notFound.hbs';
 
-function renderNotFound() {
-  const content = notFoundTemplate();
+class NotFoundPage extends Block {
+  initChildren() {
+    this.children.link = new Link({
+      label: 'Назад к чатам',
+      url: '/chats',
+    });
+  }
 
-  addContentToMainSection(content);
+  render() {
+    return this.compile(notFoundTemplate, {});
+  }
 }
 
-export default renderNotFound;
+export default NotFoundPage;

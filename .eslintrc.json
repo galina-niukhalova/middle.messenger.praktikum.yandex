@@ -21,6 +21,7 @@
         "semi": [2, "always"],
         "no-unused-expressions": [2, { "allowTernary": true }],
         "@typescript-eslint/no-unused-vars": 2,
+        "no-underscore-dangle": 0,
         "import/no-unresolved": [
             "error",
             {
@@ -34,7 +35,7 @@
         ],
         "no-shadow": "off",
         "@typescript-eslint/no-shadow": ["error"],
-        "no-use-before-define": ["error", { "functions": false }],
+        "no-use-before-define": ["error", { "functions": false, "classes": false }],
         "no-param-reassign": ["error", { "props": false }]
     }
 }

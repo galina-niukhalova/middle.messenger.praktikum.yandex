@@ -1,11 +1,20 @@
 import './error.style.scss';
-import { addContentToMainSection } from 'utils/dom';
+import Block from 'utils/Block';
+import Link from 'components/link';
 import errorTemplate from './error.tmpl.hbs';
 
-function renderError() {
-  const content = errorTemplate();
+class ErrorPage extends Block {
+  initChildren() {
+    this.children.link = new Link({
+      label: 'Назад к чатам',
+      url: '/chats',
+    });
+  }
 
-  addContentToMainSection(content);
+  render() {
+    return this.compile(errorTemplate, {});
+  }
 }
 
-export default renderError;
+export default ErrorPage;
+

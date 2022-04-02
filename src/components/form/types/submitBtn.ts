@@ -1,5 +1,5 @@
 interface ISubmitBtn {
-  title: string
+  label: string
 }
 
 export default ISubmitBtn;

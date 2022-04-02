@@ -14,6 +14,7 @@
   "alias": {
     "components": "~/src/components",
     "utils": "~/src/utils",
+    "helpers": "~/src/helpers",
     "style": "~/src/style",
     "pages": "~/src/pages",
     "static": "~/static"
@@ -30,12 +31,13 @@
     "eslint-import-resolver-typescript": "^2.5.0",
     "parcel": "^2.0.1",
     "sass": "^1.45.1",
-    "ts-node": "^10.4.0",
+    "ts-node": "^10.7.0",
     "typescript": "^4.5.5"
   },
   "dependencies": {
     "express": "^4.17.2",
     "handlebars": "^4.7.7",
+    "nanoid": "^3.2.0",
     "path": "^0.12.7"
   }
 }

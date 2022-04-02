@@ -8,7 +8,7 @@ const FORM = {
 };
 
 const SUBMIT_BTN = {
-  title: 'Зарегистрироваться',
+  label: 'Зарегистрироваться',
 };
 
 const INPUTS: Record<string, IFormInput> = {

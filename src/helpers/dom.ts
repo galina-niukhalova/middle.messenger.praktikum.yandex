@@ -3,7 +3,9 @@ function getErrorMessageElement(formName: string, inputName: string) {
 }
 
 function addContentToMainSection(content: string) {
-  document.getElementsByTagName('main')[0].innerHTML = content;
+  const el = document.createElement('div');
+  el.innerHTML = content;
+  document.getElementsByTagName('main')[0].appendChild(el);
 }
 
 export {
