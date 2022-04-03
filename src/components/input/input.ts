@@ -1,8 +1,6 @@
 import './input.scss';
-import compile from 'components/utils/compile';
 import Block from 'utils/Block';
 import { IInputProps } from './types';
-import tmpl from './input.hbs';
 
 class Input extends Block {
   constructor(props: IInputProps) {
@@ -21,7 +19,15 @@ class Input extends Block {
   }
 
   render() {
-    return compile(tmpl, { ...this.props });
+    return `
+      <div class='{{containerClassName}}'>
+        <div class='floating-input-container'>
+          <input class="input {{className}}" type={{type}} name={{name}} required placeholder='placeholder' {{#if readonly}} readonly {{/if}}>
+          <span class='input__label'>{{label}}</span>
+        </div>
+        <span id={{errorId}} class='input__error-message input__error-message_hidden'>Error</span>
+      </div>
+    `;
   }
 }
 

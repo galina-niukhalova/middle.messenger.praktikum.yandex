@@ -6,11 +6,11 @@ interface IFormInput {
   type?: InputType,
   value?: string,
   label: string,
+  isValid: (value: string) => boolean,
   errors?: {
     fieldId: string,
     general?: string,
     emptyField: string,
-    customValidator?: () => boolean,
     dependentFields?: [string],
   }
 }

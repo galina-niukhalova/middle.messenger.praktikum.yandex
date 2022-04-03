@@ -1,32 +1,46 @@
 import './button.scss';
 import classnames from 'helpers/classnames';
 import Block from 'utils/Block';
-import tmpl from './button.hbs';
 import { IButtonProps, ButtonVariants } from './types';
 
 class Button extends Block {
   constructor(props: IButtonProps) {
-    const variant = props.variant ?? ButtonVariants.CLASSIC;
+    const {
+      onClick, variant, className, ...rest
+    } = props;
+
+    const buttonVariant = variant ?? ButtonVariants.CLASSIC;
     const classNames = [];
-    if (props.className) classNames.push(props.className);
+    if (className) classNames.push(className);
 
     const defaultProps = {
       type: 'button',
-      variant,
+      variant: buttonVariant,
+      className: classnames(...classNames, {
+        button_link: buttonVariant === ButtonVariants.LINK,
+        button: buttonVariant === ButtonVariants.CLASSIC,
+      }),
     };
 
     super({
       ...defaultProps,
-      ...props,
-      className: classnames(...classNames, {
-        button_link: variant === ButtonVariants.LINK,
-        button: variant === ButtonVariants.CLASSIC,
-      }),
+      ...rest,
+      events: {
+        click: onClick,
+      },
     });
   }
 
   render() {
-    return this.compile(tmpl, { ...this.props });
+    return `
+      <button 
+        {{#if id}}{{id}}{{/if}} 
+        type={{type}} 
+        class="{{className}}"
+      >
+        {{label}}
+      </button>
+    `;
   }
 }
 

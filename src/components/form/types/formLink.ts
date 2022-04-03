@@ -1,6 +1,6 @@
 interface IFromLink {
   url: string,
-  title: string
+  label: string
 }
 
 export default IFromLink;

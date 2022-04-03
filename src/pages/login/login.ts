@@ -1,29 +1,68 @@
 import './login.style.scss';
-import Form from 'components/form';
 import Block from 'utils/Block';
-import tmpl from './login.tmpl.hbs';
-import {
-  FORM,
-  INPUTS,
-  NO_ACCOUNT_LINK,
-  SUBMIT_BTN,
-} from './const';
+
 class Login extends Block {
-  initChildren() {
-    this.children.form = new Form({
-      id: FORM.id,
-      name: FORM.name,
-      title: FORM.title,
-      className: 'login-form',
-      inputs: Object.keys(INPUTS).map((key) => ({ name: key, ...INPUTS[key] })),
-      submitBtn: SUBMIT_BTN,
-      link: NO_ACCOUNT_LINK,
-      onFormSubmit: () => { console.log('submit'); },
-    });
+  protected getStateFromProps() {
+    this.state = {
+      values: {
+        login: '',
+        password: '',
+      },
+      handleSubmit: (inputs: { [key: string]: HTMLElement }) => {
+        const loginData = {
+          login: (inputs.login.querySelector('input') as HTMLInputElement).value,
+          password: (inputs.password.querySelector('input') as HTMLInputElement).value,
+        };
+        console.log(loginData);
+      },
+    };
   }
 
   render() {
-    return this.compile(tmpl, {});
+    const inputs = [
+      {
+        name: 'login',
+        id: 'login-form_login-input',
+        type: 'text',
+        label: 'Логин',
+        ref: 'login',
+        errors: {
+          fieldId: 'login-form_login-error',
+          general: 'Неверный логин',
+          emptyField: 'Укажите пожалуйста логин',
+        },
+      },
+      {
+        name: 'password',
+        id: 'login-form_password-input',
+        type: 'password',
+        label: 'Пароль',
+        ref: 'password',
+        errors: {
+          fieldId: 'login-form_password-error',
+          emptyField: 'Задайте пожалуйста пароль',
+        },
+      },
+    ];
+
+    const link = {
+      to: '/signup',
+      label: 'Нет аккаунта?',
+    };
+
+    return `
+      {{{Form
+          id='login'
+          name='login-form'
+          title='Вход'
+          ref='form'
+          className='login-form'
+          inputs='${JSON.stringify(inputs)}'
+          submitBtn='Войти'
+          onSubmit=handleSubmit
+          link='${JSON.stringify(link)}'
+      }}}
+    `;
   }
 }
 

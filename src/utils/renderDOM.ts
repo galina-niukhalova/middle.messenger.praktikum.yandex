@@ -1,17 +1,10 @@
 import Block from './Block';
 
-export function renderDOM(rootSelector: string, component: Block) {
-  const root = document.querySelector(rootSelector);
+export default function renderPage(BlockPage: typeof Block) {
+  const block = new BlockPage();
 
-  if (!root) {
-    throw new Error('Root not found');
-  }
+  const root = document.querySelector('#app');
 
-  root.innerHTML = '';
-
-  root.append(component.getContent()!);
-
-  // component.dispatchComponentDidMount();
+  root!.innerHTML = '';
+  root!.appendChild(block.getContent());
 }
-
-export default renderDOM;

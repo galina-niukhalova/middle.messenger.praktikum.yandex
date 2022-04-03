@@ -1,7 +1,7 @@
 type LinkSize = 'small' | 'medium';
 
 interface ILinkProps {
-  url: string,
+  to: string,
   label: string,
   className?: string,
   danger?: boolean,

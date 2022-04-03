@@ -2,7 +2,6 @@ import './link.style.scss';
 import classnames from 'helpers/classnames';
 import Block from 'utils/Block';
 import ILinkProps from './types';
-import linkTemplate from './link.tmpl.hbs';
 
 class Link extends Block {
   constructor(props: ILinkProps) {
@@ -25,7 +24,14 @@ class Link extends Block {
   }
 
   render() {
-    return this.compile(linkTemplate, { ...this.props });
+    return `
+      <a 
+        href={{to}} 
+        class='{{className}}'
+      >
+        {{label}}
+      </a>
+    `;
   }
 }
 

@@ -6,9 +6,7 @@ interface IButtonProps {
   label: string,
   id?: string,
   variant?: ButtonVariants,
-  events: {
-    click: () => void,
-  }
+  onClick: () => void,
 }
 
 export default IButtonProps;

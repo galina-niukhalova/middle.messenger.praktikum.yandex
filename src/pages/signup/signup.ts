@@ -23,7 +23,6 @@ class Signup extends Block {
     });
   }
 
-  // eslint-disable-next-line class-methods-use-this
   handleFormSubmit() {
     window.location.href = '/chats';
   }

@@ -1,6 +1,6 @@
 import './userProfile.style.scss';
 // import avatarPlaceholder from 'static/images/image-outline.svg';
-import './changeUserInfoForm';
+// import 'components/profileForm';
 import Block from 'utils/Block';
 import {
   SELECTORS,
@@ -186,18 +186,15 @@ class UserProfile extends Block {
     });
   }
 
-  // eslint-disable-next-line class-methods-use-this
   handleChangePasswordBtnClick() {
     console.log('password change');
     // this.switchViewTo(Views.EDIT_USER_PASSWORD);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   handleChangeUserInfoBtnClick() {
     console.log('user info change');
   }
 
-  // eslint-disable-next-line class-methods-use-this
   // switchViewTo(viewName: Views) {
   //   this.setProps({
   //     ...this.props,

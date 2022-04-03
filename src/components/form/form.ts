@@ -3,75 +3,52 @@ import {
 } from 'helpers/dom';
 import './form.scss';
 import Block from 'utils/Block';
-import Input from 'components/input';
-import Button from 'components/button';
-import Link from 'components/link';
+import isValid from 'helpers/formValidation';
 import CLASS_NAMES from './const';
-import formTemplate from './form.hbs';
 import { IFormProps, IFormInputData } from './types';
 
 class Form extends Block {
-  formWasSubmitted;
-
   constructor(props: IFormProps) {
-    const defaultProps = {
-      readonly: false,
-    };
-
     super({
-      ...defaultProps,
       ...props,
+      inputs: JSON.parse(props.inputs) as IFormInputData[],
+      link: props.link ? JSON.parse(props.link) : '',
     });
-
-    this.formWasSubmitted = false;
-  }
-
-  initChildren() {
-    const inputs = this.props.inputs.map((input: IFormInputData) => new Input({
-      type: input.type,
-      name: input.name,
-      label: input.label,
-      errorId: input.errors?.fieldId,
-      isFormInput: true,
-    }));
-    this.children.inputs = inputs;
-
-    this.children.submitBtn = new Button({
-      ...this.props.submitBtn,
-      className: 'form__submit-btn',
-      type: 'submit',
-    });
-
-    if (this.props.link) {
-      this.children.link = new Link({
-        ...this.props.link,
-        size: 'small',
-      });
-    }
   }
 
   componentDidMount() {
     this.element?.addEventListener('submit', this.handleFormSubmit.bind(this));
-    this.element?.addEventListener('input', this.handleInputChange.bind(this));
+    this.element?.querySelectorAll('.input').forEach((inputElement) => {
+      inputElement.addEventListener('focus', this.handleFocus.bind(this));
+      inputElement.addEventListener('blur', this.handleBlur.bind(this));
+    });
   }
 
   /** EVENTS */
   handleFormSubmit(e: Event) {
     e.preventDefault();
-    this.formWasSubmitted = true;
 
     if (this.validateForm()) {
       console.log('Form was successfully submitted');
-      this.props.onFormSubmit();
+      this.props.onSubmit(this.refs);
     }
   }
 
-  handleInputChange(e: Event) {
-    const { target } = e;
-    if (target instanceof HTMLInputElement) {
-      if (this.formWasSubmitted) {
-        this.validateInput(target.name);
-      }
+  getInputByName(name: string) {
+    return this.props.inputs.find((el: IFormInputData) => el.name === name);
+  }
+
+  handleFocus(e: Event) {
+    if (e.target) {
+      const element = e.target as HTMLInputElement;
+      this.validateInput(element.name);
+    }
+  }
+
+  handleBlur(e: Event) {
+    if (e.target) {
+      const element = e.target as HTMLInputElement;
+      this.validateInput(element.name);
     }
   }
 
@@ -97,50 +74,65 @@ class Form extends Block {
 
   validateForm() {
     let validationFail = false;
-    this.props.inputs.forEach(({ name }) => {
-      if (!this.isInputValid(name)) {
-        this.showErrorMessageFor(name, true);
-        validationFail = true;
-      }
+    this.props.inputs.forEach(({ name }: { name: string }) => {
+      const isInputValid = this.validateInput(name);
+      if (!isInputValid) { validationFail = true; }
     });
 
     return !validationFail;
   }
 
-  isInputValid(inputName: string) {
-    const inputElement = document.getElementsByName(inputName)[0] as HTMLInputElement;
+  isInputValid(element: HTMLInputElement) {
+    if (!element.value) return false;
 
-    if (!inputElement.value) return false;
-
-    const targetInput = this.props.inputs.find((el) => el.name === inputName);
-    if (targetInput?.errors?.customValidator) {
-      return targetInput!.errors!.customValidator!();
-    }
-
-    return inputElement.validity.valid;
+    const inputName = element.name;
+    return isValid(inputName, element.value);
   }
 
   validateInput(field: string) {
-    if (!this.isInputValid(field)) {
-      this.showErrorMessageFor(field, true);
-    } else {
-      this.showErrorMessageFor(field, false);
-    }
+    const element = document.getElementsByName(field)[0] as HTMLInputElement;
+
+    const isInputValid = this.isInputValid(element);
+    this.showErrorMessageFor(field, !isInputValid);
 
     const dependentFields = this.props.inputs[field]?.errors?.dependentFields as [string];
     if (dependentFields) {
       dependentFields.forEach((dependentField) => {
-        if (!this.isInputValid(dependentField)) {
-          this.showErrorMessageFor(dependentField, true);
-        } else {
-          this.showErrorMessageFor(dependentField, false);
-        }
+        const dependentElement = document.getElementsByName(dependentField)[0] as HTMLInputElement;
+
+        const isDependentInputValid = this.isInputValid(dependentElement);
+        this.showErrorMessageFor(dependentField, !isDependentInputValid);
       });
     }
+
+    return isInputValid;
   }
 
   render() {
-    return this.compile(formTemplate, { ...this.props });
+    return `
+      <form id={{id}} class="form {{className}}" novalidate>
+        <div class='form__container'>
+          {{#if title}}
+            <h3 class='form__title'>{{title}}</h3>
+          {{/if}}
+          {{#each inputs}}
+            {{{Input 
+              ref=this.ref
+              type=this.type
+              name=this.name
+              label=this.label
+              errorId=this.errors.fieldId
+              isFormInput=true
+            }}}
+          {{/each}}
+          <div class="form__container">
+            {{{ Button label=submitBtn className='form__submit-btn' type='submit' }}}
+            {{#if link}}
+              {{{ Link label=link.label to=link.to size="small" }}}
+            {{/if}}
+          </div>
+      </form>
+    `;
   }
 }
 
