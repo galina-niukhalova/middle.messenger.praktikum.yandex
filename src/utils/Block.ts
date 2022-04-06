@@ -115,11 +115,13 @@ class Block<P = any> {
     const fragment = this._compile();
 
     this._removeEvents();
+
     const newElement = fragment.firstElementChild!;
 
     this._element!.replaceWith(newElement);
 
     this._element = newElement as HTMLElement;
+
     this._addEvents();
   }
 
@@ -169,26 +171,38 @@ class Block<P = any> {
   }
 
   _removeEvents() {
-    const { events }: { events: Record<string, () => void> } = (this.props as any);
+    const { events, selector }:
+      { events: Record<string, () => void>, selector: string } = (this.props as any);
 
     if (!events || !this._element) {
       return;
     }
 
+    let element = this._element;
+    if (selector && element) {
+      element = element.querySelector(selector) as HTMLElement;
+    }
+
     Object.entries(events).forEach(([event, listener]) => {
-      this._element!.removeEventListener(event, listener);
+      element?.removeEventListener(event, listener);
     });
   }
 
   _addEvents() {
-    const { events }: { events: Record<string, () => void> } = this.props as any;
+    const { events, selector }:
+      { events: Record<string, () => void>, selector: string } = this.props as any;
 
     if (!events) {
       return;
     }
 
+    let element = this._element;
+    if (selector && element) {
+      element = element.querySelector(selector) as HTMLElement;
+    }
+
     Object.entries(events).forEach(([event, listener]) => {
-      this._element!.addEventListener(event, listener);
+      element!.addEventListener(event, listener);
     });
   }
 

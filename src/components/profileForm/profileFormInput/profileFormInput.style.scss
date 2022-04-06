@@ -1,0 +1,23 @@
+@import '~style/colors.scss';
+
+.profile-form__input {
+  border: none;
+  outline: none;
+  width: 200px;
+  color: $color-grey;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 13px;
+  text-align: right;
+
+  &_readonly {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  &_invalid {
+    color: $color-red;
+  }
+}

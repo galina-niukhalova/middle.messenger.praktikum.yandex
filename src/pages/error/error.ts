@@ -1,20 +1,16 @@
 import './error.style.scss';
 import Block from 'utils/Block';
-import Link from 'components/link';
-import errorTemplate from './error.tmpl.hbs';
 
 class ErrorPage extends Block {
-  initChildren() {
-    this.children.link = new Link({
-      label: 'Назад к чатам',
-      url: '/chats',
-    });
-  }
-
   render() {
-    return this.compile(errorTemplate, {});
+    return `
+      <div class='error-page'>
+        <h1 class='error-page__header'>500</h1>
+        <h3 class='error-page__description'>Мы уже фиксим</h3>
+        {{{ Link to="/chats" label="Назад к чатам" }}}
+     </div>
+    `;
   }
 }
 
 export default ErrorPage;
-

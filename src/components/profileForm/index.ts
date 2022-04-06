@@ -1,3 +1,3 @@
-import profileForm from './profileForm';
+import ProfileForm from './profileForm';
 
-export default profileForm;
+export default ProfileForm;

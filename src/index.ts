@@ -1,6 +1,5 @@
-import { Block, renderDOM, registerComponent } from 'utils';
+import { renderDOM, registerComponent } from 'utils';
 import './base.scss';
-import Block from 'utils/Block';
 import LoginPage from 'pages/login';
 import SignupPage from 'pages/signup';
 import ChatsPage from 'pages/chatsList';
@@ -8,20 +7,25 @@ import ChatPage from 'pages/chat';
 import NotFoundPage from 'pages/notFound';
 import ErrorPage from 'pages/error';
 import UserProfilePage from 'pages/userProfile';
-import TestPage from 'pages/test';
-
+import './utils/registerHandlebarsHelpers';
 import {
   Button,
   Link,
   Input,
-  Form,
+  InputField,
+  AuthForm,
+  ProfileForm,
+  Avatar,
 } from 'components';
 
 function registerComponents() {
   registerComponent(Button);
   registerComponent(Link);
   registerComponent(Input);
-  registerComponent(Form);
+  registerComponent(InputField);
+  registerComponent(AuthForm);
+  registerComponent(ProfileForm);
+  registerComponent(Avatar);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -33,9 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
       renderDOM(LoginPage);
       break;
 
-    //   case '/signup':
-    //     page = new SignupPage({});
-    //     break;
+    case '/signup':
+      renderDOM(SignupPage);
+      break;
 
     //   case '/chats':
     //     page = new ChatsPage();
@@ -45,16 +49,15 @@ document.addEventListener('DOMContentLoaded', () => {
     //     page = new ChatPage();
     //     break;
 
-    //   case '/profile':
-    //     page = new UserProfilePage({});
-    //     break;
+    case '/profile':
+      renderDOM(UserProfilePage);
+      break;
 
-    //   case '/error':
-    //     page = new ErrorPage();
-    //     break;
+    case '/error':
+      renderDOM(ErrorPage);
+      break;
 
     default:
-      console.log('not found');
-      renderDOM(TestPage);
+      renderDOM(NotFoundPage);
   }
 });

@@ -1,14 +1,22 @@
-import { ISubmitBtn, IFormInputData } from 'components/form/types';
+import { InputType } from 'components/input/types';
 
+type InputVariants = 'login';
+
+export interface IFormInputData {
+  name: InputVariants,
+  type: InputType,
+  label: string,
+  value: string,
+  invalid: boolean,
+}
 interface IProfileFormProps {
   id: string,
   name: string,
   className: string,
-  inputs: IFormInputData[],
-  submitBtn: ISubmitBtn,
+  inputs: string | IFormInputData[],
   readonly?: boolean,
   disabled?: boolean,
-  onFormSubmit: () => void,
+  onSubmit: () => void,
 }
 
 export default IProfileFormProps;

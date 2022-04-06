@@ -18,8 +18,13 @@ function isPasswordValid(value: string): boolean {
   return /^(?=.*[A-Z])(?=.*\d).*$/.test(value);
 }
 
-function isRepeatPasswordValid(value: string): boolean {
+function isOldPasswordValid(value: string): boolean {
   return !!value;
+}
+
+function isRepeatPasswordValid(value: string, passwordValue: string): boolean {
+  if (!passwordValue) return !!value;
+  return value === passwordValue;
 }
 
 function isPhoneValid(value: string): boolean {
@@ -32,19 +37,22 @@ function isMessageValid(value: string): boolean {
   return !!value;
 }
 
-export default function isValid(fieldName: string, value: string) {
+export default function isValid(fieldName: string, value: string, dependentFieldValue = '') {
   switch (fieldName) {
     case 'email':
       return isEmail(value);
+    case 'oldPassword':
+      return isOldPasswordValid(value);
     case 'password':
+    case 'newPassword':
       return isPasswordValid(value);
-    case 'first-name':
-    case 'second-name':
+    case 'firstName':
+    case 'secondName':
       return isNameValid(value);
     case 'login':
       return isLoginValid(value);
-    case 'repeat-password':
-      return isRepeatPasswordValid(value);
+    case 'repeatPassword':
+      return isRepeatPasswordValid(value, dependentFieldValue);
     case 'phone':
       return isPhoneValid(value);
     case 'message':

@@ -24,30 +24,16 @@
     justify-content: space-between;
     padding: 12px 0 4px 0;
     border-bottom: 1px solid $color-light-grey;
+
+    &_invalid {
+      border-bottom: 1px solid $color-red;
+    }
   }
 
   &__label {
     font-weight: 500;
     font-size: 13px;
     line-height: 13px;
-  }
-
-  &__input {
-    border: none;
-    outline: none;
-    width: 200px;
-    color: $color-grey;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 13px;
-    text-align: right;
-  
-    &_readonly {
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
   }
 
   &__submit-button-wrap {
@@ -57,10 +43,6 @@
    @media only screen and (max-width: 600px) {
      width: 100%;
    }
-  
-    &_hidden {
-      display: none;
-    }
   }
 
   &__submit-btn {

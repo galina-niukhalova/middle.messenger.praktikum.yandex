@@ -4,45 +4,16 @@ import Block from 'utils/Block';
 class Login extends Block {
   protected getStateFromProps() {
     this.state = {
-      values: {
-        login: '',
-        password: '',
-      },
-      handleSubmit: (inputs: { [key: string]: HTMLElement }) => {
-        const loginData = {
-          login: (inputs.login.querySelector('input') as HTMLInputElement).value,
-          password: (inputs.password.querySelector('input') as HTMLInputElement).value,
-        };
-        console.log(loginData);
+      handleSubmit: (values: { login: string, password: string }) => {
+        console.log('submit', values);
       },
     };
   }
 
   render() {
     const inputs = [
-      {
-        name: 'login',
-        id: 'login-form_login-input',
-        type: 'text',
-        label: 'Логин',
-        ref: 'login',
-        errors: {
-          fieldId: 'login-form_login-error',
-          general: 'Неверный логин',
-          emptyField: 'Укажите пожалуйста логин',
-        },
-      },
-      {
-        name: 'password',
-        id: 'login-form_password-input',
-        type: 'password',
-        label: 'Пароль',
-        ref: 'password',
-        errors: {
-          fieldId: 'login-form_password-error',
-          emptyField: 'Задайте пожалуйста пароль',
-        },
-      },
+      { name: 'login' },
+      { name: 'password' },
     ];
 
     const link = {
@@ -51,7 +22,7 @@ class Login extends Block {
     };
 
     return `
-      {{{Form
+      {{{AuthForm
           id='login'
           name='login-form'
           title='Вход'

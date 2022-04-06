@@ -1,47 +1,61 @@
 import { IFormData } from '../types';
 
-const userInfoFormData: IFormData = {
-  email: {
+const userInfoFormData: IFormData[] = [
+  {
+    name: 'email',
     id: 'user-info-form__email',
     label: 'Почта',
-    value: 'example_email',
   },
-  login: {
+  {
+    name: 'login',
     id: 'user-info-form__login',
     label: 'Логин',
   },
-  first_name: {
+  {
+    name: 'firstName',
     id: 'user-info-form__first-name',
     label: 'Имя',
   },
-  second_name: {
+  {
+    name: 'secondName',
     id: 'user-info-form__second-name',
     label: 'Фамилия',
   },
-  display_name: {
+  {
+    name: 'displayName',
     id: 'user-info-form__display-name',
     label: 'Имя в чате',
   },
-  phone: {
+  {
+    name: 'phone',
     id: 'user-info-form__phone',
     label: 'Телефон',
   },
-};
+];
 
-const passwordChangeFormData: IFormData = {
-  oldPassword: {
+const passwordChangeFormData: IFormData[] = [
+  {
+    name: 'oldPassword',
     label: 'Старый пароль',
     type: 'password',
   },
-  newPassword: {
+  {
+    name: 'newPassword',
     label: 'Новый пароль',
     type: 'password',
+    errors: {
+      dependentField: 'repeatPassword',
+    },
   },
-  repeatPassword: {
+  {
+    name: 'repeatPassword',
     label: 'Повторите новый пароль',
     type: 'password',
+    errors: {
+      dependentField: 'newPassword',
+    },
   },
-};
+];
 
 export {
   passwordChangeFormData,

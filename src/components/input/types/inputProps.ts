@@ -1,14 +1,17 @@
 import InputType from './inputType';
 
 interface IInputProps {
+  id?: string,
   className?: string,
   type?: InputType,
-  name?: string,
   value?: string,
-  label: string,
-  errorId?: string,
-  isFormInput?: boolean,
+  name?: string,
+  placeholder?: string,
   readonly?: boolean,
+  onBlur?: (e: Event) => void,
+  onFocus?: (e: Event) => void,
+  onChange?: (e: Event) => void,
+  accept?: string,
 }
 
 export default IInputProps;

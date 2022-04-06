@@ -1,18 +1,15 @@
 import './notFound.style.scss';
 import Block from 'utils/Block';
-import Link from 'components/link';
-import notFoundTemplate from './notFound.hbs';
 
 class NotFoundPage extends Block {
-  initChildren() {
-    this.children.link = new Link({
-      label: 'Назад к чатам',
-      url: '/chats',
-    });
-  }
-
   render() {
-    return this.compile(notFoundTemplate, {});
+    return `
+      <div class='not-found-page'>
+        <h1 class='not-found-page__header'>404</h1>
+        <h3 class='not-found-page__description'>Не туда попали</h3>
+        {{{ Link to="/chats" label="Назад к чатам" }}}
+      </div>
+    `;
   }
 }
 
