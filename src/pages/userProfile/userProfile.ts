@@ -78,17 +78,29 @@ class UserProfile extends Block {
   }
 
   handleUserInfoSubmit(values: { [key: string]: string }) {
-    console.log('Form has been successfully submitted', values);
+    const mapFieldToApi: { [key: string]: string } = {
+      email: 'email',
+      login: 'login',
+      firstName: 'first-name',
+      secondName: 'second-name',
+      displayName: 'display-name',
+      phone: 'phone',
+    };
+
+    const newValues: { [key: string]: string } = {};
+    Object.keys(mapFieldToApi).forEach((key: string) => {
+      newValues[mapFieldToApi[key]] = values[key];
+    });
 
     this.setState({
       view: Views.READ_ONLY,
-      values,
+      values: newValues,
     });
+
+    console.log('Form has been submitted with', newValues);
   }
 
   handlePasswordSubmit(values: { [key: string]: string }) {
-    console.log('Form has been successfully submitted', values);
-
     this.setState({
       view: Views.READ_ONLY,
       values: {
@@ -96,6 +108,8 @@ class UserProfile extends Block {
         values,
       },
     });
+
+    console.log('Form has been successfully submitted', values);
   }
 
   handleAvatarChange(e: Event) {
@@ -105,10 +119,13 @@ class UserProfile extends Block {
       const reader = new FileReader();
 
       reader.onload = (event) => {
+        const avatar = event.target?.result;
         self.setState({
           ...self.state,
-          avatarImg: event.target?.result,
+          avatarImg: avatar,
         });
+
+        console.log({ avatar });
       };
 
       if (input instanceof HTMLInputElement && input.files?.length) {

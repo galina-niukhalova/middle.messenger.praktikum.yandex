@@ -86,7 +86,7 @@ class Chats extends Block {
         const inputElement = document.querySelector('.chat__footer input') as HTMLInputElement;
 
         if (!this.isMessageEmpty(inputElement.value)) {
-          console.log(inputElement.value);
+          console.log({ message: inputElement.value });
           inputElement.value = '';
         }
       },

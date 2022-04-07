@@ -11,8 +11,7 @@ A user can visit the following pages:
 - [User profile](https://galina-messenger.netlify.app/profile)
 - [5xx](https://galina-messenger.netlify.app/error)
 - [404](https://galina-messenger.netlify.app/random)
-- [chats](https://galina-messenger.netlify.app/chats) `mock page`
-- [chat](https://galina-messenger.netlify.app/chat) `mock page`
+- [chats](https://galina-messenger.netlify.app/chats)
 
 ## Design
 Project design can be found in [Figma](https://www.figma.com/file/EuBlJHo8hEbs4qs7NQc64c/Chat-Galina).

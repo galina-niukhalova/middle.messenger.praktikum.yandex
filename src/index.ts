@@ -3,7 +3,6 @@ import './base.scss';
 import LoginPage from 'pages/login';
 import SignupPage from 'pages/signup';
 import ChatsPage from 'pages/chatsList';
-import ChatPage from 'pages/chat';
 import NotFoundPage from 'pages/notFound';
 import ErrorPage from 'pages/error';
 import UserProfilePage from 'pages/userProfile';
@@ -44,10 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
     case '/chats':
       renderDOM(ChatsPage);
       break;
-
-    //   case '/chat':
-    //     page = new ChatPage();
-    //     break;
 
     case '/profile':
       renderDOM(UserProfilePage);

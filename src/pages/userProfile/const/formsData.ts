@@ -13,11 +13,13 @@ const userInfoFormData: IFormData[] = [
   },
   {
     name: 'firstName',
+    api: 'first_name',
     id: 'user-info-form__first-name',
     label: 'Имя',
   },
   {
     name: 'secondName',
+    api: 'second_name',
     id: 'user-info-form__second-name',
     label: 'Фамилия',
   },
