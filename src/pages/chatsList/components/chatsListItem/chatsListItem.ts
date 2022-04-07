@@ -23,23 +23,23 @@ class ChatsListItem extends Block {
 
   render() {
     return `
-      <li class="chatsListItem">
+      <li class="chats-list-item">
         {{{ ChatImage 
           imgUrl=userLogo
           size="medium" 
         }}}
-        <div class="chatsListItem__content">
-          <div class="chatsListItem__name">{{userName}}</div>
-          <div class="chatsListItem__message">
-            <div class="chatsListItem__sender">{{lastMessageSender}}:</div>
+        <div class="chats-list-item__content">
+          <div class="chats-list-item__name">{{userName}}</div>
+          <div class="chats-list-item__message">
+            <div class="chats-list-item__sender">{{lastMessageSender}}:</div>
             {{lastMessage}}
           </div>
         </div>
 
-        <div class="chatsListItem__side">
-          <div class="chatsListItem__date">${this.getDate()}</div>
+        <div class="chats-list-item__side">
+          <div class="chats-list-item__date">${this.getDate()}</div>
           {{#if unread}}
-            <div class="chatsListItem__unread">{{unread}}</div>
+            <div class="chats-list-item__unread">{{unread}}</div>
           {{/if}}
         </div>
       </li>

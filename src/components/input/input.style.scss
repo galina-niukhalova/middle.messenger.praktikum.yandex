@@ -1,20 +1,20 @@
-@import '~style/colors.scss';
+@import "style/colors.scss";
 
 .input {
-	border: none;
-	border-bottom: 1px solid $color-blue;
-	padding: 8px 4px;
-	outline: none;
-	width: 100%;
+  border: none;
+  border-bottom: 1px solid $color-blue;
+  padding: 8px 4px;
+  outline: none;
+  width: 100%;
 
-	&_invalid {
-		color: $color-red;
-		border-bottom: 1px solid $color-red;
-	}
+  &_invalid {
+    color: $color-red;
+    border-bottom: 1px solid $color-red;
+  }
 
   &::placeholder {
-		color: $color-white;
-	}
+    color: $color-white;
+  }
 
   &_filled {
     border: none;

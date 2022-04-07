@@ -1,4 +1,4 @@
-@import '~style/colors.scss';
+@import "~style/colors.scss";
 
 .profile-form__input {
   border: none;
@@ -11,9 +11,6 @@
   text-align: right;
 
   &_readonly {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
   }
 

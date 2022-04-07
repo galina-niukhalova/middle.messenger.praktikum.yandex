@@ -39,7 +39,7 @@ class Block<P = any> {
       props,
     };
 
-    this.getStateFromProps(props)
+    this.getStateFromProps(props);
 
     this.props = this._makePropsProxy(props || {} as P);
 
@@ -239,13 +239,11 @@ class Block<P = any> {
       stub.replaceWith(component.getContent());
     });
 
-
     /**
      * Возвращаем фрагмент
      */
     return fragment.content;
   }
-
 
   show() {
     this.getContent().style.display = 'block';

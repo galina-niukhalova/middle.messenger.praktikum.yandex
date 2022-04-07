@@ -1,4 +1,4 @@
-@import '~style/colors.scss';
+@import "~style/colors.scss";
 
 .profile {
   padding: 60px 40px;
@@ -14,13 +14,13 @@
     color: $color-black;
     margin-top: 21px;
     display: block;
-   }  
+  }
 
   &__actions-buttons {
     display: flex;
     flex-direction: column;
     width: 50%;
-    margin: 60px auto 0 auto;
+    margin: 60px auto 0;
 
     @media only screen and (max-width: 1024px) {
       width: 100%;
@@ -35,8 +35,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 12px 0 4px 0;
+    padding: 12px 0 4px;
     border-bottom: 1px solid $color-light-grey;
   }
 }
-
