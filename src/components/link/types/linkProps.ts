@@ -4,7 +4,7 @@ export enum LinkVariants {
   CLASSIC,
   NAV
 }
-interface ILinkProps {
+export interface ILinkProps {
   to: string,
   label: string,
   className?: string,

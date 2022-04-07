@@ -1,4 +1,3 @@
-import ILinkProps from './linkProps';
+export { ILinkProps, LinkVariants } from './linkProps';
 
-export { LinkVariants } from './linkProps';
-export default ILinkProps;
+export default {};

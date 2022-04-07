@@ -1,7 +1,7 @@
 import './link.style.scss';
 import classnames from 'helpers/classnames';
 import Block from 'utils/Block';
-import ILinkProps, { LinkVariants } from './types';
+import { ILinkProps, LinkVariants } from './types';
 
 class Link extends Block {
   constructor(props: ILinkProps) {
