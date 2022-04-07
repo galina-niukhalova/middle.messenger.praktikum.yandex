@@ -7,5 +7,8 @@
         "message": "Wrong selector class name"
       }
     ]
-  }
+  },
+  "ignoreFiles": [
+    "dist/*"
+  ]
 }
