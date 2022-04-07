@@ -1,0 +1,32 @@
+@import '~style/colors.scss';
+
+.input {
+	border: none;
+	border-bottom: 1px solid $color-blue;
+	padding: 8px 4px;
+	outline: none;
+	width: 100%;
+
+	&_invalid {
+		color: $color-red;
+		border-bottom: 1px solid $color-red;
+	}
+
+  &::placeholder {
+		color: $color-white;
+	}
+
+  &_filled {
+    border: none;
+    background: $color-bright-grey;
+    border-radius: 30px;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 12px;
+
+    &::placeholder {
+      color: $color-grey;
+    }
+  }
+}

@@ -1,5 +1,9 @@
 import InputType from './inputType';
 
+export enum InputVariants {
+  CLASSIC,
+  FILLED,
+}
 interface IInputProps {
   id?: string,
   className?: string,
@@ -12,6 +16,7 @@ interface IInputProps {
   onFocus?: (e: Event) => void,
   onChange?: (e: Event) => void,
   accept?: string,
+  variant?: InputVariants,
 }
 
 export default IInputProps;

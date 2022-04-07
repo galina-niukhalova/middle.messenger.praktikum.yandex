@@ -1,0 +1,67 @@
+@import '~style/colors.scss';
+
+.chatsListItem {
+  cursor: pointer;
+  padding: 8px 0;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  border-top: 1px solid $color-bright-grey;
+
+  &:last-child {
+    border-bottom: 1px solid $color-bright-grey;
+  }
+
+  &__content {
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  &__name {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 13px;
+  }
+
+  &__sender {
+    display: inline;
+  }
+
+  &__message {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: $color-grey;
+  }
+
+  &__side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__date {
+    font-weight: 500;
+    font-size: 9px;
+    line-height: 13px;
+    color: $color-grey;
+  }
+
+  &__unread {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: $color-blue;
+    color: $color-white;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+  }
+}

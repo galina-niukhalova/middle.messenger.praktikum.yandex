@@ -1,7 +1,7 @@
 import './link.style.scss';
 import classnames from 'helpers/classnames';
 import Block from 'utils/Block';
-import ILinkProps from './types';
+import ILinkProps, { LinkVariants } from './types';
 
 class Link extends Block {
   constructor(props: ILinkProps) {
@@ -14,6 +14,7 @@ class Link extends Block {
       danger: false,
       className: classnames(...classNames, 'link', `link_${size}`, {
         link_danger: !!props.danger,
+        link_nav: props.variant === LinkVariants.NAV,
       }),
     };
 

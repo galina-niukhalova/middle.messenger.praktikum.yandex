@@ -41,9 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
       renderDOM(SignupPage);
       break;
 
-    //   case '/chats':
-    //     page = new ChatsPage();
-    //     break;
+    case '/chats':
+      renderDOM(ChatsPage);
+      break;
 
     //   case '/chat':
     //     page = new ChatPage();

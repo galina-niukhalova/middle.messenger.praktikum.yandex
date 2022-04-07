@@ -1,6 +1,7 @@
 import classnames from 'helpers/classnames';
 import Block from 'utils/Block';
-import { IInputProps } from './types';
+import { IInputProps, InputVariants } from './types';
+import './input.style.scss';
 
 class Input extends Block {
   constructor(props: IInputProps) {
@@ -23,8 +24,9 @@ class Input extends Block {
 
   render() {
     const className = classnames({
-      input_invalid: !!this.props.invalid,
       [this.props.className]: !!this.props.className,
+      input_invalid: !!this.props.invalid,
+      input_filled: this.props.variant === InputVariants.FILLED,
     });
 
     return `

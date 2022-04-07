@@ -6,17 +6,6 @@
 }
 
 .input {
-	border: none;
-	border-bottom: 1px solid $color-blue;
-	padding: 8px 4px;
-	outline: none;
-	width: 100%;
-
-	&_invalid {
-		color: $color-red;
-		border-bottom: 1px solid $color-red;
-	}
-
 	&__label {
 		font-size: 13px;
 		color: $color-grey;
@@ -36,10 +25,6 @@
 		&_hidden {
 			visibility: hidden;
 		}
-	}
-
-	&::placeholder {
-		color: $color-white;
 	}
 }
 
