@@ -2,11 +2,10 @@
   "name": "yandex_frontend",
   "version": "1.0.0",
   "description": "",
-  "source": "static/index.html",
   "scripts": {
-    "dev": "parcel -p 4000",
-    "build": "parcel build",
-    "start": "npm run build && node server.js",
+    "dev": "parcel src/index.html -p 4000",
+    "build": "parcel build src/index.html --no-source-maps --no-cache --public-url ./",
+    "start": "parcel -p 3000 src/index.html --no-source-maps && node server.js",
     "lint": "eslint . --fix --ext .js,.ts"
   },
   "author": "",
