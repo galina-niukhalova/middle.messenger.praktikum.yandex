@@ -18,13 +18,13 @@ import {
 } from 'components';
 
 function registerComponents() {
-  registerComponent(Button);
-  registerComponent(Link);
-  registerComponent(Input);
-  registerComponent(InputField);
-  registerComponent(AuthForm);
-  registerComponent(ProfileForm);
-  registerComponent(Avatar);
+  registerComponent(Button, 'Button');
+  registerComponent(Link, 'Link');
+  registerComponent(Input, 'Input');
+  registerComponent(InputField, 'InputField');
+  registerComponent(AuthForm, 'AuthForm');
+  registerComponent(ProfileForm, 'ProfileForm');
+  registerComponent(Avatar, 'Avatar');
 }
 
 document.addEventListener('DOMContentLoaded', () => {

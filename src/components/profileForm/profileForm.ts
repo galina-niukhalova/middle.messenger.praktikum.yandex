@@ -6,7 +6,7 @@ import isValid from 'helpers/formValidation';
 import IProfileFormProps, { IFormInputData } from './types';
 import ProfileFormInput from './profileFormInput';
 
-registerComponent(ProfileFormInput);
+registerComponent(ProfileFormInput, 'ProfileFormInput');
 
 class ProfileForm extends Block {
   constructor(props: IProfileFormProps) {

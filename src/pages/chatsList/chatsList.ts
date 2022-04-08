@@ -7,8 +7,8 @@ import classnames from 'helpers/classnames';
 import { ChatImage, ChatsListItem } from './components';
 import { IChatsProps, IChat, IChatMessage } from './types';
 
-registerComponent(ChatImage);
-registerComponent(ChatsListItem);
+registerComponent(ChatImage, 'ChatImage');
+registerComponent(ChatsListItem, 'ChatsListItem');
 
 class Chats extends Block {
   constructor(props: IChatsProps) {
