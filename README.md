@@ -4,6 +4,9 @@ This is a messenger app written for Yandex practicum [middle FE course](https://
 
 Live version is published [here](https://galina-messenger.netlify.app).
 
+## Open PR
+- https://github.com/galina-niukhalova/middle.messenger.praktikum.yandex/pull/2
+
 ## Functionality
 A user can visit the following pages:
 - [Login page](https://galina-messenger.netlify.app/)
