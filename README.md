@@ -1,3 +1,3 @@
 # Messenger app
 
-Sprint 2 PR is [here](https://github.com/galina-niukhalova/middle.messenger.praktikum.yandex/pull/2)
+PR Sprint 2 https://github.com/galina-niukhalova/middle.messenger.praktikum.yandex/pull/2
