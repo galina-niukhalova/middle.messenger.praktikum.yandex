@@ -6,6 +6,8 @@ interface IProfileFormInputProps {
   value: string,
   name?: string,
   onBlur?: () => void,
+  invalid?: boolean,
+  className?: string,
 }
 
 export default IProfileFormInputProps;

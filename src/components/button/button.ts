@@ -11,7 +11,9 @@ class Button extends Block {
 
     const buttonVariant = variant ?? ButtonVariants.CLASSIC;
     const classNames = [];
-    if (className) classNames.push(className);
+    if (className) {
+      classNames.push(className);
+    }
 
     const defaultProps = {
       type: 'button',

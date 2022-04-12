@@ -7,7 +7,7 @@ import ERROR_MESSAGES from './const/errors';
 class AuthForm extends Block {
   constructor(props: IFormProps) {
     const inputs = JSON.parse(props.inputs as string) as IFormInputData[];
-    const inputsData: { [key: string]: IFormInputData } = {};
+    const inputsData: Record<string, IFormInputData> = {};
     inputs.forEach((input: IFormInputData) => {
       inputsData[input.name] = { ...input };
     });
@@ -33,7 +33,6 @@ class AuthForm extends Block {
       errors,
       handleError: (field: InputType): boolean => {
         const newValue = (this.refs[field].querySelector('input') as HTMLInputElement).value;
-        let errorMessage;
         const dependentFieldName = this.props.inputsData[field].errors?.dependentField;
         let dependentFieldValue;
         if (dependentFieldName) {
@@ -41,12 +40,11 @@ class AuthForm extends Block {
         }
         const { emptyFieldError, generalError } = ERROR_MESSAGES[field];
 
+        let errorMessage = '';
         if (!newValue) {
           errorMessage = emptyFieldError || generalError;
         } else if (!isValid(field, newValue, dependentFieldValue)) {
           errorMessage = generalError;
-        } else {
-          errorMessage = '';
         }
 
         const nextState = {
@@ -68,7 +66,6 @@ class AuthForm extends Block {
     };
   }
 
-  /** EVENTS */
   handleFormSubmit(e: Event) {
     e.preventDefault();
 
@@ -99,9 +96,7 @@ class AuthForm extends Block {
   }
 
   validateInput(field: string) {
-    let isInputValid;
-
-    isInputValid = this.state.handleError(field) as boolean;
+    let isInputValid = this.state.handleError(field) as boolean;
 
     const dependentField = this.props.inputsData[field]?.errors?.dependentField as [string];
     if (dependentField) {

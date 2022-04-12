@@ -1,4 +1,4 @@
-enum METHODS {
+enum Methods {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
@@ -7,7 +7,7 @@ enum METHODS {
 }
 
 type Options = {
-  method: METHODS;
+  method: Methods;
   data?: any;
   retries?: number,
 };
@@ -16,19 +16,19 @@ type OptionsWithoutMethod = Omit<Options, 'method'>;
 
 class HTTPTransport {
   get(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(url, { ...options, method: METHODS.GET });
+    return this.request(url, { ...options, method: Methods.GET });
   }
 
   put(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(url, { ...options, method: METHODS.PUT });
+    return this.request(url, { ...options, method: Methods.PUT });
   }
 
   post(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(url, { ...options, method: METHODS.POST });
+    return this.request(url, { ...options, method: Methods.POST });
   }
 
   delete(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(url, { ...options, method: METHODS.DELETE });
+    return this.request(url, { ...options, method: Methods.DELETE });
   }
 
   queryStringify(data: { [key: string]: string }) {
@@ -49,7 +49,7 @@ class HTTPTransport {
     return queryString;
   }
 
-  async request(url: string, options: Options = { method: METHODS.GET }, timeout = 5000):
+  async request(url: string, options: Options = { method: Methods.GET }, timeout = 5000):
     Promise<XMLHttpRequest> {
     const self = this;
     let targetUrl = url;
@@ -58,7 +58,7 @@ class HTTPTransport {
       const xhr = new XMLHttpRequest();
       const { method, data } = options;
 
-      if (method === METHODS.GET && data) {
+      if (data) {
         targetUrl += self.queryStringify(data);
       }
 
@@ -80,7 +80,7 @@ class HTTPTransport {
       xhr.onerror = handleError;
       xhr.ontimeout = handleError;
 
-      if (method === METHODS.GET || !data) {
+      if (method === Methods.GET || !data) {
         xhr.send();
       } else {
         xhr.send(JSON.stringify(data));
