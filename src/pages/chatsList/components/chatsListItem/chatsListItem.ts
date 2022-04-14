@@ -1,8 +1,24 @@
 import Block from 'utils/Block';
 import './chatsListItem.style.scss';
-import { IChatsListItemProps } from './types';
 
-class ChatsListItem extends Block {
+interface IChatsListItemProps {
+  id: string,
+  userName: string,
+  userLogo: string,
+  lastMessage: string,
+  lastMessageDate: string,
+  lastMessageSender: string,
+  unread: number,
+  onChatClick: (id: string) => {},
+}
+
+interface IChatsListItemPropsWithEvents extends Omit<IChatsListItemProps, 'onChatClick'> {
+  events: {
+    click: EventListener,
+  }
+}
+
+class ChatsListItem extends Block<IChatsListItemPropsWithEvents> {
   constructor(props: IChatsListItemProps) {
     super({
       ...props,

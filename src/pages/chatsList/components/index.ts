@@ -1,4 +1,2 @@
-export { default as ChatImage } from './chatImage';
-export { default as ChatsListItem } from './chatsListItem';
-
-export default {};
+export { ChatImage } from './chatImage';
+export { ChatsListItem } from './chatsListItem';

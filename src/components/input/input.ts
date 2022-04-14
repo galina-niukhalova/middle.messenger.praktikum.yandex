@@ -1,9 +1,33 @@
 import classnames from 'helpers/classnames';
 import Block from 'utils/Block';
-import { IInputProps, InputVariants } from './types';
+import { InputVariants, InputType } from './types';
 import './input.style.scss';
 
-class Input extends Block {
+export interface IInputProps {
+  id?: string,
+  className?: string,
+  type?: InputType,
+  value?: string,
+  name?: string,
+  placeholder?: string,
+  readonly?: boolean,
+  onBlur?: EventListener,
+  onFocus?: EventListener,
+  onChange?: EventListener,
+  accept?: string,
+  variant?: InputVariants,
+  invalid?: boolean,
+}
+
+interface IInputPropsWithEvents extends Omit<IInputProps, 'onBlur' | 'onFocus' | 'onChange'> {
+  events: {
+    blur?: EventListener,
+    focus?: EventListener,
+    input?: EventListener,
+  }
+}
+
+class Input extends Block<IInputPropsWithEvents> {
   constructor(props: IInputProps) {
     const {
       onBlur,
@@ -24,7 +48,7 @@ class Input extends Block {
 
   render() {
     const className = classnames({
-      [this.props.className]: !!this.props.className,
+      [this.props.className ?? '']: Boolean(this.props.className),
       input_invalid: !!this.props.invalid,
       input_filled: this.props.variant === InputVariants.FILLED,
     });

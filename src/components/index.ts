@@ -1,7 +1,7 @@
-export { default as Link } from './link';
-export { default as Button } from './button';
-export { default as Input } from './input';
-export { default as InputField } from './inputField';
-export { default as AuthForm } from './authForm';
-export { default as ProfileForm } from './profileForm';
-export { default as Avatar } from './avatar';
+export { Link } from './link';
+export { Button } from './button';
+export { Input } from './input';
+export { InputField } from './inputField';
+export { AuthForm } from './authForm';
+export { ProfileForm } from './profileForm';
+export { Avatar } from './avatar';

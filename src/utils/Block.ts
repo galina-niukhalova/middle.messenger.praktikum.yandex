@@ -8,7 +8,7 @@ interface BlockMeta<P = any> {
 
 type Events = Values<typeof Block.EVENTS>;
 
-class Block<P = any> {
+class Block<Props extends {}> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -22,9 +22,9 @@ class Block<P = any> {
 
   protected _element: Nullable<HTMLElement> = null;
 
-  protected readonly props: P;
+  protected readonly props: Props;
 
-  protected children: { [id: string]: Block } = {};
+  protected children: { [id: string]: Block<Props> } = {};
 
   eventBus: () => EventBus<Events>;
 
@@ -32,7 +32,7 @@ class Block<P = any> {
 
   protected refs: { [key: string]: HTMLElement } = {};
 
-  public constructor(props?: P) {
+  public constructor(props?: Props) {
     const eventBus = new EventBus<Events>();
 
     this._meta = {
@@ -41,7 +41,7 @@ class Block<P = any> {
 
     this.getStateFromProps(props);
 
-    this.props = this._makePropsProxy(props || {} as P);
+    this.props = this._makePropsProxy(props || {} as Props);
 
     this.state = this._makePropsProxy(this.state);
 
@@ -63,7 +63,7 @@ class Block<P = any> {
     this._element = this._createDocumentElement('div');
   }
 
-  protected getStateFromProps(props: any): void {
+  protected getStateFromProps(props?: Props): void {
     this.state = {};
   }
 
@@ -72,14 +72,14 @@ class Block<P = any> {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER, this.props);
   }
 
-  private _componentDidMount(props: P) {
+  private _componentDidMount(props: Props) {
     this.componentDidMount(props);
   }
 
-  componentDidMount(props: P) {
+  componentDidMount(props: Props) {
   }
 
-  private _componentDidUpdate(oldProps: P, newProps: P) {
+  private _componentDidUpdate(oldProps: Props, newProps: Props) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
       return;
@@ -87,11 +87,11 @@ class Block<P = any> {
     this._render();
   }
 
-  componentDidUpdate(oldProps: P, newProps: P) {
+  componentDidUpdate(oldProps: Props, newProps: Props) {
     return true;
   }
 
-  setProps = (nextProps: P) => {
+  setProps = (nextProps: Props) => {
     if (!nextProps) {
       return;
     }
@@ -142,7 +142,7 @@ class Block<P = any> {
     return this.element!;
   }
 
-  private _makePropsProxy(props: any): any {
+  private _makePropsProxy(props: Props): Props {
     // Можно и так передать this
     // Такой способ больше не применяется с приходом ES6+
     const self = this;
@@ -163,7 +163,7 @@ class Block<P = any> {
       deleteProperty() {
         throw new Error('Нет доступа');
       },
-    }) as unknown as P;
+    }) as unknown as Props;
   }
 
   private _createDocumentElement(tagName: string) {

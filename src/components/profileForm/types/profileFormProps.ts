@@ -8,15 +8,7 @@ export interface IFormInputData {
   label: string,
   value: string,
   invalid: boolean,
+  errors?: {
+    dependentField: string,
+  }
 }
-interface IProfileFormProps {
-  id: string,
-  name: string,
-  className: string,
-  inputs: string | IFormInputData[],
-  readonly?: boolean,
-  disabled?: boolean,
-  onSubmit: () => void,
-}
-
-export default IProfileFormProps;

@@ -1,10 +1,30 @@
 import './authForm.scss';
 import Block from 'utils/Block';
 import isValid from 'helpers/formValidation';
-import { IFormProps, IFormInputData, InputType } from './types';
+import { IFormInputData, InputType } from './types';
 import ERROR_MESSAGES from './const/errors';
 
-class AuthForm extends Block {
+interface ISubmitBtn {
+  label: string
+}
+interface IFormProps {
+  id: string,
+  name: string,
+  title?: string,
+  className: string,
+  inputs: string,
+  submitBtn: ISubmitBtn,
+  link?: string,
+  readonly?: boolean,
+  onSubmit: (values: Record<string, string>) => void;
+}
+
+interface AuthFormProps extends Omit<IFormProps, 'inputs'> {
+  inputsData: Record<string, IFormInputData>
+  inputs: IFormInputData[],
+}
+
+class AuthForm extends Block<AuthFormProps> {
   constructor(props: IFormProps) {
     const inputs = JSON.parse(props.inputs as string) as IFormInputData[];
     const inputsData: Record<string, IFormInputData> = {};
@@ -20,9 +40,9 @@ class AuthForm extends Block {
     });
   }
 
-  protected getStateFromProps(props: IFormProps) {
-    const values: { [key: string]: string } = {};
-    const errors: { [key: string]: string } = {};
+  protected getStateFromProps(props: AuthFormProps) {
+    const values: Record<string, string> = {};
+    const errors: Record<string, string> = {};
     (props.inputs as IFormInputData[]).forEach((input: IFormInputData) => {
       values[input.name] = '';
       errors[input.name] = '';
@@ -98,7 +118,7 @@ class AuthForm extends Block {
   validateInput(field: string) {
     let isInputValid = this.state.handleError(field) as boolean;
 
-    const dependentField = this.props.inputsData[field]?.errors?.dependentField as [string];
+    const dependentField = this.props.inputsData[field]?.errors?.dependentField;
     if (dependentField) {
       isInputValid = this.state.handleError(dependentField) as boolean;
     }

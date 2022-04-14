@@ -1,3 +1,1 @@
-import ProfileFormInput from './profileFormInput';
-
-export default ProfileFormInput;
+export { default as ProfileFormInput } from './profileFormInput';

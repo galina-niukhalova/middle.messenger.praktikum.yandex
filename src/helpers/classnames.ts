@@ -1,6 +1,8 @@
 function classnames(...names: (string | Record<string, boolean>)[]) {
   const className: string[] = [];
   names.forEach((name) => {
+    if (!name) return;
+
     if (typeof name === 'string') {
       className.push(name);
     } else if (typeof name === 'object') {

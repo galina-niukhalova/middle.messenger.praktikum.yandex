@@ -1,7 +1,7 @@
 import './notFound.style.scss';
 import Block from 'utils/Block';
 
-class NotFoundPage extends Block {
+class NotFoundPage extends Block<{}> {
   render() {
     return `
       <div class='not-found-page'>

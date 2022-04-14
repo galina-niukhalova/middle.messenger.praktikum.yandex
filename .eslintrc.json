@@ -18,6 +18,7 @@
     }
   },
   "rules": {
+    "import/prefer-default-export": "off",
     "semi": [2, "always"],
     "no-unused-expressions": [2, { "allowTernary": true }],
     "@typescript-eslint/no-unused-vars": 2,

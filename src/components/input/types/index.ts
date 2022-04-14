@@ -1,2 +1,2 @@
-export { default as IInputProps, InputVariants } from './inputProps';
+export { default as InputVariants } from './inputVariants';
 export { default as InputType } from './inputType';

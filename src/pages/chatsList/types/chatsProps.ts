@@ -14,12 +14,3 @@ export interface IChat {
   },
   history: IChatMessage[],
 }
-
-interface IChatsProps {
-  activeChat: {
-    userName: string,
-  },
-  chats: IChat[],
-}
-
-export default IChatsProps;

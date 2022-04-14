@@ -1,3 +1,1 @@
-import ChatsListItem from './chatsListItem';
-
-export default ChatsListItem;
+export { default as ChatsListItem } from './chatsListItem';

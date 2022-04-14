@@ -1,11 +1,13 @@
-import { renderDOM, registerComponent } from 'utils';
+import { registerComponent, Router } from 'utils';
 import './base.scss';
-import LoginPage from 'pages/login';
-import SignupPage from 'pages/signup';
-import ChatsPage from 'pages/chatsList';
-import NotFoundPage from 'pages/notFound';
-import ErrorPage from 'pages/error';
-import UserProfilePage from 'pages/userProfile';
+import {
+  LoginPage,
+  SignupPage,
+  ChatsPage,
+  NotFoundPage,
+  ErrorPage,
+  UserProfilePage,
+} from 'pages';
 import './utils/registerHandlebarsHelpers';
 import {
   Button,
@@ -30,29 +32,15 @@ function registerComponents() {
 document.addEventListener('DOMContentLoaded', () => {
   registerComponents();
 
-  switch (window.location.pathname) {
-    case '/':
-    case '/login':
-      renderDOM(LoginPage);
-      break;
+  const router = new Router('#app');
 
-    case '/signup':
-      renderDOM(SignupPage);
-      break;
-
-    case '/chats':
-      renderDOM(ChatsPage);
-      break;
-
-    case '/profile':
-      renderDOM(UserProfilePage);
-      break;
-
-    case '/error':
-      renderDOM(ErrorPage);
-      break;
-
-    default:
-      renderDOM(NotFoundPage);
-  }
+  router
+    .use('/', LoginPage)
+    .use('/login', LoginPage)
+    .use('/signup', SignupPage)
+    .use('/chats', ChatsPage)
+    .use('/profile', UserProfilePage)
+    .use('/error', ErrorPage)
+    .use('/not-found', NotFoundPage)
+    .start();
 });

@@ -1,2 +1,2 @@
-export { default as IButtonProps } from './buttonProps';
-export { default as ButtonVariants } from './buttonVariants';
+export { ButtonVariants } from './buttonVariants';
+export { ButtonTypes } from './buttonTypes';

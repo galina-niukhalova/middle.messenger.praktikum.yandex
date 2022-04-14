@@ -1,9 +1,18 @@
 import './link.style.scss';
 import classnames from 'helpers/classnames';
 import Block from 'utils/Block';
-import { ILinkProps, LinkVariants } from './types';
+import { LinkSize, LinkVariants } from './types';
 
-class Link extends Block {
+export interface ILinkProps {
+  to: string,
+  label: string,
+  className?: string,
+  danger?: boolean,
+  size?: LinkSize,
+  variant?: LinkVariants
+}
+
+class Link extends Block<ILinkProps> {
   constructor(props: ILinkProps) {
     const size = props.size ?? 'medium';
     const classNames = [];

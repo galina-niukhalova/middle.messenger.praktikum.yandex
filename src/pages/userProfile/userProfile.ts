@@ -1,13 +1,17 @@
 import './userProfile.style.scss';
 import Block from 'utils/Block';
 import { ButtonVariants } from 'components/button/types';
-import { Views, IFormData, IUserProfileProps } from './types';
+import { Views, IFormData } from './types';
 import {
   userInfoFormData,
   passwordChangeFormData,
 } from './const';
 
-class UserProfile extends Block {
+interface IUserProfileProps {
+  view?: Views
+}
+
+class UserProfile extends Block<IUserProfileProps> {
   constructor(props: IUserProfileProps) {
     super({
       ...props,

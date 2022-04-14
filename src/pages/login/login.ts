@@ -1,7 +1,7 @@
 import './login.style.scss';
 import Block from 'utils/Block';
 
-class Login extends Block {
+class LoginPage extends Block<{}> {
   protected getStateFromProps() {
     this.state = {
       handleSubmit: (values: { login: string, password: string }) => {
@@ -37,4 +37,4 @@ class Login extends Block {
   }
 }
 
-export default Login;
+export default LoginPage;

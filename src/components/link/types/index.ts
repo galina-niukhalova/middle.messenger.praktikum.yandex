@@ -1,3 +1,2 @@
-export { ILinkProps, LinkVariants } from './linkProps';
-
-export default {};
+export { default as LinkVariants } from './linkVariants';
+export { default as LinkSize } from './linkSize';

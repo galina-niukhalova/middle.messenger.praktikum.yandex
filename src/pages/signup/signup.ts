@@ -1,7 +1,7 @@
 import Block from 'utils/Block';
 import './signup.style.scss';
 
-class Signup extends Block {
+class Signup extends Block<{}> {
   protected getStateFromProps() {
     this.state = {
       handleSubmit: (values: { [key: string]: string }) => {

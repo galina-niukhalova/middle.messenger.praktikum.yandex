@@ -2,7 +2,11 @@ import classnames from 'helpers/classnames';
 import Block from 'utils/Block';
 import './chatImage.style.scss';
 
-class ChatImage extends Block {
+export interface IChatImageProps {
+  size: 'small' | 'medium'
+}
+
+class ChatImage extends Block<IChatImageProps> {
   render() {
     const containerClassName = classnames('chat-image__container', {
       'chat-image__container_small': this.props.size === 'small',

@@ -1,12 +1,27 @@
 import './button.scss';
 import classnames from 'helpers/classnames';
 import Block from 'utils/Block';
-import { IButtonProps, ButtonVariants } from './types';
+import { ButtonVariants, ButtonTypes } from './types';
 
-class Button extends Block {
+interface IButtonProps {
+  id?: string,
+  className?: string,
+  type?: ButtonTypes,
+  variant?: ButtonVariants,
+  label: string,
+  onClick: () => void,
+}
+
+interface IButtonPropsWithEvents extends Omit<IButtonProps, 'onClick'> {
+  events: {
+    click: () => void,
+  }
+}
+
+class Button extends Block<IButtonPropsWithEvents> {
   constructor(props: IButtonProps) {
     const {
-      onClick, variant, className, ...rest
+      onClick, variant, className, id, label, type,
     } = props;
 
     const buttonVariant = variant ?? ButtonVariants.CLASSIC;
@@ -15,18 +30,15 @@ class Button extends Block {
       classNames.push(className);
     }
 
-    const defaultProps = {
-      type: 'button',
+    super({
+      id,
+      label,
+      type: type ?? ButtonTypes.BUTTON,
       variant: buttonVariant,
       className: classnames(...classNames, {
         button_link: buttonVariant === ButtonVariants.LINK,
         button: buttonVariant === ButtonVariants.CLASSIC,
       }),
-    };
-
-    super({
-      ...defaultProps,
-      ...rest,
       events: {
         click: onClick,
       },

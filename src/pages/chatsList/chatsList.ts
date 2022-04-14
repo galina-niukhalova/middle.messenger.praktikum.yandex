@@ -5,12 +5,19 @@ import { LinkVariants } from 'components/link/types';
 import { registerComponent } from 'utils';
 import classnames from 'helpers/classnames';
 import { ChatImage, ChatsListItem } from './components';
-import { IChatsProps, IChat, IChatMessage } from './types';
+import { IChat, IChatMessage } from './types';
 
 registerComponent(ChatImage, 'ChatImage');
 registerComponent(ChatsListItem, 'ChatsListItem');
 
-class Chats extends Block {
+interface IChatsProps {
+  activeChat: {
+    userName: string,
+  },
+  chats: IChat[],
+}
+
+class ChatsPage extends Block<IChatsProps> {
   constructor(props: IChatsProps) {
     const defaultProps = {
       activeChat: {
@@ -179,4 +186,4 @@ class Chats extends Block {
   }
 }
 
-export default Chats;
+export default ChatsPage;
