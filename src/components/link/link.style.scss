@@ -1,11 +1,15 @@
-@import '~style/colors.scss';
+@import "~style/colors.scss";
 
 .link {
   text-decoration: none;
   color: $color-blue;
 
   &_danger {
-    color: $color-red;  
+    color: $color-red;
+  }
+
+  &_nav {
+    color: $color-grey;
   }
 
   &_small {

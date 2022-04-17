@@ -1,0 +1,14 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "selector-class-pattern": [
+      "^([a-z][a-z0-9]*)([-_a-z0-9]+)*$",
+      {
+        "message": "Wrong selector class name"
+      }
+    ]
+  },
+  "ignoreFiles": [
+    "dist/*"
+  ]
+}

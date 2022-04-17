@@ -2,34 +2,44 @@
   "name": "yandex_frontend",
   "version": "1.0.0",
   "description": "",
-  "source": "static/index.html",
   "scripts": {
-    "dev": "parcel -p 4000",
-    "build": "parcel build",
-    "start": "npm run build && node server.js",
-    "lint": "eslint --fix --ext .js, ."
+    "dev": "parcel src/index.html -p 4000",
+    "build": "parcel build src/index.html --no-source-maps --no-cache --public-url ./",
+    "start": "parcel -p 3000 src/index.html --no-source-maps && node server.js",
+    "lint": "eslint . --fix --ext .js,.ts"
   },
   "author": "",
   "license": "ISC",
   "alias": {
     "components": "~/src/components",
     "utils": "~/src/utils",
+    "helpers": "~/src/helpers",
     "style": "~/src/style",
     "pages": "~/src/pages",
     "static": "~/static"
   },
   "devDependencies": {
-    "@anikin/parcel-transformer-handlebars": "^1.0.9",
-    "@anikin/parcel-transformer-handlebars-precompile": "^1.0.1",
-    "@parcel/config-default": "^2.1.1",
-    "@parcel/transformer-sass": "^2.1.1",
-    "eslint": "^8.5.0",
-    "parcel": "^2.0.1",
-    "sass": "^1.45.1"
+    "@anikin/parcel-transformer-handlebars": "1.0.9",
+    "@anikin/parcel-transformer-handlebars-precompile": "1.0.1",
+    "@parcel/config-default": "2.1.1",
+    "@parcel/transformer-sass": "2.1.1",
+    "@types/node": "^17.0.23",
+    "@typescript-eslint/eslint-plugin": "5.10.1",
+    "@typescript-eslint/parser": "5.10.1",
+    "eslint": "8.7.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-import-resolver-typescript": "2.5.0",
+    "parcel": "2.0.1",
+    "sass": "1.45.1",
+    "stylelint": "^14.6.1",
+    "stylelint-config-standard": "^25.0.0",
+    "ts-node": "10.7.0",
+    "typescript": "4.5.5"
   },
   "dependencies": {
-    "express": "^4.17.2",
-    "handlebars": "^4.7.7",
-    "path": "^0.12.7"
+    "express": "4.17.2",
+    "handlebars": "4.7.7",
+    "nanoid": "3.2.0",
+    "path": "0.12.7"
   }
 }
