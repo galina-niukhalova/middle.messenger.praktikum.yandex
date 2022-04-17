@@ -1,5 +1,5 @@
 import './userProfile.style.scss';
-import Block from 'utils/Block';
+import Block from 'core/Block';
 import { ButtonVariants } from 'components/button/types';
 import { Views, IFormData } from './types';
 import {

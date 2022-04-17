@@ -1,4 +1,4 @@
-enum Methods {
+export enum Methods {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
@@ -15,6 +15,12 @@ type Options = {
 type OptionsWithoutMethod = Omit<Options, 'method'>;
 
 class HTTPTransport {
+  baseURL: string;
+
+  constructor(baseURL: string) {
+    this.baseURL = baseURL;
+  }
+
   get(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
     return this.request(url, { ...options, method: Methods.GET });
   }
@@ -52,13 +58,13 @@ class HTTPTransport {
   async request(url: string, options: Options = { method: Methods.GET }, timeout = 5000):
     Promise<XMLHttpRequest> {
     const self = this;
-    let targetUrl = url;
+    let targetUrl = `${this.baseURL}${url}`;
 
     return new Promise<XMLHttpRequest>((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       const { method, data } = options;
 
-      if (data) {
+      if (data && method === Methods.GET) {
         targetUrl += self.queryStringify(data);
       }
 
@@ -70,7 +76,9 @@ class HTTPTransport {
         reject(err);
       };
 
-      xhr.open(method, targetUrl);
+      xhr.open(method, targetUrl, true);
+      xhr.setRequestHeader('Accept', 'application/json');
+      xhr.setRequestHeader('Content-type', 'application/json');
       xhr.withCredentials = true;
       xhr.timeout = timeout;
 
@@ -87,22 +95,22 @@ class HTTPTransport {
       }
     });
   }
-}
 
-export function fetchWithRetry(url: string, options: Options): Promise<XMLHttpRequest> {
-  const { retries = 1 } = options;
+  fetchWithRetry(url: string, options: Options): Promise<XMLHttpRequest> {
+    const { retries = 1 } = options;
 
-  function onError() {
-    const retriesLeft = retries - 1;
+    function onError() {
+      const retriesLeft = retries - 1;
 
-    if (retriesLeft < 1) {
-      throw new Error('Exceeded the number of attempts');
+      if (retriesLeft < 1) {
+        throw new Error('Exceeded the number of attempts');
+      }
+
+      return this.fetchWithRetry(url, { ...options, retries: retriesLeft });
     }
 
-    return fetchWithRetry(url, { ...options, retries: retriesLeft });
+    return this.request(url, options).catch(onError);
   }
-
-  return new HTTPTransport().request(url, options).catch(onError);
 }
 
 export default HTTPTransport;

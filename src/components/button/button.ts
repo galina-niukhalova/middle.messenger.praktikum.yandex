@@ -1,6 +1,6 @@
 import './button.scss';
 import classnames from 'helpers/classnames';
-import Block from 'utils/Block';
+import Block from 'core/Block';
 import { ButtonVariants, ButtonTypes } from './types';
 
 interface IButtonProps {

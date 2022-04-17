@@ -1,11 +1,11 @@
-import Block from 'utils/Block';
+import Block from 'core/Block';
 import Route from './Route';
 
 interface BlockConstructable<Props extends {}> {
   new(props: any): Block<Props>;
 }
 
-export class Router {
+class Router {
   private static __instance: Router;
 
   private _rootQuery: string;
@@ -83,3 +83,5 @@ export class Router {
     return this.routes.find((route) => route.match(pathname));
   }
 }
+
+export default Router;

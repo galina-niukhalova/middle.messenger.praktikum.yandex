@@ -1,6 +1,6 @@
 import { isEqual } from 'helpers/mydash';
-import renderDOM from 'utils/renderDOM';
-import Block from './Block';
+import renderDOM from 'core/renderDOM';
+import Block from 'core/Block';
 
 interface BlockConstructable<Props extends {}> {
   new(props: any): Block<Props>;

@@ -1,5 +1,5 @@
 import './notFound.style.scss';
-import Block from 'utils/Block';
+import Block from 'core/Block';
 
 class NotFoundPage extends Block<{}> {
   render() {

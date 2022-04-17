@@ -1,4 +1,4 @@
-import Block from 'utils/Block';
+import Block from 'core/Block';
 import './signup.style.scss';
 
 class Signup extends Block<{}> {

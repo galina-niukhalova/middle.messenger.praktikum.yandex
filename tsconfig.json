@@ -13,7 +13,9 @@
     "typeRoots": ["node_modules/@types", "types/app.d.ts"],
     "paths": {
       "pages": ["pages"],
-      "types": ["types"]
+      "types": ["types"],
+      "modules": ["modules"],
+      "api": ["api"]
     }
   }
 }

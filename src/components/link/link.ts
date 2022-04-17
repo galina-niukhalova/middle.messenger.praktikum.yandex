@@ -1,6 +1,6 @@
 import './link.style.scss';
 import classnames from 'helpers/classnames';
-import Block from 'utils/Block';
+import Block from 'core/Block';
 import { LinkSize, LinkVariants } from './types';
 
 export interface ILinkProps {

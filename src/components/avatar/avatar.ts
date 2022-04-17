@@ -1,4 +1,4 @@
-import Block from 'utils/Block';
+import Block from 'core/Block';
 import avatarPlaceholder from 'static/images/image-outline.svg';
 import './avatar.style.scss';
 

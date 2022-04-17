@@ -1,11 +1,19 @@
 import './login.style.scss';
-import Block from 'utils/Block';
+import Block from 'core/Block';
+import withStore from 'utils/withStore';
+import AuthController from 'controllers/AuthController';
 
-class LoginPage extends Block<{}> {
+const controller = new AuthController();
+
+interface ILoginProps {
+  isLoading: boolean,
+}
+class LoginPage extends Block<ILoginProps> {
   protected getStateFromProps() {
     this.state = {
       handleSubmit: (values: { login: string, password: string }) => {
         console.log('submit', values);
+        controller.logout();
       },
     };
   }
@@ -37,4 +45,13 @@ class LoginPage extends Block<{}> {
   }
 }
 
-export default LoginPage;
+function mapLoginToProps(state: GlobalState) {
+  return {
+    isLoading: state?.isLoading,
+  };
+}
+
+export default withStore<ILoginProps>(
+  LoginPage,
+  mapLoginToProps,
+);

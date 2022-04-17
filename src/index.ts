@@ -1,4 +1,4 @@
-import { registerComponent, Router } from 'utils';
+import { Router, registerComponent } from 'core';
 import './base.scss';
 import {
   LoginPage,
@@ -34,13 +34,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const router = new Router('#app');
 
+  window.router = router;
+
   router
     .use('/', LoginPage)
-    .use('/login', LoginPage)
-    .use('/signup', SignupPage)
-    .use('/chats', ChatsPage)
-    .use('/profile', UserProfilePage)
-    .use('/error', ErrorPage)
+    .use(Routes.Login, LoginPage)
+    .use(Routes.Signup, SignupPage)
+    .use(Routes.Chats, ChatsPage)
+    .use(Routes.Profile, UserProfilePage)
+    .use(Routes.Error, ErrorPage)
     .use('/not-found', NotFoundPage)
     .start();
 });

@@ -1,8 +1,8 @@
 import './chatsList.style.scss';
-import Block from 'utils/Block';
+import Block from 'core/Block';
 import { InputVariants } from 'components/input/types';
 import { LinkVariants } from 'components/link/types';
-import { registerComponent } from 'utils';
+import { registerComponent } from 'core';
 import classnames from 'helpers/classnames';
 import { ChatImage, ChatsListItem } from './components';
 import { IChat, IChatMessage } from './types';

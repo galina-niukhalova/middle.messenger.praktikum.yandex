@@ -1,5 +1,5 @@
 import './error.style.scss';
-import Block from 'utils/Block';
+import Block from 'core/Block';
 
 class ErrorPage extends Block<{}> {
   render() {

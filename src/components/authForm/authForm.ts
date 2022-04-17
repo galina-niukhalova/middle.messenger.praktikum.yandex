@@ -1,5 +1,5 @@
 import './authForm.scss';
-import Block from 'utils/Block';
+import Block from 'core/Block';
 import isValid from 'helpers/formValidation';
 import { IFormInputData, InputType } from './types';
 import ERROR_MESSAGES from './const/errors';

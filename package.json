@@ -16,7 +16,10 @@
     "helpers": "~/src/helpers",
     "style": "~/src/style",
     "pages": "~/src/pages",
-    "static": "~/static"
+    "static": "~/static",
+    "api": "~/src/api",
+    "core": "~/src/core",
+    "controllers": "~/src/controllers"
   },
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars": "1.0.9",

@@ -1,7 +1,7 @@
 import classnames from 'helpers/classnames';
 import './profileForm.style.scss';
-import Block from 'utils/Block';
-import registerComponent from 'utils/registerComponent';
+import Block from 'core/Block';
+import registerComponent from 'core/registerComponent';
 import isValid from 'helpers/formValidation';
 import { IFormInputData } from './types';
 import { ProfileFormInput } from './profileFormInput';

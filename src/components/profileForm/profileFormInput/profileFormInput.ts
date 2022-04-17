@@ -1,4 +1,4 @@
-import Block from 'utils/Block';
+import Block from 'core/Block';
 import classnames from 'helpers/classnames';
 import './profileFormInput.style.scss';
 import { InputType } from 'components/input';

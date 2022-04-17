@@ -1,5 +1,5 @@
 import classnames from 'helpers/classnames';
-import Block from 'utils/Block';
+import Block from 'core/Block';
 import { InputVariants, InputType } from './types';
 import './input.style.scss';
 
