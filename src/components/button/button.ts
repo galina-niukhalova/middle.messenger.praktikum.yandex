@@ -1,6 +1,7 @@
 import './button.scss';
 import classnames from 'helpers/classnames';
 import Block from 'core/Block';
+import { SpinnerSize } from 'components/spinner';
 import { ButtonVariants, ButtonTypes } from './types';
 
 interface IButtonProps {
@@ -9,6 +10,8 @@ interface IButtonProps {
   type?: ButtonTypes,
   variant?: ButtonVariants,
   label: string,
+  isLoading: boolean,
+  disabled: boolean,
   onClick: () => void,
 }
 
@@ -21,7 +24,7 @@ interface IButtonPropsWithEvents extends Omit<IButtonProps, 'onClick'> {
 class Button extends Block<IButtonPropsWithEvents> {
   constructor(props: IButtonProps) {
     const {
-      onClick, variant, className, id, label, type,
+      onClick, variant, className, id, label, type, isLoading = false, disabled,
     } = props;
 
     const buttonVariant = variant ?? ButtonVariants.CLASSIC;
@@ -33,11 +36,14 @@ class Button extends Block<IButtonPropsWithEvents> {
     super({
       id,
       label,
+      isLoading,
+      disabled,
       type: type ?? ButtonTypes.BUTTON,
       variant: buttonVariant,
       className: classnames(...classNames, {
         button_link: buttonVariant === ButtonVariants.LINK,
         button: buttonVariant === ButtonVariants.CLASSIC,
+        button_loading: isLoading,
       }),
       events: {
         click: onClick,
@@ -46,13 +52,22 @@ class Button extends Block<IButtonPropsWithEvents> {
   }
 
   render() {
+    const { isLoading } = this.props;
+
     return `
       <button 
         {{#if id}}{{id}}{{/if}} 
         type={{type}} 
         class="{{className}}"
+        {{#if disabled}}
+          disabled
+        {{/if}}
       >
-        {{label}}
+        {{#if ${isLoading === true}}} 
+          {{{ Spinner size=${SpinnerSize.sm} }}} 
+        {{else}}
+          {{ label }}  
+        {{/if}}
       </button>
     `;
   }

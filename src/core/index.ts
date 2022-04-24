@@ -1,6 +1,6 @@
-export { default as Block } from 'core/Block';
+export { default as Block, BlockConstructable } from 'core/Block';
 export { default as registerComponent } from 'core/registerComponent';
 export { default as renderDOM } from 'core/renderDOM';
 export { default as EventBus } from 'core/EventBus';
-export { default as store, StoreEvents } from 'core/Store';
+export { Store, Dispatch } from 'core/Store';
 export { default as Router } from 'core/Router';

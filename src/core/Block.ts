@@ -5,6 +5,9 @@ import EventBus from './EventBus';
 interface BlockMeta<P = any> {
   props: P;
 }
+export interface BlockConstructable<Props extends {}> {
+  new(props: any): Block<Props>;
+}
 
 type Events = Values<typeof Block.EVENTS>;
 
@@ -13,6 +16,7 @@ class Block<Props extends {}> {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
+    FLOW_CWU: 'flow:component-will-unmount',
     FLOW_RENDER: 'flow:render',
   } as const;
 
@@ -56,6 +60,7 @@ class Block<Props extends {}> {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CWU, this._componentWillUnmount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
@@ -86,6 +91,13 @@ class Block<Props extends {}> {
     }
     this._render();
   }
+
+  private _componentWillUnmount() {
+    this.eventBus().destroy();
+    this.componentWillUnmount();
+  }
+
+  componentWillUnmount() { }
 
   componentDidUpdate(oldProps: Props, newProps: Props) {
     return true;

@@ -1,6 +1,15 @@
 import './userProfile.style.scss';
 import Block from 'core/Block';
 import { ButtonVariants } from 'components/button/types';
+import { withStore, withUser } from 'utils';
+import { Store } from 'core';
+import {
+  getUser,
+  changeUserProfile,
+  changePassword,
+  changeAvatar,
+  logout,
+} from 'services/profile';
 import { Views, IFormData } from './types';
 import {
   userInfoFormData,
@@ -8,7 +17,9 @@ import {
 } from './const';
 
 interface IUserProfileProps {
-  view?: Views
+  store: Store<AppState>,
+  view?: Views,
+  user: User,
 }
 
 class UserProfile extends Block<IUserProfileProps> {
@@ -19,11 +30,21 @@ class UserProfile extends Block<IUserProfileProps> {
     });
   }
 
-  protected getStateFromProps() {
+  componentDidMount(): void {
+    const { user } = this.props.store.getState();
+
+    if (!user) {
+      this.props.store.dispatch(getUser);
+    }
+  }
+
+  protected getStateFromProps(props: IUserProfileProps) {
     const values: { [key: string]: string } = {};
     const errors: { [key: string]: boolean } = {};
+    const userData = props?.store.getState().user as User;
+
     (userInfoFormData as IFormData[]).forEach((input: IFormData) => {
-      values[input.name] = '';
+      values[input.name] = userData[input.name as keyof Omit<User, 'id'>] ?? '';
       errors[input.name] = false;
     });
     (passwordChangeFormData as IFormData[]).forEach((input: IFormData) => {
@@ -39,7 +60,6 @@ class UserProfile extends Block<IUserProfileProps> {
     this.state = {
       values,
       errors,
-      avatarImg: '',
       view: Views.READ_ONLY,
       updateErrors: this.updateErrors.bind(this),
       onChangeUserInfoClick: this.handleChangeUserInfoBtnClick.bind(this),
@@ -47,6 +67,7 @@ class UserProfile extends Block<IUserProfileProps> {
       onChangePasswordClick: this.handleChangePasswordBtnClick.bind(this),
       onSubmitPassword: this.handlePasswordSubmit.bind(this),
       onAvatarChange: this.handleAvatarChange.bind(this),
+      logout: this.handleLogout.bind(this),
     };
   }
 
@@ -82,26 +103,12 @@ class UserProfile extends Block<IUserProfileProps> {
   }
 
   handleUserInfoSubmit(values: { [key: string]: string }) {
-    const mapFieldToApi: { [key: string]: string } = {
-      email: 'email',
-      login: 'login',
-      firstName: 'first-name',
-      secondName: 'second-name',
-      displayName: 'display-name',
-      phone: 'phone',
-    };
-
-    const newValues: { [key: string]: string } = {};
-    Object.keys(mapFieldToApi).forEach((key: string) => {
-      newValues[mapFieldToApi[key]] = values[key];
-    });
-
     this.setState({
+      values,
       view: Views.READ_ONLY,
-      values: newValues,
     });
 
-    console.log('Form has been submitted with', newValues);
+    this.props.store.dispatch(changeUserProfile, values);
   }
 
   handlePasswordSubmit(values: { [key: string]: string }) {
@@ -113,29 +120,24 @@ class UserProfile extends Block<IUserProfileProps> {
       },
     });
 
-    console.log('Form has been successfully submitted', values);
+    this.props.store.dispatch(changePassword, values);
+
+    const nextState = { ...this.state };
+    (passwordChangeFormData as IFormData[]).forEach((input: IFormData) => {
+      nextState.values[input.name] = '';
+      nextState.errors[input.name] = false;
+    });
+
+    this.setState(nextState);
   }
 
-  handleAvatarChange(e: Event) {
-    const input = e.target;
-    if (input) {
-      const self = this;
-      const reader = new FileReader();
+  handleAvatarChange() {
+    const formData = new FormData(document.querySelector('form.avatar') as HTMLFormElement);
+    this.props.store.dispatch(changeAvatar, formData);
+  }
 
-      reader.onload = (event) => {
-        const avatar = event.target?.result;
-        self.setState({
-          ...self.state,
-          avatarImg: avatar,
-        });
-
-        console.log({ avatar });
-      };
-
-      if (input instanceof HTMLInputElement && input.files?.length) {
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
+  handleLogout() {
+    this.props.store.dispatch(logout);
   }
 
   render() {
@@ -143,8 +145,9 @@ class UserProfile extends Block<IUserProfileProps> {
       view,
       values,
       errors,
-      avatarImg,
     } = this.state;
+
+    const avatarImg = this.props.store.getState().user?.avatar ?? '';
 
     const userInfoInputs = userInfoFormData.map((input) => ({
       ...input,
@@ -203,7 +206,7 @@ class UserProfile extends Block<IUserProfileProps> {
               }}}
             </li>
             <li class='profile__actions-button-row'>
-              {{{ Link label="Выйти" to="/login" danger=true size="medium" }}}
+              {{{ Link label="Выйти" danger=true size="medium" onClick=logout }}}
             </li>
           </ul>
         {{/ifEquals}}
@@ -212,4 +215,8 @@ class UserProfile extends Block<IUserProfileProps> {
   }
 }
 
-export default UserProfile;
+export default withStore<IUserProfileProps>(
+  withUser<IUserProfileProps>(
+    UserProfile,
+  ),
+);

@@ -1,3 +1,5 @@
+import queryStringify from 'helpers/queryStringify';
+
 export enum Methods {
   GET = 'GET',
   POST = 'POST',
@@ -10,6 +12,7 @@ type Options = {
   method: Methods;
   data?: any;
   retries?: number,
+  isFile?: boolean,
 };
 
 type OptionsWithoutMethod = Omit<Options, 'method'>;
@@ -37,35 +40,16 @@ class HTTPTransport {
     return this.request(url, { ...options, method: Methods.DELETE });
   }
 
-  queryStringify(data: { [key: string]: string }) {
-    let queryString = '';
-    const keys = Object.keys(data);
-
-    if (keys.length) {
-      queryString += '?';
-    }
-
-    keys.forEach((key, index) => {
-      queryString += `${key}=${data[key]}`;
-      if (index !== keys.length - 1) {
-        queryString += '&';
-      }
-    });
-
-    return queryString;
-  }
-
   async request(url: string, options: Options = { method: Methods.GET }, timeout = 5000):
     Promise<XMLHttpRequest> {
-    const self = this;
     let targetUrl = `${this.baseURL}${url}`;
 
     return new Promise<XMLHttpRequest>((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      const { method, data } = options;
+      const { method, data, isFile = false } = options;
 
       if (data && method === Methods.GET) {
-        targetUrl += self.queryStringify(data);
+        targetUrl += `?${queryStringify(data)}`;
       }
 
       const handleLoad = () => {
@@ -77,12 +61,15 @@ class HTTPTransport {
       };
 
       xhr.open(method, targetUrl, true);
-      xhr.setRequestHeader('Accept', 'application/json');
-      xhr.setRequestHeader('Content-type', 'application/json');
+      if (!isFile) {
+        xhr.setRequestHeader('content-type', 'application/json');
+      }
+
+      xhr.setRequestHeader('accept', 'application/json');
+      xhr.responseType = 'json';
+
       xhr.withCredentials = true;
       xhr.timeout = timeout;
-
-      xhr.setRequestHeader('Content-Type', 'text/plain');
       xhr.onload = handleLoad;
       xhr.onabort = handleError;
       xhr.onerror = handleError;
@@ -91,7 +78,7 @@ class HTTPTransport {
       if (method === Methods.GET || !data) {
         xhr.send();
       } else {
-        xhr.send(JSON.stringify(data));
+        xhr.send(isFile ? data : JSON.stringify(data));
       }
     });
   }

@@ -16,7 +16,7 @@ class Avatar extends Block<IAvatarProps> {
 
   render() {
     return `
-      <div class='avatar'>
+      <form class='avatar'>
         <label for='avatar__file-upload' class='avatar__label'></label>
         {{{ Input 
             type="file"
@@ -34,7 +34,7 @@ class Avatar extends Block<IAvatarProps> {
             <img class='avatar__image avatar__image-placeholder' src=${avatarPlaceholder} />
           {{/if}}
         </div>
-      </div>
+      </form>
   `;
   }
 }

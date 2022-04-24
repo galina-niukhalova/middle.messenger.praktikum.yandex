@@ -1,1 +1,3 @@
-export { default as withStore } from './withStore';
+export { withStore } from './withStore';
+export { withRouter } from './withRouter';
+export { withUser } from './withUser';

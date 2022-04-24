@@ -1,35 +1,25 @@
-import { Block, store, StoreEvents } from 'core';
+import { BlockConstructable, Store } from 'core';
 
-export interface BlockConstructable<Props extends {}> {
-  new(props: any): Block<Props>;
-}
+type WithStateProps = { store: Store<AppState> };
 
-function withStore<Props extends {}>(
-  Component: BlockConstructable<Props>,
-  mapStateToProps: (state: GlobalState) => Partial<Props>,
-) {
-  return class extends Component {
-    public static componentName = Component.name;
+export function withStore<P extends WithStateProps>(WrappedBlock: BlockConstructable<P>) {
+  return class extends WrappedBlock {
+    constructor(props: P) {
+      super({ ...props, store: window.store });
+    }
 
-    constructor(props: Props) {
-      let state = mapStateToProps(store.getState());
+    __onChangeStoreCallback = () => {
+      this.setProps({ ...this.props, store: window.store });
+    };
 
-      super({
-        ...props,
-        ...state,
-      });
+    componentDidMount(props: P) {
+      super.componentDidMount(props);
+      window.store.on('changed', this.__onChangeStoreCallback);
+    }
 
-      store.on(StoreEvents.Updated, () => {
-        const newState = mapStateToProps(store.getState());
-
-        if (!isEqual(state, newState)) {
-          this.setProps({ ...props, ...newState });
-        }
-
-        state = newState;
-      });
+    componentWillUnmount() {
+      super.componentWillUnmount();
+      window.store.off('changed', this.__onChangeStoreCallback);
     }
   };
 }
-
-export default withStore;

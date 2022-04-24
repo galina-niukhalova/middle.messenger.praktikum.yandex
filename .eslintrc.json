@@ -36,6 +36,8 @@
     "no-param-reassign": ["error", { "props": false }],
     "class-methods-use-this": "off",
     "no-undef": "off",
-    "global-require": "off"
+    "global-require": "off",
+    "no-continue": "off",
+    "array-callback-return": "off"
   }
 }

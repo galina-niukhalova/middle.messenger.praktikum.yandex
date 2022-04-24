@@ -17,6 +17,7 @@ export interface IInputProps {
   accept?: string,
   variant?: InputVariants,
   invalid?: boolean,
+  tabindex?: string,
 }
 
 interface IInputPropsWithEvents extends Omit<IInputProps, 'onBlur' | 'onFocus' | 'onChange'> {
@@ -67,7 +68,6 @@ class Input extends Block<IInputPropsWithEvents> {
         class="input ${className}"
         type={{type}} 
         name={{name}} 
-        required 
         placeholder={{placeholder}}
         {{#if readonly}} readonly {{/if}}>
   `;

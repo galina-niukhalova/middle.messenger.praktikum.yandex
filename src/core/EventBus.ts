@@ -32,4 +32,8 @@ export default class EventBus<
 
     this.listeners[event]!.forEach((listener) => listener(...args));
   }
+
+  destroy() {
+    this.listeners = {};
+  }
 }

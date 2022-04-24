@@ -32,9 +32,19 @@
     }
   }
 
+  &__submit-btn-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+
   &__submit-btn {
     width: 100%;
-    margin-bottom: 14px;
     margin-top: 80px;
+  }
+
+  &__link {
+    margin-top: 32px;
   }
 }

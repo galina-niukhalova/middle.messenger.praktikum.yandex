@@ -82,4 +82,4 @@ class ChatsAPI {
   }
 }
 
-export default ChatsAPI;
+export default new ChatsAPI();

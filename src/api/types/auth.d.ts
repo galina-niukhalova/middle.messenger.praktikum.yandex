@@ -1,4 +1,14 @@
-export type SignupRequest = {
+import { APIError } from './errors';
+import { UserDTO } from './user';
+
+export type SigninRequestData = {
+  login: string,
+  password: string
+}
+
+export type SigninResponseData = {} | APIError;
+
+export type SignupRequestData = {
   first_name: string,
   second_name: string,
   login: string,
@@ -7,16 +17,8 @@ export type SignupRequest = {
   phone: string
 }
 
-export type SigninRequest = {
-  login: string,
-  password: string
-}
+export type SignupResponseData = {
+  id: number
+} | APIError;
 
-export type SignupResponseSuccess = {
-  id: number,
-}
-
-export type ResponseError = {
-  reason: string,
-  error: string
-}
+export type GetUserResponseData = UserDTO | APIError;

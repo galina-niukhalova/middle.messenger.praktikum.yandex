@@ -1,4 +1,4 @@
-export type ChangeUserProfileFormData = {
+export type ChangeUserProfilePayload = {
   first_name: string,
   second_name: string,
   display_name: string,
@@ -7,11 +7,11 @@ export type ChangeUserProfileFormData = {
   phone: string,
 }
 
-export type ChangeUserPasswordFormData = {
+export type ChangeUserPasswordPayload = {
   oldPassword: string,
   newPassword: string
 }
 
-export type UploadAvatarFormData = {
+export type UploadAvatarPayload = {
   avatar: FormData,
 }

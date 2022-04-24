@@ -1,10 +1,10 @@
-import { Block, Router } from 'core';
+import { BlockConstructable, Router } from 'core';
 
-export function withRouter<T extends {}>(Component: typeof Block) {
-  return class WithRouter extends Component<T> {
-    public static componentName = Component.name;
+type WithRouterProps = { router: Router };
 
-    constructor(props: T & { router: Router }) {
+export function withRouter<T extends WithRouterProps>(Component: BlockConstructable<T>) {
+  return class WithRouter extends Component {
+    constructor(props: T) {
       super({ ...props, router: window.router });
     }
   };

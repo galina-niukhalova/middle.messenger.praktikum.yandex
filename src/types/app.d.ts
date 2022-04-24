@@ -1,28 +1,43 @@
 import { Router } from 'core';
+import { Store } from 'core/Store';
 
 declare global {
   export type Nullable<T> = T | null;
 
   export type Keys<T extends Record<string, unknown>> = keyof T;
   export type Values<T extends Record<string, unknown>> = T[Keys<T>];
+  export type Indexed<T = unknown> = {
+    [key in string]: T;
+  };
+  export type StringIndexed = Record<string, any>;
 
-  export type GlobalState = {
+  type PlainObject<T = unknown> = {
+    [k in string]: T;
+  };
+
+  export type AppState = {
     isLoading: boolean;
+    loginFormError: string;
+    signupFormError: string,
+    user: Nullable<User>,
+    appIsInited: boolean,
   };
 
   interface Window {
-    // store: Store<AppStore>;
+    store: Store<AppState>;
     router: Router;
   }
 
-  export enum Routes {
-    Home = '/',
-    Login = '/login',
-    Signup = '/signup',
-    Chats = '/chats',
-    Profile = '/profile',
-    Error = '/error'
-  }
+  export type User = {
+    id: number;
+    login: string;
+    firstName: string;
+    secondName: string;
+    displayName: string;
+    avatar: string;
+    phone: string;
+    email: string;
+  };
 }
 
 export { };

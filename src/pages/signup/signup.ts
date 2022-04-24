@@ -1,54 +1,86 @@
 import Block from 'core/Block';
 import './signup.style.scss';
+import { withStore, withRouter } from 'utils';
+import { Router, Store } from 'core';
+import { signup } from 'services/auth';
+import { Routes } from 'const';
 
-class Signup extends Block<{}> {
+interface ISignupProps {
+  router: Router,
+  store: Store<AppState>,
+  formError?: () => string | null;
+}
+
+enum SignupField {
+  email = 'email',
+  login = 'login',
+  firstName = 'firstName',
+  secondName = 'secondName',
+  phone = 'phone',
+  password = 'password',
+  repeatPassword = 'repeatPassword'
+}
+class Signup extends Block<ISignupProps> {
   protected getStateFromProps() {
+    const values: Record<string, string> = {};
+    const errors: Record<string, string> = {};
+
+    (Object.keys(SignupField) as Array<keyof typeof SignupField>).map((key) => {
+      values[key] = '';
+      errors[key] = '';
+    });
     this.state = {
-      handleSubmit: (values: { [key: string]: string }) => {
-        const mapFieldToApi: { [key: string]: string } = {
-          email: 'email',
-          login: 'login',
-          firstName: 'first-name',
-          secondName: 'second-name',
-          phone: 'phone',
-          password: 'passoword',
+      isFormValid: false,
+      values,
+      errors,
+      goToLoginLink: {
+        onClick: () => this.props.router.go(Routes.Login),
+        label: 'Войти',
+      },
+      handleSignup: () => {
+        if (this.state.isFormValid) {
+          const signupData = this.state.values;
+          this.props.store.dispatch(signup, signupData);
+        }
+      },
+      handleStateChange: ({ field, value, error }: {
+        field: SignupField,
+        value: string,
+        error: string
+      }) => {
+        const nextState = {
+          ...this.state,
         };
 
-        const newValues: { [key: string]: string } = {};
-        Object.keys(mapFieldToApi).forEach((key: string) => {
-          newValues[mapFieldToApi[key]] = values[key];
+        nextState.values[field] = value;
+        nextState.errors[field] = error;
+
+        let isFormValid = true;
+        console.log(nextState.values, nextState.errors)
+        Object.keys(nextState.values).every((key: string) => {
+          if ((!nextState.values[key]) || (nextState.values[key] && nextState.errors[key])) {
+            isFormValid = false;
+            return false;
+          }
+          return true;
         });
 
-        console.log('submit', newValues);
+        nextState.isFormValid = isFormValid;
+
+        this.setState(nextState);
       },
     };
   }
 
   render() {
-    const inputs = [
-      { name: 'email' },
-      { name: 'login' },
-      { name: 'firstName' },
-      { name: 'secondName' },
-      { name: 'phone' },
-      {
-        name: 'password',
-        errors: {
-          dependentField: 'repeatPassword',
-        },
-      },
-      {
-        name: 'repeatPassword',
-        errors: {
-          dependentField: 'password',
-        },
-      },
-    ];
+    const { isLoading, signupFormError } = this.props.store.getState();
 
-    const link = {
-      to: '/login',
-      label: 'Войти',
-    };
+    const inputs = (Object.keys(SignupField) as Array<keyof typeof SignupField>)
+      .map((key) => ({
+        name: key,
+        value: this.state.values[key],
+        error: this.state.errors[key],
+      }));
 
     return `
       {{{AuthForm
@@ -59,11 +91,19 @@ class Signup extends Block<{}> {
           className='signup-form'
           inputs='${JSON.stringify(inputs)}'
           submitBtn='Зарегистрироваться'
-          onSubmit=handleSubmit
-          link='${JSON.stringify(link)}'
+          onSubmit=handleSignup
+          link=goToLoginLink
+          update=handleStateChange
+          formError="${signupFormError}"
+          isLoading=${isLoading}
+          isFormValid=isFormValid
       }}}
     `;
   }
 }
 
-export default Signup;
+export default withRouter<ISignupProps>(
+  withStore<ISignupProps>(
+    Signup,
+  ),
+);

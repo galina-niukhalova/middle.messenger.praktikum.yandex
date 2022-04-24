@@ -1,4 +1,3 @@
-import { isEqual } from 'helpers/mydash';
 import renderDOM from 'core/renderDOM';
 import Block from 'core/Block';
 
@@ -40,12 +39,12 @@ export default class Route {
   }
 
   match(pathname: string) {
-    return isEqual(pathname, this._pathname);
+    return pathname === this._pathname;
   }
 
   render() {
     if (!this._block) {
-      this._block = new this._blockClass({});
+      this._block = new this._blockClass(this._props);
       renderDOM(this._block, this._props.rootQuery);
       return;
     }

@@ -1,40 +1,33 @@
 import HTTP, { Methods } from 'core/request';
 import {
   ChangeUserProfileRequest,
+  ChangeUserProfileResponse,
   ChangeAvatarRequest,
   ChangeUserPasswordRequest,
+  ChangeUserPasswordResponse,
   GetUserByIdRequest,
   FindUsersRequest,
+  UserDTO,
 } from './types/user';
 
 const userAPIInstance = new HTTP('https://ya-praktikum.tech/api/v2/user');
 
 class UserAPI {
   changeUserProfile(data: ChangeUserProfileRequest) {
-    return userAPIInstance.fetchWithRetry('/profile', {
-      method: Methods.PUT,
-      data,
-    }).then((response) => {
-      console.log('changeUserProfile Users API', response);
-    });
+    return userAPIInstance.put('/profile', { data })
+      .then(({ response }) => response as ChangeUserProfileResponse);
   }
 
   changeAvatar(data: ChangeAvatarRequest) {
-    return userAPIInstance.fetchWithRetry('/profile/avatar', {
-      method: Methods.PUT,
+    return userAPIInstance.put('/profile/avatar', {
       data,
-    }).then((response) => {
-      console.log('changeAvatar Users API', response);
-    });
+      isFile: true,
+    }).then(({ response }) => (response as UserDTO));
   }
 
   changeUserPassword(data: ChangeUserPasswordRequest) {
-    return userAPIInstance.fetchWithRetry('/profile/password', {
-      method: Methods.PUT,
-      data,
-    }).then((response) => {
-      console.log('changeUserPassword Users API', response);
-    });
+    return userAPIInstance.put('/password', { data })
+      .then(({ response }) => response as ChangeUserPasswordResponse);
   }
 
   getUserById(data: GetUserByIdRequest) {
@@ -55,4 +48,4 @@ class UserAPI {
   }
 }
 
-export default UserAPI;
+export default new UserAPI();
