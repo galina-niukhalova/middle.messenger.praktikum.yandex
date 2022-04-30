@@ -10,7 +10,7 @@ export async function initApp(dispatch: Dispatch<AppState>) {
     const response = await authAPI.getUser();
 
     if (apiHasError(response)) {
-      dispatch(logout);
+      // dispatch(logout);
       return;
     }
 

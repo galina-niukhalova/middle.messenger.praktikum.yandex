@@ -19,8 +19,13 @@ declare global {
     isLoading: boolean;
     loginFormError: string;
     signupFormError: string,
+    addUserError: string,
+    deleteUserError: string,
     user: Nullable<User>,
     appIsInited: boolean,
+    chats: Chat[],
+    searchResult: User[],
+    chatUsers: User[],
   };
 
   interface Window {
@@ -38,6 +43,13 @@ declare global {
     phone: string;
     email: string;
   };
+
+  export type Chat = {
+    id: number,
+    title: string,
+    avatar: string,
+    unreadCount: string,
+  }
 }
 
 export { };

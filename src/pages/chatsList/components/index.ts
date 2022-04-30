@@ -1,2 +1,5 @@
 export { ChatImage } from './chatImage';
-export { ChatsListItem } from './chatsListItem';
+export { ChatsList } from './chatsList';
+export { AddChat } from './addChat';
+export { AddUser } from './addUser';
+export { DeleteUser } from './deleteUser';

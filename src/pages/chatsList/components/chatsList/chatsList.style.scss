@@ -2,7 +2,8 @@
 
 .chats-list-item {
   cursor: pointer;
-  padding: 8px 0;
+  padding: 8px 4px;
+  border-radius: 4px;
   display: flex;
   flex-direction: row;
   gap: 8px;
@@ -63,5 +64,10 @@
     align-items: center;
     justify-content: center;
     align-self: flex-end;
+  }
+
+  &_active {
+    background-color: $color-baby-blue;
+    
   }
 }

@@ -49,9 +49,9 @@ class Input extends Block<IInputPropsWithEvents> {
 
   render() {
     const className = classnames({
-      [this.props.className ?? '']: Boolean(this.props.className),
       input_invalid: !!this.props.invalid,
       input_filled: this.props.variant === InputVariants.FILLED,
+      [this.props.className ?? '']: Boolean(this.props.className),
     });
 
     return `

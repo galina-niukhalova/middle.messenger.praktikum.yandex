@@ -1,14 +1,16 @@
 import Block from 'core/Block';
 import './signup.style.scss';
 import { withStore, withRouter } from 'utils';
-import { Router, Store } from 'core';
+import { Router, Dispatch } from 'core';
 import { signup } from 'services/auth';
 import { Routes } from 'const';
 
 interface ISignupProps {
   router: Router,
-  store: Store<AppState>,
-  formError?: () => string | null;
+  isLoading: boolean,
+  signupFormError: string,
+  formError?: () => string | null,
+  dispatch: Dispatch<AppState>
 }
 
 enum SignupField {
@@ -40,7 +42,7 @@ class Signup extends Block<ISignupProps> {
       handleSignup: () => {
         if (this.state.isFormValid) {
           const signupData = this.state.values;
-          this.props.store.dispatch(signup, signupData);
+          this.props.dispatch(signup, signupData);
         }
       },
       handleStateChange: ({ field, value, error }: {
@@ -56,7 +58,7 @@ class Signup extends Block<ISignupProps> {
         nextState.errors[field] = error;
 
         let isFormValid = true;
-        console.log(nextState.values, nextState.errors)
+
         Object.keys(nextState.values).every((key: string) => {
           if ((!nextState.values[key]) || (nextState.values[key] && nextState.errors[key])) {
             isFormValid = false;
@@ -73,7 +75,7 @@ class Signup extends Block<ISignupProps> {
   }
 
   render() {
-    const { isLoading, signupFormError } = this.props.store.getState();
+    const { isLoading, signupFormError } = this.props;
 
     const inputs = (Object.keys(SignupField) as Array<keyof typeof SignupField>)
       .map((key) => ({
@@ -102,8 +104,16 @@ class Signup extends Block<ISignupProps> {
   }
 }
 
+function mapStateToProps(state: AppState) {
+  return {
+    isLoading: state.isLoading,
+    signupFormError: state.signupFormError,
+  };
+}
+
 export default withRouter<ISignupProps>(
   withStore<ISignupProps>(
     Signup,
+    mapStateToProps,
   ),
 );

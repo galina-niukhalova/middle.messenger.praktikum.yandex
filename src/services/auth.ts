@@ -31,7 +31,7 @@ export const login = async (
 
   dispatch({ user: transformUser(responseUser) });
 
-  window.router.go(Routes.Profile);
+  window.router.go(Routes.Chats);
 };
 
 export const signup = async (
@@ -77,7 +77,7 @@ export const signup = async (
 
   dispatch({ user: transformUser(responseUser) });
 
-  window.router.go(Routes.Profile);
+  window.router.go(Routes.Chats);
 };
 
 export const logout = async () => {

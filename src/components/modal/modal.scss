@@ -1,0 +1,42 @@
+@import "~style/layer.scss";
+@import "~style/colors.scss";
+
+.modal__backdrop {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba($color: #000000, $alpha: .7);
+    z-index: $zindex-dropdown;
+    position: fixed;
+}
+
+.modal {
+  min-width: 400px;
+  padding: 40px 24px;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+  z-index: $zindex-modal;
+  background-color: $color-white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__close {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: normal;
+  }
+}

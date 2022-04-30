@@ -21,15 +21,10 @@ class Router {
       // eslint-disable-next-line no-constructor-return
       return Router.__instance;
     }
-
     Router.__instance = this;
-
     this.routes = [];
-
     this.history = window.history;
-
     this._currentRoute = null;
-
     this._rootQuery = rootQuery;
   }
 

@@ -1,49 +1,44 @@
 import HTTP, { Methods } from 'core/request';
 import {
   CreateChatRequest,
+  CreateChatResponseData,
   DeleteChatRequest,
+  DeleteChatResponseData,
+  DeleteUserFromChatResponseData,
+  AddUsersToChatResponseData,
   GetChatUsersRequest,
+  GetChatUsersResponse,
   GetNewMessagesRequest,
   UploadAvatarRequest,
   AddUsersToChatRequest,
   DeleteUsersFromChatRequest,
+  ChatDTO,
+  GetTokenResponseData,
 } from './types/chats';
 
 const chatsAPIInstance = new HTTP('https://ya-praktikum.tech/api/v2/chats');
 
 class ChatsAPI {
   get() {
-    return chatsAPIInstance.fetchWithRetry('', {
-      method: Methods.GET,
-    }).then((response) => {
-      console.log('get Chats API', response);
-    });
+    return chatsAPIInstance.get('')
+      .then(({ response }) => response as ChatDTO[]);
   }
 
   createChat(data: CreateChatRequest) {
-    return chatsAPIInstance.fetchWithRetry('', {
-      method: Methods.POST,
+    return chatsAPIInstance.post('', {
       data,
-    }).then((response) => {
-      console.log('createChat Chats API', response);
-    });
+    }).then(({ response }) => (response as CreateChatResponseData));
   }
 
   deleteChat(data: DeleteChatRequest) {
-    return chatsAPIInstance.fetchWithRetry('', {
-      method: Methods.DELETE,
+    return chatsAPIInstance.delete('', {
       data,
-    }).then((response) => {
-      console.log('deleteChat Chats API', response);
-    });
+    }).then(({ response }) => (response as DeleteChatResponseData));
   }
 
   getChatUsers(data: GetChatUsersRequest) {
-    return chatsAPIInstance.fetchWithRetry(`/${data.id}/users`, {
-      method: Methods.GET,
-    }).then((response) => {
-      console.log('getChatUsers Chats API', response);
-    });
+    return chatsAPIInstance.get(`/${data.id}/users`)
+      .then(({ response }) => (response as GetChatUsersResponse));
   }
 
   getNewMessages(data: GetNewMessagesRequest) {
@@ -64,21 +59,20 @@ class ChatsAPI {
   }
 
   addUsersToChat(data: AddUsersToChatRequest) {
-    return chatsAPIInstance.fetchWithRetry('/users', {
-      method: Methods.PUT,
+    return chatsAPIInstance.put('/users', {
       data,
-    }).then((response) => {
-      console.log('addUsersToChat Chats API', response);
-    });
+    }).then(({ response }) => (response as AddUsersToChatResponseData));
   }
 
   deleteUsersFromChat(data: DeleteUsersFromChatRequest) {
-    return chatsAPIInstance.fetchWithRetry('/users', {
-      method: Methods.DELETE,
+    return chatsAPIInstance.delete('/users', {
       data,
-    }).then((response) => {
-      console.log('deleteUsersFromChat Chats API', response);
-    });
+    }).then(({ response }) => (response as DeleteUserFromChatResponseData));
+  }
+
+  getToken(chatId: string) {
+    return chatsAPIInstance.post(`/token/${chatId}`)
+      .then(({ response }) => (response as GetTokenResponseData));
   }
 }
 

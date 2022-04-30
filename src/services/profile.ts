@@ -4,8 +4,8 @@ import { transformUser } from 'helpers/apiTransformers';
 import type { Dispatch } from 'core';
 import { UserProfileFormData, UserPasswordChangeFormData } from 'components/profileForm/types/profileFormProps';
 import userAPI from 'api/user';
-import { Routes } from 'const';
 import { ChangeUserProfilePayload, ChangeUserPasswordPayload } from './types/user';
+import { logout } from './auth';
 
 export const getUser = async (
   dispatch: Dispatch<AppState>,
@@ -59,12 +59,6 @@ export const changeUserProfile = async (
   }
 
   dispatch({ user: transformUser(response) });
-};
-
-export const logout = async () => {
-  await authAPI.logout();
-
-  window.router.go(Routes.Login);
 };
 
 export const changePassword = async (

@@ -6,7 +6,7 @@ import {
   ChangeUserPasswordRequest,
   ChangeUserPasswordResponse,
   GetUserByIdRequest,
-  FindUsersRequest,
+  FindUserRequest,
   UserDTO,
 } from './types/user';
 
@@ -38,13 +38,10 @@ class UserAPI {
     });
   }
 
-  findUsers(data: FindUsersRequest) {
-    return userAPIInstance.fetchWithRetry('/search', {
-      method: Methods.POST,
+  findUserByLogin(data: FindUserRequest) {
+    return userAPIInstance.post('/search', {
       data,
-    }).then((response) => {
-      console.log('findUsers Users API', response);
-    });
+    }).then(({ response }) => (response as UserDTO[]));
   }
 }
 

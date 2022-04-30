@@ -7,3 +7,5 @@ export { ProfileForm } from './profileForm';
 export { Avatar } from './avatar';
 export { Spinner } from './spinner';
 export { Error } from './error';
+export { Icon } from './icon';
+export { Dropdown } from './dropdown';

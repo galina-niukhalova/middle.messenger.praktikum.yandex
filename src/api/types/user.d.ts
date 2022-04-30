@@ -26,7 +26,7 @@ export type GetUserByIdRequest = {
   id: number,
 }
 
-export type FindUsersRequest = {
+export type FindUserRequest = {
   login: string,
 }
 

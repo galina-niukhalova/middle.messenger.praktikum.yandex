@@ -1,15 +1,28 @@
-import { BlockConstructable, Store } from 'core';
+import { BlockConstructable, Dispatch } from 'core';
 
-type WithStateProps = { store: Store<AppState> };
+interface PropsWithDispatch {
+  dispatch: Dispatch<AppState>
+}
 
-export function withStore<P extends WithStateProps>(WrappedBlock: BlockConstructable<P>) {
+export function withStore<P extends PropsWithDispatch>(
+  WrappedBlock: BlockConstructable<P>,
+  mapStateToProps: (state: AppState) => Partial<P>,
+) {
   return class extends WrappedBlock {
     constructor(props: P) {
-      super({ ...props, store: window.store });
+      super({
+        ...props,
+        ...mapStateToProps(window.store.getState()),
+        dispatch: window.store.dispatch.bind(window.store),
+      });
     }
 
     __onChangeStoreCallback = () => {
-      this.setProps({ ...this.props, store: window.store });
+      this.setProps({
+        ...this.props,
+        ...mapStateToProps(window.store.getState()),
+        dispatch: window.store.dispatch.bind(window.store),
+      });
     };
 
     componentDidMount(props: P) {

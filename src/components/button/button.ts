@@ -13,6 +13,7 @@ interface IButtonProps {
   isLoading: boolean,
   disabled: boolean,
   onClick: () => void,
+  dataId: string
 }
 
 interface IButtonPropsWithEvents extends Omit<IButtonProps, 'onClick'> {
@@ -25,6 +26,7 @@ class Button extends Block<IButtonPropsWithEvents> {
   constructor(props: IButtonProps) {
     const {
       onClick, variant, className, id, label, type, isLoading = false, disabled,
+      dataId,
     } = props;
 
     const buttonVariant = variant ?? ButtonVariants.CLASSIC;
@@ -38,6 +40,7 @@ class Button extends Block<IButtonPropsWithEvents> {
       label,
       isLoading,
       disabled,
+      dataId,
       type: type ?? ButtonTypes.BUTTON,
       variant: buttonVariant,
       className: classnames(...classNames, {
@@ -61,6 +64,9 @@ class Button extends Block<IButtonPropsWithEvents> {
         class="{{className}}"
         {{#if disabled}}
           disabled
+        {{/if}}
+        {{#if dataId}}
+          data-id="{{dataId}}"
         {{/if}}
       >
         {{#if ${isLoading === true}}} 

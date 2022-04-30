@@ -1,13 +1,15 @@
 import './login.style.scss';
 import Block from 'core/Block';
 import { withStore, withRouter } from 'utils';
-import { Router, Store } from 'core';
+import { Router, Dispatch } from 'core';
 import { login as loginService } from 'services/auth';
 import { Routes } from 'const';
 
 interface ILoginProps {
   router: Router,
-  store: Store<AppState>,
+  dispatch: Dispatch<AppState>,
+  loginFormError: string,
+  isLoading: boolean,
   formError?: () => string | null;
 }
 
@@ -35,7 +37,7 @@ class LoginPage extends Block<ILoginProps> {
       handleLogin: () => {
         if (this.state.isFormValid) {
           const loginData = this.state.values;
-          this.props.store.dispatch(loginService, loginData);
+          this.props.dispatch(loginService, loginData);
         }
       },
       handleStateChange: ({ field, value, error }: {
@@ -67,7 +69,7 @@ class LoginPage extends Block<ILoginProps> {
   }
 
   render() {
-    const { isLoading, loginFormError } = this.props.store.getState();
+    const { isLoading, loginFormError } = this.props;
 
     const inputs = (Object.keys(LoginField) as Array<keyof typeof LoginField>)
       .map((key) => ({
@@ -98,14 +100,16 @@ class LoginPage extends Block<ILoginProps> {
   }
 }
 
-// function mapLoginToProps(state: AppState) {
-//   return {
-//     isLoading: state?.isLoading,
-//   };
-// }
+function mapStateToProps(state: AppState) {
+  return {
+    isLoading: state?.isLoading,
+    loginFormError: state.loginFormError,
+  };
+}
 
 export default withRouter<ILoginProps>(
   withStore<ILoginProps>(
     LoginPage,
+    mapStateToProps,
   ),
 );

@@ -20,6 +20,8 @@ import {
   Avatar,
   Spinner,
   Error,
+  Icon,
+  Dropdown
 } from 'components';
 import { Routes } from 'const';
 import { Store } from 'core/Store';
@@ -35,6 +37,8 @@ function registerComponents() {
   registerComponent(Avatar, 'Avatar');
   registerComponent(Spinner, 'Spinner');
   registerComponent(Error, 'Error');
+  registerComponent(Icon, 'Icon');
+  registerComponent(Dropdown, 'Dropdown');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
