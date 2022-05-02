@@ -1,7 +1,11 @@
 import chatsAPI from 'api/chats';
 import type { Dispatch } from 'core';
 import { apiHasError } from 'helpers/apiHasError';
-import { CreateConnectionPayload } from './types/message';
+import { transformMessages, transformMessage } from 'helpers/apiTransformers';
+import {
+  CreateConnectionPayload,
+  SendMessagePayload,
+} from './types/message';
 import { logout } from './auth';
 
 const BASE_URL = 'wss://ya-praktikum.tech/ws';
@@ -22,7 +26,12 @@ export const createConnection = async (
   const socket = new WebSocket(`${BASE_URL}/chats/${userID}/${action.chatId}/${tokenResponse.token}`);
 
   socket.addEventListener('open', () => {
-    console.log('Соединение установлено');
+    dispatch({ socket });
+
+    socket.send(JSON.stringify({
+      content: '0',
+      type: 'get old',
+    }));
   });
 
   socket.addEventListener('close', (event) => {
@@ -36,10 +45,36 @@ export const createConnection = async (
   });
 
   socket.addEventListener('message', (event) => {
-    console.log('Получены данные', event.data);
+    const data = JSON.parse(event.data);
+    const newMessages = [...window.store.getState().messages];
+
+    if (Array.isArray(data)) {
+      newMessages.push(...transformMessages(data));
+    } else {
+      newMessages.push(transformMessage(data));
+    }
+
+    dispatch({
+      messages: newMessages,
+    });
   });
 
   socket.addEventListener('error', (event: Event) => {
     console.log('Ошибка', event.message);
   });
+};
+
+export const sendMessage = async (
+  dispatch: Dispatch<AppState>,
+  state: AppState,
+  action: SendMessagePayload,
+) => {
+  if (!state.socket) {
+    return;
+  }
+
+  state.socket.send(JSON.stringify({
+    content: action.message,
+    type: 'message',
+  }));
 };

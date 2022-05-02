@@ -9,4 +9,6 @@ export const defaultState: AppState = {
   chatUsers: [],
   appIsInited: false,
   chats: [],
+  messages: [],
+  socket: null,
 };

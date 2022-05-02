@@ -15,6 +15,7 @@ import {
   getChatUsers,
   deleteUserFromChat,
 } from 'services/chats';
+import { createConnection, sendMessage } from 'services/message';
 import { IDropdownItem } from 'components/dropdown/components/dropdownItem';
 import {
   ChatImage,
@@ -23,7 +24,6 @@ import {
   AddUser,
   DeleteUser,
 } from './components';
-import { IChatMessage } from './types';
 
 registerComponent(ChatImage, 'ChatImage');
 registerComponent(ChatsList, 'ChatsList');
@@ -37,6 +37,8 @@ interface IChatsProps {
   dispatch: Dispatch<AppState>
   router: Router,
   chatMenu: IDropdownItem[],
+  messages: Message[],
+  user: Nullable<User>,
 }
 
 class ChatsPage extends Block<IChatsProps> {
@@ -130,6 +132,10 @@ class ChatsPage extends Block<IChatsProps> {
     const inputElement = document.querySelector('.chat__footer input') as HTMLInputElement;
 
     if (!this.isMessageEmpty(inputElement.value)) {
+      this.props.dispatch(sendMessage, {
+        message: inputElement.value,
+      });
+
       inputElement.value = '';
     }
   }
@@ -137,6 +143,8 @@ class ChatsPage extends Block<IChatsProps> {
   handleChatClick(chatId: number) {
     const currentChat = this.props.chats
       .find((chat: Chat) => chat.id === chatId) as Chat;
+
+    this.props.dispatch(createConnection, { chatId });
 
     this.props.dispatch(getChatUsers, {
       chatId,
@@ -177,14 +185,6 @@ class ChatsPage extends Block<IChatsProps> {
   getChatsList() {
     let chatsListString = '';
     this.props.chats?.forEach((chat: Chat) => {
-      //   const lastMessage = chat.history[chat.history.length - 1];
-      //   const totalUnread = chat.history.reduce((prev: number, current: IChatMessage) => {
-      //     if (!current.read) {
-      //       return prev + 1;
-      //     }
-      //     return prev;
-      //   }, 0);
-
       chatsListString += `
           {{{ ChatsListItem
                 id="${chat.id}"
@@ -194,27 +194,21 @@ class ChatsPage extends Block<IChatsProps> {
         `;
     });
 
-    // userLogo="${chat.user.logo}"
-    //             lastMessage="${lastMessage.message}"
-    //             lastMessageDate="${lastMessage.date}"
-    //             lastMessageSender="${lastMessage.senderId === chat.user.id ? chat.user.name : 'Вы'}"
-    //             unread=${totalUnread}
-
     return chatsListString;
   }
 
   getChatWindow() {
     let messagesString = '';
 
-    this.state.activeChat?.history.forEach((message: IChatMessage) => {
-      const isCurrentUserSender = message.senderId !== this.state.activeChat?.user.id;
+    this.props.messages.forEach((message: Message) => {
+      const isCurrentUserSender = message.userId !== this.props.user.id;
       const containerClassName = classnames('message', {
         message__right: isCurrentUserSender,
         message__left: !isCurrentUserSender,
       });
 
       messagesString += `
-          <div class="${containerClassName}">${message.message}</div>
+          <div class="${containerClassName}">${message.content}</div>
         `;
     });
 
@@ -259,7 +253,7 @@ class ChatsPage extends Block<IChatsProps> {
               </div>
             </header>
             <div class="chat__window">
-              Hi
+              ${this.getChatWindow()}
             </div>
             <footer class="chat__footer">
               {{{ Input variant=${InputVariants.FILLED} placeholder="Сообщение" }}}
@@ -281,6 +275,8 @@ function mapStateToProps(state: AppState) {
     chats: state.chats,
     searchResult: state.searchResult,
     chatUsers: state.chatUsers,
+    messages: state.messages,
+    user: state.user,
   };
 }
 
