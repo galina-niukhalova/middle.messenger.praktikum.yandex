@@ -1,6 +1,6 @@
 # Messenger app
 
-PR Sprint 2 https://github.com/galina-niukhalova/middle.messenger.praktikum.yandex/pull/2
+PR Sprint 3 https://github.com/galina-niukhalova/middle.messenger.praktikum.yandex/pull/3
 
 This is a messenger app written for Yandex practicum [middle FE course](https://practicum.yandex.ru/profile/middle-frontend/).
 
