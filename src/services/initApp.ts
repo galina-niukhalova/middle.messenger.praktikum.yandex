@@ -3,14 +3,12 @@ import { UserDTO } from 'api/types/user';
 import type { Dispatch } from 'core';
 import { apiHasError } from 'helpers/apiHasError';
 import { transformUser } from 'helpers/apiTransformers';
-import { logout } from './auth';
 
 export async function initApp(dispatch: Dispatch<AppState>) {
   try {
     const response = await authAPI.getUser();
 
     if (apiHasError(response)) {
-      // dispatch(logout);
       return;
     }
 

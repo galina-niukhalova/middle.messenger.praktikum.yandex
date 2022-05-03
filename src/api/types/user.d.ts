@@ -1,4 +1,4 @@
-import { APIError } from "./errors"
+import { APIError } from './errors';
 
 export type ChangeUserProfileRequest = {
   first_name: string,
@@ -21,10 +21,6 @@ export type ChangeUserPasswordRequest = {
 }
 
 export type ChangeUserPasswordResponse = {} | APIError;
-
-export type GetUserByIdRequest = {
-  id: number,
-}
 
 export type FindUserRequest = {
   login: string,

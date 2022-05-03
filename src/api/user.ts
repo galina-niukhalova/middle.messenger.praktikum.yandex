@@ -1,11 +1,10 @@
-import HTTP, { Methods } from 'core/request';
+import HTTP from 'core/request';
 import {
   ChangeUserProfileRequest,
   ChangeUserProfileResponse,
   ChangeAvatarRequest,
   ChangeUserPasswordRequest,
   ChangeUserPasswordResponse,
-  GetUserByIdRequest,
   FindUserRequest,
   UserDTO,
 } from './types/user';
@@ -28,14 +27,6 @@ class UserAPI {
   changeUserPassword(data: ChangeUserPasswordRequest) {
     return userAPIInstance.put('/password', { data })
       .then(({ response }) => response as ChangeUserPasswordResponse);
-  }
-
-  getUserById(data: GetUserByIdRequest) {
-    return userAPIInstance.fetchWithRetry(`/${data.id}`, {
-      method: Methods.GET,
-    }).then((response) => {
-      console.log('getUserById Users API', response);
-    });
   }
 
   findUserByLogin(data: FindUserRequest) {

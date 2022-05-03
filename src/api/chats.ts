@@ -1,4 +1,4 @@
-import HTTP, { Methods } from 'core/request';
+import HTTP from 'core/request';
 import {
   CreateChatRequest,
   CreateChatResponseData,
@@ -8,8 +8,6 @@ import {
   AddUsersToChatResponseData,
   GetChatUsersRequest,
   GetChatUsersResponse,
-  GetNewMessagesRequest,
-  UploadAvatarRequest,
   AddUsersToChatRequest,
   DeleteUsersFromChatRequest,
   ChatDTO,
@@ -39,23 +37,6 @@ class ChatsAPI {
   getChatUsers(data: GetChatUsersRequest) {
     return chatsAPIInstance.get(`/${data.id}/users`)
       .then(({ response }) => (response as GetChatUsersResponse));
-  }
-
-  getNewMessages(data: GetNewMessagesRequest) {
-    return chatsAPIInstance.fetchWithRetry(`/new/${data.id}`, {
-      method: Methods.GET,
-    }).then((response) => {
-      console.log('getNewMessages Chats API', response);
-    });
-  }
-
-  uploadAvatar(data: UploadAvatarRequest) {
-    return chatsAPIInstance.fetchWithRetry('/avatar', {
-      method: Methods.PUT,
-      data,
-    }).then((response) => {
-      console.log('uploadAvatar Chats API', response);
-    });
   }
 
   addUsersToChat(data: AddUsersToChatRequest) {
