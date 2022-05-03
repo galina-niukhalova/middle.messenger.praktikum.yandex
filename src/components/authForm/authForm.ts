@@ -74,7 +74,6 @@ class AuthForm extends Block<AuthFormProps> {
     const newValue = (this.refs[field].querySelector('input') as HTMLInputElement).value;
     const { emptyFieldError, generalError } = ERROR_MESSAGES[field];
     let errorMessage = '';
-    console.log(isValid(field, newValue), field, newValue)
     if (!newValue) {
       errorMessage = emptyFieldError || generalError;
     } else if (!isValid(field, newValue)) {
