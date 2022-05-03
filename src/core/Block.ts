@@ -1,10 +1,7 @@
 import { nanoid } from 'nanoid';
-import Handlebars from 'handlebars';
+import * as Handlebars from 'handlebars';
 import EventBus from './EventBus';
 
-interface BlockMeta<P = any> {
-  props: P;
-}
 export interface BlockConstructable<Props extends {}> {
   new(props: any): Block<Props>;
 }
@@ -22,8 +19,6 @@ class Block<Props extends {}> {
 
   public id = nanoid(6);
 
-  private readonly _meta: BlockMeta;
-
   protected _element: Nullable<HTMLElement> = null;
 
   protected readonly props: Props;
@@ -38,10 +33,6 @@ class Block<Props extends {}> {
 
   public constructor(props?: Props) {
     const eventBus = new EventBus<Events>();
-
-    this._meta = {
-      props,
-    };
 
     this.getStateFromProps(props);
 
@@ -69,6 +60,7 @@ class Block<Props extends {}> {
   }
 
   protected getStateFromProps(props?: Props): void {
+    console.log(props);
     this.state = {};
   }
 
@@ -82,6 +74,7 @@ class Block<Props extends {}> {
   }
 
   componentDidMount(props: Props) {
+    console.log(props);
   }
 
   private _componentDidUpdate(oldProps: Props, newProps: Props) {
@@ -100,6 +93,7 @@ class Block<Props extends {}> {
   componentWillUnmount() { }
 
   componentDidUpdate(oldProps: Props, newProps: Props) {
+    console.log(oldProps, newProps);
     return true;
   }
 

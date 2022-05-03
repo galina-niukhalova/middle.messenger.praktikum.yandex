@@ -38,6 +38,7 @@
     "no-undef": "off",
     "global-require": "off",
     "no-continue": "off",
-    "array-callback-return": "off"
+    "array-callback-return": "off",
+    "max-classes-per-file": "off"
   }
 }

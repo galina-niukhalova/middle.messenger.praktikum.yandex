@@ -3,7 +3,8 @@ enum Routes {
   Signup = '/sign-up',
   Chats = '/messenger',
   Profile = '/settings',
-  Error = '/error'
+  Error500 = '/500',
+  UnknownPath = '*'
 }
 
 export default Routes;

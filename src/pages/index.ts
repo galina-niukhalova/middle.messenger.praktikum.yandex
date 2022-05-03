@@ -1,5 +1,5 @@
 export { ChatsPage } from './chatsList';
-export { ErrorPage } from './error';
+export { Error500Page } from './error';
 export { LoginPage } from './login';
 export { NotFoundPage } from './notFound';
 export { SignupPage } from './signup';

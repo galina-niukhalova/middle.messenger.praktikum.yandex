@@ -141,6 +141,8 @@ class ChatsPage extends Block<IChatsProps> {
   }
 
   handleChatClick(chatId: number) {
+    this.props.dispatch({ messages: [] });
+
     const currentChat = this.props.chats
       .find((chat: Chat) => chat.id === chatId) as Chat;
 
@@ -201,7 +203,7 @@ class ChatsPage extends Block<IChatsProps> {
     let messagesString = '';
 
     this.props.messages.forEach((message: Message) => {
-      const isCurrentUserSender = message.userId !== this.props.user.id;
+      const isCurrentUserSender = message.userId !== this.props.user?.id;
       const containerClassName = classnames('message', {
         message__right: isCurrentUserSender,
         message__left: !isCurrentUserSender,
@@ -219,6 +221,7 @@ class ChatsPage extends Block<IChatsProps> {
     const { activeChat } = this.state;
 
     return `
+    <div>
       <div class="chats">
         {{#if showCreateChatWindow}}
           {{{ AddChat close=onCreateChatClose createChat=createChat }}}
@@ -266,6 +269,7 @@ class ChatsPage extends Block<IChatsProps> {
           </main>
         {{/if}}
       </div>
+    </div>
     `;
   }
 }

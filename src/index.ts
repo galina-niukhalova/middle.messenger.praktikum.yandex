@@ -5,7 +5,7 @@ import {
   SignupPage,
   ChatsPage,
   NotFoundPage,
-  ErrorPage,
+  Error500Page,
   UserProfilePage,
 } from 'pages';
 import { defaultState } from 'store';
@@ -21,7 +21,7 @@ import {
   Spinner,
   Error,
   Icon,
-  Dropdown
+  Dropdown,
 } from 'components';
 import { Routes } from 'const';
 import { Store } from 'core/Store';
@@ -56,8 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
     .use(Routes.Signup, SignupPage)
     .use(Routes.Chats, ChatsPage)
     .use(Routes.Profile, UserProfilePage)
-    .use(Routes.Error, ErrorPage);
-  // .use('/not-found', NotFoundPage)
+    .use(Routes.Error500, Error500Page)
+    .use(Routes.UnknownPath, NotFoundPage);
 
   store.on('changed', (prevState, nextState) => {
     if (!prevState.appIsInited && nextState.appIsInited) {

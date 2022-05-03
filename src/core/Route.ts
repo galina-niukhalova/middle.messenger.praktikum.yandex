@@ -25,6 +25,10 @@ export default class Route {
     this._props = props;
   }
 
+  get pathname() {
+    return this._pathname;
+  }
+
   navigate(pathname: string) {
     if (this.match(pathname)) {
       this._pathname = pathname;
@@ -45,10 +49,10 @@ export default class Route {
   render() {
     if (!this._block) {
       this._block = new this._blockClass(this._props);
-      renderDOM(this._block, this._props.rootQuery);
-      return;
+    } else {
+      this._block.show();
     }
 
-    this._block.show();
+    renderDOM(this._block, this._props.rootQuery);
   }
 }

@@ -162,6 +162,7 @@ class UserProfile extends Block<IUserProfileProps> {
     }));
 
     return `
+    <div>
       <div class='page-wrap profile'>
         {{{ Avatar 
           imageUrl="${avatarImg}"
@@ -211,6 +212,7 @@ class UserProfile extends Block<IUserProfileProps> {
           </ul>
         {{/ifEquals}}
       </div>
+    </div>
     `;
   }
 }

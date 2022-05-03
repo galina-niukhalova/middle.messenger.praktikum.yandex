@@ -85,6 +85,7 @@ class Signup extends Block<ISignupProps> {
       }));
 
     return `
+    <div>
       {{{AuthForm
           id='signup'
           name='signup-form'
@@ -100,6 +101,7 @@ class Signup extends Block<ISignupProps> {
           isLoading=${isLoading}
           isFormValid=isFormValid
       }}}
+    </div>
     `;
   }
 }

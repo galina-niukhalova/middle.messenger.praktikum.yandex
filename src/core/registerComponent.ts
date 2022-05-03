@@ -1,4 +1,4 @@
-import Handlebars, { HelperOptions } from 'handlebars';
+import * as Handlebars from 'handlebars';
 import { BlockConstructable } from './Block';
 
 export default function registerComponent<Props extends {}>(
@@ -6,7 +6,7 @@ export default function registerComponent<Props extends {}>(
   name: string,
 ) {
   Handlebars
-    .registerHelper(name, ({ hash: { ref, ...hash }, data }: HelperOptions) => {
+    .registerHelper(name, ({ hash: { ref, ...hash }, data }: Handlebars.HelperOptions) => {
       if (!data.root.children) {
         data.root.children = {};
       }
