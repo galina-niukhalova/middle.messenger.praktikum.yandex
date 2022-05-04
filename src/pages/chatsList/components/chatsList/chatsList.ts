@@ -1,5 +1,6 @@
 import Block from 'core/Block';
 import './chatsList.style.scss';
+import { ChatImageSize } from '../chatImage';
 
 type IChat = {
   id: string,
@@ -62,7 +63,7 @@ class ChatsList extends Block<IChatsListPropsWithEvents> {
             data-id=${chat.id}>
           {{{ ChatImage 
             imgUrl=${chat.userLogo}
-            size="medium" 
+            size=${ChatImageSize.Medium}
             active=${chat.id === this.props.activeChat?.id}
           }}}
           <div class="chats-list-item__content">

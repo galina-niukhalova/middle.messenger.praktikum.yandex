@@ -17,10 +17,8 @@ interface IDropdownPropsWithEvents extends Omit<IDropdownProps, 'openDropdown'> 
 
 class Dropdown extends Block<IDropdownPropsWithEvents> {
   constructor(props: IDropdownProps) {
-    const { ...rest } = props;
-
     super({
-      ...rest,
+      ...props,
     });
   }
 

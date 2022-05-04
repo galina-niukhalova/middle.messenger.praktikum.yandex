@@ -24,6 +24,7 @@ import {
   AddUser,
   DeleteUser,
 } from './components';
+import { ChatImageSize } from './components/chatImage';
 
 registerComponent(ChatImage, 'ChatImage');
 registerComponent(ChatsList, 'ChatsList');
@@ -131,7 +132,7 @@ class ChatsPage extends Block<IChatsProps> {
   handleMessageSend() {
     const inputElement = document.querySelector('.chat__footer input') as HTMLInputElement;
 
-    if (!this.isMessageEmpty(inputElement.value)) {
+    if (inputElement && !this.isMessageEmpty(inputElement.value)) {
       this.props.dispatch(sendMessage, {
         message: inputElement.value,
       });
@@ -248,7 +249,7 @@ class ChatsPage extends Block<IChatsProps> {
           <main class="chat">
             <header class="chat__header">
               <div class="chat__header_left">
-                {{{ ChatImage size="small" imgUrl="${activeChat?.avatar}" }}}
+                {{{ ChatImage size=${ChatImageSize.Small} imgUrl="${activeChat?.avatar}" }}}
                 <span>${activeChat?.title}</span>
               </div>
               <div class="chat__header_right">
