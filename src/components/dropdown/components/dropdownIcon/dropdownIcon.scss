@@ -1,0 +1,39 @@
+@import "~style/colors.scss";
+
+.dropdown {
+  &__icon {
+    position: relative;
+  }
+
+  &__icon,
+  &__icon::before,
+  &__icon::after {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: $color-blue;
+    cursor: pointer;
+  }
+
+  &__icon::before,
+  &__icon::after {
+    content: '';
+    position: absolute;
+    top: -9px;
+    left: 0;
+  }
+
+  &__icon::before {
+    top: -9px;
+  }
+
+  &__icon::after {
+    top: 9px;
+  }
+
+  &__icon:hover,
+  &__icon:hover::before,
+  &__icon:hover::after {
+    background-color: rgba($color: $color-blue, $alpha: 0.8);
+  }
+}

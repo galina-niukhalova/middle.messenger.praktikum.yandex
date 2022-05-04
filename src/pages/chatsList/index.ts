@@ -1,3 +1,1 @@
-import ChatsPage from './chatsList';
-
-export default ChatsPage;
+export { default as ChatsPage } from './chatsList';

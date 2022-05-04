@@ -1,15 +1,30 @@
 import classnames from 'helpers/classnames';
 import './profileForm.style.scss';
-import Block from 'utils/Block';
-import registerComponent from 'utils/registerComponent';
+import Block from 'core/Block';
+import registerComponent from 'core/registerComponent';
 import isValid from 'helpers/formValidation';
-import IProfileFormProps, { IFormInputData } from './types';
-import ProfileFormInput from './profileFormInput';
+import { IFormInputData } from './types';
+import { ProfileFormInput } from './profileFormInput';
 
 registerComponent(ProfileFormInput, 'ProfileFormInput');
 
-class ProfileForm extends Block {
-  constructor(props: IProfileFormProps) {
+interface IProfileFormComponentProps {
+  id: string,
+  name: string,
+  className: string,
+  inputs: string,
+  readonly?: boolean,
+  disabled?: boolean,
+  onSubmit: (values: Record<string, string>) => void,
+  updateErrors: (field: string, newValue: string, isValid?: boolean) => void;
+}
+
+interface IProfileFormProps extends Omit<IProfileFormComponentProps, 'inputs'> {
+  inputs: IFormInputData[]
+}
+
+class ProfileForm extends Block<IProfileFormProps> {
+  constructor(props: IProfileFormComponentProps) {
     const disabled = props.disabled ?? false;
     const defaultProps = {
       readonly: false,
@@ -21,7 +36,7 @@ class ProfileForm extends Block {
     super({
       ...defaultProps,
       ...props,
-      inputs: props.inputs && JSON.parse(props.inputs as string) as IFormInputData[],
+      inputs: JSON.parse(props.inputs),
     });
   }
 
@@ -29,7 +44,7 @@ class ProfileForm extends Block {
     this.state = {
       handleSubmit: (e: Event) => {
         e.preventDefault();
-        const values: { [key: string]: string } = {};
+        const values: Record<string, string> = {};
         this._element?.querySelectorAll('input').forEach((inputElement: HTMLInputElement) => {
           values[inputElement.name] = inputElement.value;
         });
@@ -82,19 +97,22 @@ class ProfileForm extends Block {
     return isInputValid;
   }
 
-  validateForm(values: { [key: string]: string }) {
+  validateForm(values: Record<string, string>) {
     let validationFail = false;
 
     Object.keys(values).forEach((name) => {
-      const { dependentField } = this.props.inputs
-        .find((input: IFormInputData) => input.name === name).errors || {};
+      const currentInput = this.props.inputs
+        .find((input: IFormInputData) => input.name === name);
+      const { dependentField } = currentInput?.errors || {};
 
-      const isInputValid = this.validateInput(name, values, dependentField);
-      if (!isInputValid) {
-        validationFail = true;
-        this.props.updateErrors(name, values[name]);
-      } else {
-        this.props.updateErrors(name, values[name], true);
+      if (dependentField) {
+        const isInputValid = this.validateInput(name, values, dependentField);
+        if (!isInputValid) {
+          validationFail = true;
+          this.props.updateErrors(name, values[name]);
+        } else {
+          this.props.updateErrors(name, values[name], true);
+        }
       }
     });
 

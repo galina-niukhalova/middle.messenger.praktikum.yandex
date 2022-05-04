@@ -1,3 +1,13 @@
-type InputType = 'button' | 'checkbox' | 'email' | 'file' | 'image' | 'password' | 'submit' | 'tel' | 'text';
+enum InputType {
+  BUTTON = 'button',
+  CHECKBOX = 'checkbox',
+  EMAIL = 'email',
+  FILE = 'file',
+  IMAGE = 'image',
+  PASSWORD = 'password',
+  SUBMIT = 'submit',
+  TEL = 'tel',
+  TEXT = 'text'
+}
 
 export default InputType;

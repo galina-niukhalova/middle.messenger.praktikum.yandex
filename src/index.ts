@@ -1,11 +1,14 @@
-import { renderDOM, registerComponent } from 'utils';
+import { Router, registerComponent } from 'core';
 import './base.scss';
-import LoginPage from 'pages/login';
-import SignupPage from 'pages/signup';
-import ChatsPage from 'pages/chatsList';
-import NotFoundPage from 'pages/notFound';
-import ErrorPage from 'pages/error';
-import UserProfilePage from 'pages/userProfile';
+import {
+  LoginPage,
+  SignupPage,
+  ChatsPage,
+  NotFoundPage,
+  Error500Page,
+  UserProfilePage,
+} from 'pages';
+import { defaultState } from 'store';
 import './utils/registerHandlebarsHelpers';
 import {
   Button,
@@ -15,7 +18,14 @@ import {
   AuthForm,
   ProfileForm,
   Avatar,
+  Spinner,
+  Error,
+  Icon,
+  Dropdown,
 } from 'components';
+import { Routes } from 'const';
+import { Store } from 'core/Store';
+import { initApp } from 'services/initApp';
 
 function registerComponents() {
   registerComponent(Button, 'Button');
@@ -25,34 +35,33 @@ function registerComponents() {
   registerComponent(AuthForm, 'AuthForm');
   registerComponent(ProfileForm, 'ProfileForm');
   registerComponent(Avatar, 'Avatar');
+  registerComponent(Spinner, 'Spinner');
+  registerComponent(Error, 'Error');
+  registerComponent(Icon, 'Icon');
+  registerComponent(Dropdown, 'Dropdown');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   registerComponents();
 
-  switch (window.location.pathname) {
-    case '/':
-    case '/login':
-      renderDOM(LoginPage);
-      break;
+  const store = new Store<AppState>(defaultState);
+  const router = new Router('#app');
+  window.router = router;
+  window.store = store;
 
-    case '/signup':
-      renderDOM(SignupPage);
-      break;
+  store.dispatch(initApp);
 
-    case '/chats':
-      renderDOM(ChatsPage);
-      break;
+  router
+    .use(Routes.Login, LoginPage)
+    .use(Routes.Signup, SignupPage)
+    .use(Routes.Chats, ChatsPage)
+    .use(Routes.Profile, UserProfilePage)
+    .use(Routes.Error500, Error500Page)
+    .use(Routes.UnknownPath, NotFoundPage);
 
-    case '/profile':
-      renderDOM(UserProfilePage);
-      break;
-
-    case '/error':
-      renderDOM(ErrorPage);
-      break;
-
-    default:
-      renderDOM(NotFoundPage);
-  }
+  store.on('changed', (prevState, nextState) => {
+    if (!prevState.appIsInited && nextState.appIsInited) {
+      router.start();
+    }
+  });
 });

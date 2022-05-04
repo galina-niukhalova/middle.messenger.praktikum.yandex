@@ -1,13 +1,20 @@
 import './inputField.scss';
-import Block from 'utils/Block';
+import Block from 'core/Block';
 import classnames from 'helpers/classnames';
-import { IInputFieldProps } from './types';
+import { IInputProps, InputType } from 'components/input';
 
-class InputField extends Block {
+interface IInputFieldProps extends IInputProps {
+  ref?: string,
+  label: string,
+  errorMessage?: string,
+  isFormInput?: boolean,
+}
+
+class InputField extends Block<IInputFieldProps> {
   constructor(props: IInputFieldProps) {
     const isFormInput = props.isFormInput ?? false;
     const defaultProps = {
-      type: 'text',
+      type: InputType.TEXT,
       isFormInput,
       containerClassName: isFormInput ? 'form__input-container' : '',
       readonly: false,

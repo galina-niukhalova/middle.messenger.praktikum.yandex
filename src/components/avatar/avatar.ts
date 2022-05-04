@@ -1,19 +1,22 @@
-import Block from 'utils/Block';
+import Block from 'core/Block';
 import avatarPlaceholder from 'static/images/image-outline.svg';
-import { IAvatarProps } from './types';
 import './avatar.style.scss';
 
-class Avatar extends Block {
+interface IAvatarProps {
+  imageUrl: string,
+  placeholder: string,
+}
+
+class Avatar extends Block<IAvatarProps> {
   constructor(props: IAvatarProps) {
     super({
       ...props,
-      emptyPlaceholder: avatarPlaceholder,
     });
   }
 
   render() {
     return `
-      <div class='avatar'>
+      <form class='avatar'>
         <label for='avatar__file-upload' class='avatar__label'></label>
         {{{ Input 
             type="file"
@@ -28,10 +31,10 @@ class Avatar extends Block {
           {{#if imageUrl}}
             <img class='avatar__image' src={{imageUrl}} />
           {{else}}
-            <img class='avatar__image avatar__image-placeholder' src={{emptyPlaceholder}} />
+            <img class='avatar__image avatar__image-placeholder' src=${avatarPlaceholder} />
           {{/if}}
         </div>
-      </div>
+      </form>
   `;
   }
 }

@@ -1,0 +1,30 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input.search-user-input {
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 16px;
+}
+
+.search-user-form {
+  margin-top: 48px;
+  width: 100%;
+}
+
+.search-user-submit-button {
+  margin-top: 72px;
+  width: 100%
+}
+
+.add-user__search-result {
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}

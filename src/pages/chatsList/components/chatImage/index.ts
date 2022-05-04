@@ -1,3 +1,1 @@
-import ChatImage from './chatImage';
-
-export default ChatImage;
+export { default as ChatImage, IChatImageProps, ChatImageSize } from './chatImage';

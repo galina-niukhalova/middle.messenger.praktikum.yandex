@@ -6,6 +6,8 @@
 }
 
 .sidebar {
+  display: flex;
+  flex-direction: column;
   flex: 0 0 250px;
   border-right: 1px solid $color-platinum;
   padding: 0 8px;
@@ -24,6 +26,10 @@
     }
   }
 
+  &__body {
+    flex: 1;
+  }
+
   &__search {
     margin-bottom: 16px;
   }
@@ -35,6 +41,14 @@
     &::placeholder {
       text-align: center;
     }
+  }
+
+  &__footer {
+    padding: 16px 0;
+    border-top: 1px solid $color-platinum;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -54,6 +68,15 @@
     font-weight: 600;
     line-height: 13px;
     font-size: 13px;
+    justify-content: space-between;
+  }
+
+  &__header_left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    flex: 1;
   }
 
   &__window {
@@ -104,6 +127,7 @@
   color: $color-black;
   border-radius: 5px;
   padding: 16px;
+  margin-bottom: 8px;
 
   &__right {
     background-color: $color-light-blue;

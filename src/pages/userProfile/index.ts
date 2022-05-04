@@ -1,3 +1,1 @@
-import userProfile from './userProfile';
-
-export default userProfile;
+export { default as UserProfilePage } from './userProfile';

@@ -1,18 +1,46 @@
-import Block from 'utils/Block';
+import Block from 'core/Block';
 import classnames from 'helpers/classnames';
-import { IProfileFormInputProps } from './types';
 import './profileFormInput.style.scss';
+import { InputType } from 'components/input';
 
-class ProfileFormInput extends Block {
+interface IProfileFormInputProps {
+  type?: InputType,
+  readonly?: boolean,
+  value: string,
+  name?: string,
+  onBlur?: EventListener,
+  invalid?: boolean,
+  className?: string,
+}
+
+interface IProfileFormInputPropsWithEvents extends Omit<IProfileFormInputProps, 'onBlur'> {
+  events: {
+    blur?: EventListener,
+  }
+}
+
+class ProfileFormInput extends Block<IProfileFormInputPropsWithEvents> {
   constructor(props: IProfileFormInputProps) {
+    const {
+      className,
+    } = props;
+
     const defaultProps = {
-      type: 'text',
+      type: InputType.TEXT,
       readonly: false,
     };
+
+    const classNames = [];
+    if (className) {
+      classNames.push(className);
+    }
 
     super({
       ...defaultProps,
       ...props,
+      className: classnames(...classNames, 'profile-form__input', {
+        'profile-form__input_invalid': Boolean(props.invalid),
+      }),
       events: {
         blur: props.onBlur,
       },
@@ -20,15 +48,11 @@ class ProfileFormInput extends Block {
   }
 
   render() {
-    const className = classnames('profile-form__input', {
-      'profile-form__input_invalid': this.props.invalid,
-    });
-
     return `
         <input 
           value="{{value}}"
           name={{name}} 
-          class="${className}"
+          class={{className}}
           type={{type}}
           {{#if readonly}}readonly{{/if}}
         ></input>

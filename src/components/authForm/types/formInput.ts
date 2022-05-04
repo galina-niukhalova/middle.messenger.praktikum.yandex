@@ -2,7 +2,7 @@ export type InputType = 'login' | 'password' | 'firstName' | 'secondName' | 'ema
 
 interface IFormInput {
   errors: {
-    dependentFields?: [string],
+    dependentField?: string,
   }
 }
 
